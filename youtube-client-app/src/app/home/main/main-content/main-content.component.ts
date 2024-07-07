@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { YouTubeInterface } from '../../../you-tube-interface';
 
 @Component({
   selector: 'app-main-content',
@@ -7,4 +8,6 @@ import { Component } from '@angular/core';
   template: ` <p>main-content works!</p> `,
   styleUrl: './main-content.component.scss',
 })
-export class MainContentComponent {}
+export class MainContentComponent {
+  @Input() youTubeData!: YouTubeInterface;
+}
