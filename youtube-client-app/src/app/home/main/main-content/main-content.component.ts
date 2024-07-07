@@ -1,12 +1,20 @@
 import { Component, inject } from '@angular/core';
-import { VideoItem, YouTubeInterface } from '../../../you-tube-interface';
+import { VideoItem } from '../../../you-tube-interface';
 import { YoutubeService } from '../../../youtube-service.service';
 
 @Component({
   selector: 'app-main-content',
   standalone: true,
   imports: [],
-  template: ` <p>main-content works!</p> `,
+  template: `
+    <div class="main-wrapper">
+      @for (youtubeElement of youtubeList; track $index) {
+        <div class="video-card">
+          {{ youtubeElement.snippet.title }}
+        </div>
+      }
+    </div>
+  `,
   styleUrl: './main-content.component.scss',
 })
 export class MainContentComponent {
