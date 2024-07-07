@@ -10,7 +10,15 @@ import { YoutubeService } from '../../../youtube-service.service';
     <div class="main-wrapper">
       @for (youtubeElement of youtubeList; track $index) {
         <div class="video-card">
-          {{ youtubeElement.snippet.title }}
+          <div class="video-card__title">{{ youtubeElement.snippet.title }}</div>
+          <img class="video-card__title" [src]="youtubeElement.snippet.thumbnails.medium.url" alt="video_card_img" />
+          <div class="video-card__statistic">
+            <div class="video-card__views">{{ youtubeElement.statistics.viewCount }}</div>
+            <div class="video-card__likes">{{ youtubeElement.statistics.likeCount }}</div>
+            <div class="video-card__dislikes">{{ youtubeElement.statistics.dislikeCount }}</div>
+            <div class="video-card__views">{{ youtubeElement.statistics.favoriteCount }}</div>
+            <div class="video-card__comments">{{ youtubeElement.statistics.commentCount }}</div>
+          </div>
         </div>
       }
     </div>

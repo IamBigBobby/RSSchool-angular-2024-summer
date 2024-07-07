@@ -1,0 +1,18 @@
+.main-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.video-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.video-card__statistic{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
