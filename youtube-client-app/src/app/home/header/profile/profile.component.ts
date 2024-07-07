@@ -4,7 +4,11 @@ import { Component } from '@angular/core';
   selector: 'app-profile',
   standalone: true,
   imports: [],
-  template: ` <p>profile works!</p> `,
+  template: `
+    <section class="profile-section">
+      <img src="/assets/login.svg" alt="login" />
+    </section>
+  `,
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent {}
