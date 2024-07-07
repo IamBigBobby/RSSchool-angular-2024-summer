@@ -5,12 +5,13 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   template: `
-    <section>
-      <img src="/assets/logo.svg" alt="" />
+    <section class="search-field">
+      <img src="/assets/logo.svg" alt="logo" />
       <form>
         <input type="text" placeholder="What are you want to find out?" />
         <button class="primary" type="button">Search</button>
       </form>
+      <img src="/assets/search_settings.svg" alt="search_settings" />
     </section>
   `,
   styleUrl: './search-field.component.scss',
