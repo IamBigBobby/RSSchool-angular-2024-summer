@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   imports: [],
   template: `
     <section class="profile-section">
+      <p>Your Name</p>
       <img src="/assets/login.svg" alt="login" />
     </section>
   `,
