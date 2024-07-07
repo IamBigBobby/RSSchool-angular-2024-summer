@@ -1,6 +1,7 @@
 .header-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto; 
     align-items: center;
 }
 
@@ -11,4 +12,9 @@
 .profile-section {
     grid-column: 3;
     justify-self: end;
+}
+
+.sort-settings {
+    grid-column: 1 / 4;
+    grid-row: 2;
 }
