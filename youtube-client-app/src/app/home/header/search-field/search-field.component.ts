@@ -4,7 +4,14 @@ import { Component } from '@angular/core';
   selector: 'app-search-field',
   standalone: true,
   imports: [],
-  template: ` <p>search-field works!</p> `,
+  template: `
+  <section>
+    <form>
+      <input type="text" placeholder="What are you want to find out?" />
+      <button class="primary" type="button">Search</button>
+    </form>
+  </section>
+  `,
   styleUrl: './search-field.component.scss',
 })
 export class SearchFieldComponent {}
