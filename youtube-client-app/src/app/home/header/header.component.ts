@@ -6,9 +6,9 @@ import { SearchFieldComponent } from './search-field/search-field.component';
   standalone: true,
   imports: [SearchFieldComponent],
   template: `
-  <div class="header-wrapper">
-    <app-search-field></app-search-field>
-  </div> 
+    <div class="header-wrapper">
+      <app-search-field></app-search-field>
+    </div>
   `,
   styleUrl: './header.component.scss',
 })
