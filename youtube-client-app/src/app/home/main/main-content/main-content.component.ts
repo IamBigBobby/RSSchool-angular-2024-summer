@@ -7,6 +7,4 @@ import { Component } from '@angular/core';
   template: ` <p>main-content works!</p> `,
   styleUrl: './main-content.component.scss',
 })
-export class MainContentComponent {
-  videoList = [];
-}
+export class MainContentComponent {}

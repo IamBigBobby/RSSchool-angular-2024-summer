@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { mockData } from '../../../../../mock-data';
+import { YouTubeInterface } from '../../../you-tube-interface';
 
 @Component({
   selector: 'app-search-field',
@@ -16,4 +18,6 @@ import { Component } from '@angular/core';
   `,
   styleUrl: './search-field.component.scss',
 })
-export class SearchFieldComponent {}
+export class SearchFieldComponent {
+  data: YouTubeInterface = mockData;
+}
