@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { YouTubeInterface } from '../../../you-tube-interface';
+import { Component, inject } from '@angular/core';
+import { VideoItem, YouTubeInterface } from '../../../you-tube-interface';
+import { YoutubeService } from '../../../youtube-service.service';
 
 @Component({
   selector: 'app-main-content',
@@ -9,5 +10,10 @@ import { YouTubeInterface } from '../../../you-tube-interface';
   styleUrl: './main-content.component.scss',
 })
 export class MainContentComponent {
-  @Input() youTubeData!: YouTubeInterface;
+  youtubeList: VideoItem[];
+  youtubeServiceData: YoutubeService = inject(YoutubeService);
+
+  constructor() {
+    this.youtubeList = this.youtubeServiceData.getAllVideos();
+  }
 }
