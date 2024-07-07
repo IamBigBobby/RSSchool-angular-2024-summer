@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   imports: [],
   template: `
     <section>
+      <img src="/assets/logo.svg" alt="" />
       <form>
         <input type="text" placeholder="What are you want to find out?" />
         <button class="primary" type="button">Search</button>
