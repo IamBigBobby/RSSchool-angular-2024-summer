@@ -4,13 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-sort-field',
   standalone: true,
   imports: [],
-  template: `
-    <p>
-      sort-field works!
-    </p>
-  `,
-  styleUrl: './sort-field.component.scss'
+  template: ` <p>sort-field works!</p> `,
+  styleUrl: './sort-field.component.scss',
 })
-export class SortFieldComponent {
-
-}
+export class SortFieldComponent {}

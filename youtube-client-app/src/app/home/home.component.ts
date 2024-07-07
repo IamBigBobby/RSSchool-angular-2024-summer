@@ -10,8 +10,6 @@ import { HeaderComponent } from './header/header.component';
       <app-header></app-header>
     </div>
   `,
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
 })
-export class HomeComponent {
-
-}
+export class HomeComponent {}

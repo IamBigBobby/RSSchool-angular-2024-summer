@@ -4,13 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-detailed-page',
   standalone: true,
   imports: [],
-  template: `
-    <p>
-      detailed-page works!
-    </p>
-  `,
-  styleUrl: './detailed-page.component.scss'
+  template: ` <p>detailed-page works!</p> `,
+  styleUrl: './detailed-page.component.scss',
 })
-export class DetailedPageComponent {
-
-}
+export class DetailedPageComponent {}
