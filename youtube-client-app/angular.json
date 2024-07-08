@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "baseHref": "/iambigbobby-ANGULAR2024Q3/",
             "outputPath": "dist/youtube-client-app",
             "index": "src/index.html",
             "browser": "src/main.ts",
