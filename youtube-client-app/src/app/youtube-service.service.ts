@@ -12,7 +12,8 @@ export class YoutubeService {
 
   youtubeSet$ = this.youTubeSetData.asObservable();
 
-  getAllVideos() {
-    this.youTubeSetData.next(this.youTubeData.items);
+  getVideos(value: string) {
+    console.log("service", value)
+    this.youTubeSetData.next(this.youTubeData.items.filter(video => video.snippet.title.toLocaleLowerCase().includes(value.toLocaleLowerCase())));
   }
 }

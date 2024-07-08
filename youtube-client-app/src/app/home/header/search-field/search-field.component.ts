@@ -22,6 +22,6 @@ export class SearchFieldComponent {
 
   getFilterValue(word: string) {
     console.log('filter value', word);
-    this.youtubeServiceData.getAllVideos();
+    this.youtubeServiceData.getVideos(word);
   }
 }
