@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { VideoItem } from '../../../you-tube-interface';
 import { YoutubeService } from '../../../youtube-service.service';
 
@@ -26,10 +26,11 @@ import { YoutubeService } from '../../../youtube-service.service';
   styleUrl: './main-content.component.scss',
 })
 export class MainContentComponent {
-  youtubeList: VideoItem[];
-  youtubeServiceData: YoutubeService = inject(YoutubeService);
+  youtubeList: VideoItem[] | undefined;
 
-  constructor() {
-    this.youtubeList = this.youtubeServiceData.getAllVideos();
+  constructor(youtubeServiceData: YoutubeService) {
+    youtubeServiceData.youtubeSet$.subscribe((videos) => {
+      this.youtubeList = videos;
+    });
   }
 }

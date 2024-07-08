@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { YoutubeService } from '../../../youtube-service.service';
 
 @Component({
   selector: 'app-search-field',
@@ -17,7 +18,10 @@ import { Component } from '@angular/core';
   styleUrl: './search-field.component.scss',
 })
 export class SearchFieldComponent {
+  constructor(private youtubeServiceData: YoutubeService) {}
+
   getFilterValue(word: string) {
     console.log('filter value', word);
+    this.youtubeServiceData.getAllVideos();
   }
 }
