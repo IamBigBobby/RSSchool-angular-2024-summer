@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
-import { ProfileComponent } from './header/profile/profile.component';
 import { MainContentComponent } from './main/main-content/main-content.component';
 
 @Component({

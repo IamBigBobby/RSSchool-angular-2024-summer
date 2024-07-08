@@ -14,7 +14,14 @@
     justify-self: end;
 }
 
-.sort-settings {
+.sort-field {
     grid-column: 1 / 4;
     grid-row: 2;
+}
+
+.sort-field, .sort-settings, .sort-input, .search-field, .profile-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
