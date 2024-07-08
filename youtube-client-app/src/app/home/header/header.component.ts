@@ -34,7 +34,7 @@ import { MainContentComponent } from '../main/main-content/main-content.componen
             <div class="sort-input">
               <p>by word of sentance</p>
               <form>
-                <input type="text" placeholder="" />
+                <input type="text" placeholder="" (input)="sortByKeyWordTap($event)" />
               </form>
             </div>
           </div>
@@ -69,5 +69,11 @@ export class HeaderComponent {
 
   toggleSortField() {
     this.isSortFieldVisible = !this.isSortFieldVisible;
+  }
+
+  sortByKeyWordTap(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    const keyword = inputElement.value;
+    this.youtubeServiceData.sortByKeyWord(keyword);
   }
 }

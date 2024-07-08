@@ -63,4 +63,8 @@ export class YoutubeService {
       this.youTubeSetData.next(this.currentData);
     }
   }
+
+  sortByKeyWord(keyword: string) {
+    console.log(keyword);
+  }
 }
