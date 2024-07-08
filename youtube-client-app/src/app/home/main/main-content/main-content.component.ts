@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { VideoItem } from '../../../you-tube-interface';
 import { YoutubeService } from '../../../youtube-service.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-main-content',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   template: `
     <div class="main-wrapper">
       @for (youtubeElement of youtubeList; track $index) {
@@ -19,11 +20,12 @@ import { YoutubeService } from '../../../youtube-service.service';
             <div class="video-card__views">{{ youtubeElement.statistics.favoriteCount }}</div>
             <div class="video-card__comments">{{ youtubeElement.statistics.commentCount }}</div>
           </div>
+          <div class="video-card__date">{{ youtubeElement.snippet.publishedAt | date }}</div>
         </div>
       }
     </div>
   `,
-  styleUrl: './main-content.component.scss',
+  styleUrls: ['./main-content.component.scss'],
 })
 export class MainContentComponent {
   youtubeList: VideoItem[] | undefined;

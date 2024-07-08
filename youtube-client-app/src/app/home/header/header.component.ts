@@ -46,6 +46,7 @@ import { MainContentComponent } from '../main/main-content/main-content.componen
 })
 export class HeaderComponent {
   isSortFieldVisible: boolean = false;
+  isSortDateUp: boolean = false;
 
   constructor(private youtubeServiceData: YoutubeService) {}
 
@@ -54,7 +55,9 @@ export class HeaderComponent {
   }
 
   clickSortByDate() {
-    this.youtubeServiceData.sortByDate();
+    this.isSortDateUp = !this.isSortDateUp;
+
+    this.isSortDateUp ? this.youtubeServiceData.sortByDateDown() : this.youtubeServiceData.sortByDateUp();
   }
 
   toggleSortField() {

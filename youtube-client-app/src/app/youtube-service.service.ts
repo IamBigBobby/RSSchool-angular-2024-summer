@@ -20,12 +20,23 @@ export class YoutubeService {
     this.youTubeSetData.next(this.currentData);
   }
 
-  sortByDate() {
+  sortByDateUp() {
     if (this.currentData) {
       this.currentData.sort((a, b) => {
         const dateA = new Date(a.snippet.publishedAt);
         const dateB = new Date(b.snippet.publishedAt);
         return dateB.getTime() - dateA.getTime();
+      });
+      this.youTubeSetData.next(this.currentData);
+    }
+  }
+
+  sortByDateDown() {
+    if (this.currentData) {
+      this.currentData.sort((a, b) => {
+        const dateA = new Date(a.snippet.publishedAt);
+        const dateB = new Date(b.snippet.publishedAt);
+        return dateA.getTime() - dateB.getTime();
       });
       this.youTubeSetData.next(this.currentData);
     }
