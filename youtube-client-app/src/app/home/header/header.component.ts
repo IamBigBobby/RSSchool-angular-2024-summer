@@ -1,6 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { YoutubeService } from '../../youtube-service.service';
-import { MainContentComponent } from '../main/main-content/main-content.component';
 
 @Component({
   selector: 'app-header',
@@ -19,6 +18,8 @@ import { MainContentComponent } from '../main/main-content/main-content.componen
           src="/assets/search_settings.svg"
           alt="search_settings"
           (click)="toggleSortField()"
+          tabindex="0"
+          role="button"
         />
       </section>
       <section class="profile-section">
@@ -29,8 +30,10 @@ import { MainContentComponent } from '../main/main-content/main-content.componen
         <section class="sort-field">
           <p>Sorting by:</p>
           <div class="sort-settings">
-            <div class="sort-settings__position" (click)="clickSortByDate()">date</div>
-            <div class="sort-settings__position" (click)="clickSortByViews()">count of views</div>
+            <div class="sort-settings__position" (click)="clickSortByDate()" tabindex="0" role="button">date</div>
+            <div class="sort-settings__position" (click)="clickSortByViews()" tabindex="0" role="button">
+              count of views
+            </div>
             <div class="sort-input">
               <p>by word of sentance</p>
               <form>
