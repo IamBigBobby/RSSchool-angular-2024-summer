@@ -30,7 +30,7 @@ import { MainContentComponent } from '../main/main-content/main-content.componen
           <p>Sorting by:</p>
           <div class="sort-settings">
             <div class="sort-settings__position" (click)="clickSortByDate()">date</div>
-            <div class="sort-settings__position">count of views</div>
+            <div class="sort-settings__position" (click)="clickSortByViews()">count of views</div>
             <div class="sort-input">
               <p>by word of sentance</p>
               <form>
@@ -47,6 +47,7 @@ import { MainContentComponent } from '../main/main-content/main-content.componen
 export class HeaderComponent {
   isSortFieldVisible: boolean = false;
   isSortDateUp: boolean = false;
+  isSortViewsUp: boolean = false;
 
   constructor(private youtubeServiceData: YoutubeService) {}
 
@@ -58,6 +59,12 @@ export class HeaderComponent {
     this.isSortDateUp = !this.isSortDateUp;
 
     this.isSortDateUp ? this.youtubeServiceData.sortByDateDown() : this.youtubeServiceData.sortByDateUp();
+  }
+
+  clickSortByViews() {
+    this.isSortViewsUp = !this.isSortViewsUp;
+
+    this.isSortViewsUp ? this.youtubeServiceData.sortByViewsDown() : this.youtubeServiceData.sortByViewsUp();
   }
 
   toggleSortField() {

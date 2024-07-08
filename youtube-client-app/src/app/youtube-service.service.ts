@@ -41,4 +41,26 @@ export class YoutubeService {
       this.youTubeSetData.next(this.currentData);
     }
   }
+
+  sortByViewsUp() {
+    if (this.currentData) {
+      this.currentData.sort((a, b) => {
+        const viewsA: number = Number(a.statistics.viewCount);
+        const viewsB: number = Number(b.statistics.viewCount);
+        return viewsB - viewsA;
+      });
+      this.youTubeSetData.next(this.currentData);
+    }
+  }
+
+  sortByViewsDown() {
+    if (this.currentData) {
+      this.currentData.sort((a, b) => {
+        const viewsA: number = Number(a.statistics.viewCount);
+        const viewsB: number = Number(b.statistics.viewCount);
+        return viewsA - viewsB;
+      });
+      this.youTubeSetData.next(this.currentData);
+    }
+  }
 }
