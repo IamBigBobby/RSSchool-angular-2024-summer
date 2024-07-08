@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 import { VideoItem } from '../../../you-tube-interface';
 import { YoutubeService } from '../../../youtube-service.service';
 import { CommonModule } from '@angular/common';
+import { FilteringKeyWordPipe } from '../../../filtering-key-word.pipe';
 
 @Component({
   selector: 'app-main-content',
   standalone: true,
-  imports: [CommonModule],
   template: `
     <div class="main-wrapper">
-      @for (youtubeElement of youtubeList; track $index) {
+      @for (youtubeElement of youtubeList | filteringKeyWord: keyword; track $index) {
         <div class="video-card">
           <div class="video-card__title">{{ youtubeElement.snippet.title }}</div>
           <img class="video-card__title" [src]="youtubeElement.snippet.thumbnails.medium.url" alt="video_card_img" />
@@ -26,16 +26,18 @@ import { CommonModule } from '@angular/common';
     </div>
   `,
   styleUrls: ['./main-content.component.scss'],
+  imports: [CommonModule, FilteringKeyWordPipe],
 })
 export class MainContentComponent {
-  youtubeList: VideoItem[] | undefined;
+  youtubeList: VideoItem[] = [];
+  keyword: string = '';
 
   constructor(youtubeServiceData: YoutubeService) {
     youtubeServiceData.youtubeSet$.subscribe((videos) => {
-      this.youtubeList = videos;
+      this.youtubeList = videos || [];
     });
     youtubeServiceData.keywordSet$.subscribe((keyword) => {
-      console.log('mainContent', keyword);
+      this.keyword = keyword || '';
     });
   }
 }

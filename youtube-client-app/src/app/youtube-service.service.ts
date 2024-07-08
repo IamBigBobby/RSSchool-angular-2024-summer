@@ -16,8 +16,6 @@ export class YoutubeService {
   youtubeSet$ = this.youTubeSetData.asObservable();
   keywordSet$ = this.keywordSet.asObservable();
 
-  constructor() {}
-
   getVideos(value: string) {
     this.currentData = this.youTubeData.items.filter((video) =>
       video.snippet.title.toLocaleLowerCase().includes(value.toLocaleLowerCase()),
