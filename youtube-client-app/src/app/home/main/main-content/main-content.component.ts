@@ -9,7 +9,7 @@ import { FilteringKeyWordPipe } from '../../../filtering-key-word.pipe';
   standalone: true,
   template: `
     <div class="main-wrapper">
-      @for (youtubeElement of youtubeList | filteringKeyWord: keyword; track $index) {
+      @for (youtubeElement of youtubeList | filteringKeyWord: keyword; track youtubeElement.id) {
         <div class="video-card">
           <div class="video-card__title">{{ youtubeElement.snippet.title }}</div>
           <img class="video-card__title" [src]="youtubeElement.snippet.thumbnails.medium.url" alt="video_card_img" />
@@ -34,7 +34,9 @@ export class MainContentComponent {
 
   constructor(youtubeServiceData: YoutubeService) {
     youtubeServiceData.youtubeSet$.subscribe((videos) => {
+      console.log('get videos', videos);
       this.youtubeList = videos || [];
+      console.log('youtubeList', this.youtubeList);
     });
     youtubeServiceData.keywordSet$.subscribe((keyword) => {
       this.keyword = keyword || '';

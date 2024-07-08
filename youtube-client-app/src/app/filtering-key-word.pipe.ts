@@ -4,6 +4,7 @@ import { VideoItem } from './you-tube-interface';
 @Pipe({
   name: 'filteringKeyWord',
   standalone: true,
+  pure: false,
 })
 export class FilteringKeyWordPipe implements PipeTransform {
   transform(videos: VideoItem[], keyword: string): VideoItem[] {
