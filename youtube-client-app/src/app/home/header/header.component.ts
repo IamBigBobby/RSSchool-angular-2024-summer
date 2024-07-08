@@ -13,7 +13,12 @@ import { YoutubeService } from '../../youtube-service.service';
           <input type="text" placeholder="What are you want to find out?" #filter />
           <button class="primary" type="button" (click)="getFilterValue(filter.value)">Search</button>
         </form>
-        <img src="/assets/search_settings.svg" alt="search_settings" (click)="toggleSortField()" />
+        <img
+          class="search-field__show-sort-field"
+          src="/assets/search_settings.svg"
+          alt="search_settings"
+          (click)="toggleSortField()"
+        />
       </section>
       <section class="profile-section">
         <p>Your Name</p>
@@ -23,8 +28,8 @@ import { YoutubeService } from '../../youtube-service.service';
         <section class="sort-field">
           <p>Sorting by:</p>
           <div class="sort-settings">
-            <div>date</div>
-            <div>count of views</div>
+            <div class="sort-settings__position">date</div>
+            <div class="sort-settings__position">count of views</div>
             <div class="sort-input">
               <p>by word of sentance</p>
               <form>
