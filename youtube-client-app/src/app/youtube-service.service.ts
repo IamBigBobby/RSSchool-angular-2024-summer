@@ -13,6 +13,10 @@ export class YoutubeService {
   youtubeSet$ = this.youTubeSetData.asObservable();
 
   getVideos(value: string) {
-    this.youTubeSetData.next(this.youTubeData.items.filter(video => video.snippet.title.toLocaleLowerCase().includes(value.toLocaleLowerCase())));
+    this.youTubeSetData.next(
+      this.youTubeData.items.filter((video) =>
+        video.snippet.title.toLocaleLowerCase().includes(value.toLocaleLowerCase()),
+      ),
+    );
   }
 }
