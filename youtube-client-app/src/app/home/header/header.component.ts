@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { YoutubeService } from '../../youtube-service.service';
+import { MainContentComponent } from '../main/main-content/main-content.component';
 
 @Component({
   selector: 'app-header',
@@ -28,7 +29,7 @@ import { YoutubeService } from '../../youtube-service.service';
         <section class="sort-field">
           <p>Sorting by:</p>
           <div class="sort-settings">
-            <div class="sort-settings__position">date</div>
+            <div class="sort-settings__position" (click)="clickSortByDate()">date</div>
             <div class="sort-settings__position">count of views</div>
             <div class="sort-input">
               <p>by word of sentance</p>
@@ -50,6 +51,10 @@ export class HeaderComponent {
 
   getFilterValue(word: string) {
     this.youtubeServiceData.getVideos(word);
+  }
+
+  clickSortByDate() {
+    this.youtubeServiceData.sortByDate();
   }
 
   toggleSortField() {
