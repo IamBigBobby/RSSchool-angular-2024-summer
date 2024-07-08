@@ -34,5 +34,8 @@ export class MainContentComponent {
     youtubeServiceData.youtubeSet$.subscribe((videos) => {
       this.youtubeList = videos;
     });
+    youtubeServiceData.keywordSet$.subscribe((keyword) => {
+      console.log('mainContent', keyword);
+    });
   }
 }

@@ -8,10 +8,15 @@ import { Subject } from 'rxjs';
 })
 export class YoutubeService {
   protected youTubeData: YouTubeInterface = mockData;
+  protected keyword: string | undefined;
   private youTubeSetData = new Subject<VideoItem[] | undefined>();
+  private keywordSet = new Subject<string | undefined>();
   currentData: VideoItem[] | undefined;
 
   youtubeSet$ = this.youTubeSetData.asObservable();
+  keywordSet$ = this.keywordSet.asObservable();
+
+  constructor() {}
 
   getVideos(value: string) {
     this.currentData = this.youTubeData.items.filter((video) =>
@@ -65,6 +70,7 @@ export class YoutubeService {
   }
 
   sortByKeyWord(keyword: string) {
-    console.log(keyword);
+    this.keyword = keyword;
+    this.keywordSet.next(this.keyword);
   }
 }
