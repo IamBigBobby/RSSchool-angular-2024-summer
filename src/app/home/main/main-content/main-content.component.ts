@@ -5,6 +5,7 @@ import ColorBorderCardDirective from '../../../color-border-card.directive';
 import FilteringKeyWordPipe from '../../../filtering-key-word.pipe';
 import { VideoItem } from '../../../you-tube-interface';
 import YoutubeService from '../../../youtube-service.service';
+import { ButtonComponent } from '../../../button/button.component';
 
 @Component({
   selector: 'app-main-content',
@@ -48,12 +49,20 @@ import YoutubeService from '../../../youtube-service.service';
           <div class="video-card__date">
             {{ youtubeElement.snippet.publishedAt | date }}
           </div>
+          <custom-button (clicked)="onButtonClick()"
+            >Detaled page</custom-button
+          >
         </div>
       }
     </div>
   `,
   styleUrls: ['./main-content.component.scss'],
-  imports: [CommonModule, FilteringKeyWordPipe, ColorBorderCardDirective],
+  imports: [
+    CommonModule,
+    FilteringKeyWordPipe,
+    ColorBorderCardDirective,
+    ButtonComponent,
+  ],
 })
 export default class MainContentComponent {
   youtubeList: VideoItem[] = [];
@@ -67,5 +76,9 @@ export default class MainContentComponent {
     youtubeServiceData.keywordSet$.subscribe((keyword) => {
       this.keyword = keyword || '';
     });
+  }
+
+  onButtonClick() {
+    console.log('detailed page');
   }
 }
