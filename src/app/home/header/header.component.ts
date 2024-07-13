@@ -7,4 +7,4 @@ import { Component } from '@angular/core';
   template: ` <div class="header-wrapper">header works!</div> `,
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent {}
+export default class HeaderComponent {}
