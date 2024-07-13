@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from './header/header.component';
-import { MainContentComponent } from './main/main-content/main-content.component';
+
+import HeaderComponent from './header/header.component';
+import MainContentComponent from './main/main-content/main-content.component';
 
 @Component({
   selector: 'app-home',
@@ -14,4 +15,4 @@ import { MainContentComponent } from './main/main-content/main-content.component
   `,
   styleUrl: './home.component.scss',
 })
-export class HomeComponent {}
+export default class HomeComponent {}

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { YoutubeService } from '../../youtube-service.service';
+
+import YoutubeService from '../../youtube-service.service';
 
 @Component({
   selector: 'app-header',
@@ -10,8 +11,18 @@ import { YoutubeService } from '../../youtube-service.service';
       <section class="search-field">
         <img src="assets/logo.svg" alt="logo" />
         <form>
-          <input type="text" placeholder="What are you want to find out?" #filter />
-          <button class="primary" type="button" (click)="getFilterValue(filter.value)">Search</button>
+          <input
+            type="text"
+            placeholder="What are you want to find out?"
+            #filter
+          />
+          <button
+            class="primary"
+            type="button"
+            (click)="getFilterValue(filter.value)"
+          >
+            Search
+          </button>
         </form>
         <img
           class="search-field__show-sort-field"
@@ -30,14 +41,30 @@ import { YoutubeService } from '../../youtube-service.service';
         <section class="sort-field">
           <p>Sorting by:</p>
           <div class="sort-settings">
-            <div class="sort-settings__position" (click)="clickSortByDate()" tabindex="0" role="button">date</div>
-            <div class="sort-settings__position" (click)="clickSortByViews()" tabindex="0" role="button">
+            <div
+              class="sort-settings__position"
+              (click)="clickSortByDate()"
+              tabindex="0"
+              role="button"
+            >
+              date
+            </div>
+            <div
+              class="sort-settings__position"
+              (click)="clickSortByViews()"
+              tabindex="0"
+              role="button"
+            >
               count of views
             </div>
             <div class="sort-input">
               <p>by word of sentance</p>
               <form>
-                <input type="text" placeholder="" (input)="sortByKeyWordTap($event)" />
+                <input
+                  type="text"
+                  placeholder=""
+                  (input)="sortByKeyWordTap($event)"
+                />
               </form>
             </div>
           </div>
@@ -47,9 +74,11 @@ import { YoutubeService } from '../../youtube-service.service';
   `,
   styleUrl: './header.component.scss',
 })
-export class HeaderComponent {
+export default class HeaderComponent {
   isSortFieldVisible: boolean = false;
+
   isSortDateUp: boolean = false;
+
   isSortViewsUp: boolean = false;
 
   constructor(private youtubeServiceData: YoutubeService) {}
@@ -61,13 +90,21 @@ export class HeaderComponent {
   clickSortByDate() {
     this.isSortDateUp = !this.isSortDateUp;
 
-    this.isSortDateUp ? this.youtubeServiceData.sortByDateDown() : this.youtubeServiceData.sortByDateUp();
+    if (this.isSortDateUp) {
+      this.youtubeServiceData.sortByDateDown();
+    } else {
+      this.youtubeServiceData.sortByDateUp();
+    }
   }
 
   clickSortByViews() {
     this.isSortViewsUp = !this.isSortViewsUp;
 
-    this.isSortViewsUp ? this.youtubeServiceData.sortByViewsDown() : this.youtubeServiceData.sortByViewsUp();
+    if (this.isSortViewsUp) {
+      this.youtubeServiceData.sortByViewsDown();
+    } else {
+      this.youtubeServiceData.sortByViewsUp();
+    }
   }
 
   toggleSortField() {

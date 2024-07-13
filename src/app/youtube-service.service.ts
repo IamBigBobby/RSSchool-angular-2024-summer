@@ -1,24 +1,32 @@
 import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
+
 import { mockData } from '../../mock-data';
 import { VideoItem, YouTubeInterface } from './you-tube-interface';
-import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
-export class YoutubeService {
+export default class YoutubeService {
   protected youTubeData: YouTubeInterface = mockData;
+
   protected keyword: string | undefined;
+
   private youTubeSetData = new Subject<VideoItem[] | undefined>();
+
   private keywordSet = new Subject<string | undefined>();
+
   currentData: VideoItem[] | undefined;
 
   youtubeSet$ = this.youTubeSetData.asObservable();
+
   keywordSet$ = this.keywordSet.asObservable();
 
   getVideos(value: string) {
     this.currentData = this.youTubeData.items.filter((video) =>
-      video.snippet.title.toLocaleLowerCase().includes(value.toLocaleLowerCase()),
+      video.snippet.title
+        .toLocaleLowerCase()
+        .includes(value.toLocaleLowerCase()),
     );
     this.youTubeSetData.next(this.currentData);
   }

@@ -1,2 +1,2 @@
-cd youtube-client-app
 npm run prettier:fix
+

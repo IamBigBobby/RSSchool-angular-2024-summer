@@ -1,14 +1,20 @@
 {
   "root": true,
   "ignorePatterns": ["projects/**/*"],
+  "plugins": ["simple-import-sort"],
   "overrides": [
     {
       "files": ["*.ts"],
+      "parserOptions": {
+        "project": ["tsconfig.(app|spec).json"]
+      },
       "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
+        "airbnb-base",
+        "airbnb-typescript/base",
         "plugin:prettier/recommended"
       ],
       "rules": {
@@ -27,14 +33,21 @@
             "prefix": "app",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "simple-import-sort/imports": "error",
+        "simple-import-sort/exports": "error",
+        "@typescript-eslint/await-thenable": "error"
       }
     },
     {
       "files": ["*.html"],
-      "extends": ["plugin:@angular-eslint/template/recommended", "plugin:@angular-eslint/template/accessibility"],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended",
+        "plugin:@angular-eslint/template/accessibility"
+      ],
       "rules": {
-        "@angular-eslint/template/click-events-have-key-events": "off"
+        "@angular-eslint/template/click-events-have-key-events": "off",
+        "class-methods-use-this": "off"
       }
     }
   ]
