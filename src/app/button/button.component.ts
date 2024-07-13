@@ -1,7 +1,7 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
-  selector: 'custom-button',
+  selector: 'app-button',
   standalone: true,
   imports: [],
   template: `
@@ -11,10 +11,11 @@ import { Component, Output, EventEmitter } from '@angular/core';
   `,
   styleUrl: './button.component.scss',
 })
-export class ButtonComponent {
-  @Output() clicked = new EventEmitter<void>(); // событие клика
+export default class ButtonComponent {
+  @Output() clicked = new EventEmitter<void>();
 
   handleClick() {
-    this.clicked.emit(); // испускаем событие при клике
+    console.log('detailed button');
+    this.clicked.emit();
   }
 }

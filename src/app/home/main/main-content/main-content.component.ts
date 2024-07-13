@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
+import ButtonComponent from '../../../button/button.component';
 import ColorBorderCardDirective from '../../../color-border-card.directive';
 import FilteringKeyWordPipe from '../../../filtering-key-word.pipe';
 import { VideoItem } from '../../../you-tube-interface';
 import YoutubeService from '../../../youtube-service.service';
-import { ButtonComponent } from '../../../button/button.component';
 
 @Component({
   selector: 'app-main-content',
@@ -49,9 +49,7 @@ import { ButtonComponent } from '../../../button/button.component';
           <div class="video-card__date">
             {{ youtubeElement.snippet.publishedAt | date }}
           </div>
-          <custom-button (clicked)="onButtonClick()"
-            >Detaled page</custom-button
-          >
+          <app-button>Detaled page</app-button>
         </div>
       }
     </div>
@@ -76,9 +74,5 @@ export default class MainContentComponent {
     youtubeServiceData.keywordSet$.subscribe((keyword) => {
       this.keyword = keyword || '';
     });
-  }
-
-  onButtonClick() {
-    console.log('detailed page');
   }
 }
