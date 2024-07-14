@@ -23,12 +23,17 @@ export default class YoutubeService {
   keywordSet$ = this.keywordSet.asObservable();
 
   getVideos(value: string) {
-    this.currentData = this.youTubeData.items.filter((video) =>
-      video.snippet.title
-        .toLocaleLowerCase()
-        .includes(value.toLocaleLowerCase()),
-    );
-    this.youTubeSetData.next(this.currentData);
+    if (value === '') {
+      this.currentData = [];
+      this.youTubeSetData.next(this.currentData);
+    } else {
+      this.currentData = this.youTubeData.items.filter((video) =>
+        video.snippet.title
+          .toLocaleLowerCase()
+          .includes(value.toLocaleLowerCase()),
+      );
+      this.youTubeSetData.next(this.currentData);
+    }
   }
 
   sortByDateUp() {

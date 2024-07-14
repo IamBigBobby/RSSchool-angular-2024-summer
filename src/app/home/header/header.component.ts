@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 
 import YoutubeService from '../../youtube-service.service';
+import ButtonComponent from '../../button/button.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
+  imports: [ButtonComponent],
   template: `
     <div class="header-wrapper">
       <section class="search-field">
@@ -17,13 +18,9 @@ import YoutubeService from '../../youtube-service.service';
             placeholder="What are you want to find out?"
             #filter
           />
-          <button
-            class="primary"
-            type="button"
-            (click)="getFilterValue(filter.value)"
+          <app-button (clicked)="getFilterValue(filter.value)"
+            >Search</app-button
           >
-            Search
-          </button>
         </form>
         <img
           class="search-field__show-sort-field"
