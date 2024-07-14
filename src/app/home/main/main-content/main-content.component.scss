@@ -16,7 +16,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 30px;
 }
 
 .main-container {
@@ -27,4 +27,60 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+}
+
+.video-card__views, .video-card__likes, .video-card__dislikes, .video-card__comments {
+    position: relative;
+}
+
+.video-card__views::before {
+    content: "";
+    position: absolute;
+    top: 2.5px;
+    left: -25px;
+    width: 20px;
+    height: 13px;
+    background-image: url('../../../../assets/viewed.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.video-card__likes::before {
+    content: "";
+    position: absolute;
+    top: 2.5px;
+    left: -18px;
+    width: 15px;
+    height: 13px;
+    background-image: url('../../../../assets/liked.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.video-card__dislikes::before {
+    content: "";
+    position: absolute;
+    top: 2.5px;
+    left: -18px;
+    width: 15px;
+    height: 13px;
+    background-image: url('../../../../assets/dislike.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.video-card__comments::before {
+    content: "";
+    position: absolute;
+    top: 2.5px;
+    left: -18px;
+    width: 13px;
+    height: 13px;
+    background-image: url('../../../../assets/Group\ 9.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
