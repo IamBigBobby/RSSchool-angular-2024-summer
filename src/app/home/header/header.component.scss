@@ -33,3 +33,9 @@
 .sort-settings__position {
     cursor: pointer;
 }
+
+.search-field__input[type="text"] {
+    padding: 10px;
+    width: 300px;
+    margin-right: 4px;
+}
