@@ -32,8 +32,8 @@
               },
               {
                 "glob": "favicon.ico",
-                "input": "src",
-                "output": "/"
+                "input": "src/assets",
+                "output": "/assets"
               }
             ],
             "styles": ["src/styles.scss"],
