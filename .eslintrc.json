@@ -46,8 +46,7 @@
         "plugin:@angular-eslint/template/accessibility"
       ],
       "rules": {
-        "@angular-eslint/template/click-events-have-key-events": "off",
-        "class-methods-use-this": "off"
+        "@angular-eslint/template/click-events-have-key-events": "off"
       }
     }
   ]
