@@ -3,6 +3,13 @@
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto auto; 
     align-items: center;
+    background-color: rgb(223, 218, 218);
+}
+
+.search-field__form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .search-field{
@@ -37,5 +44,17 @@
 .search-field__input[type="text"] {
     padding: 10px;
     width: 300px;
+    height: 10px;
     margin-right: 4px;
+}
+
+.sort-settings {
+    color: #2F80ED;
+}
+
+.sort-settings__position:hover{
+    cursor: pointer;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-color: #2F80ED;
 }

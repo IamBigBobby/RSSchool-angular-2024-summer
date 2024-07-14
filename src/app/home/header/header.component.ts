@@ -11,14 +11,16 @@ import ButtonComponent from '../../button/button.component';
     <div class="header-wrapper">
       <section class="search-field">
         <img src="assets/logo.svg" alt="logo" />
-        <form>
+        <form class="search-field__form">
           <input
             class="search-field__input"
             type="text"
             placeholder="What are you want to find out?"
             #filter
           />
-          <app-button (clicked)="getFilterValue(filter.value)"
+          <app-button
+            class="search-field__button"
+            (clicked)="getFilterValue(filter.value)"
             >Search</app-button
           >
         </form>

@@ -1,18 +1,30 @@
-.main-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-}
-
 .video-card{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 10px;
+
+    width: 320px;
+    padding: 15px;
+
+    background-color: rgb(223, 218, 218);
+    border-radius: 10px;
 }
 
 .video-card__statistic{
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 10px;
+}
+
+.main-container {
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    width: 90vw;
+    display: flex;
+    flex-wrap: wrap;
     gap: 10px;
 }
