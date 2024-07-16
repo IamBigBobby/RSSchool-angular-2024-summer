@@ -43,7 +43,7 @@ import { YoutubeService } from '../../youtube-service.service';
           <div class="sort-settings">
             <div
               class="sort-settings__position"
-              (click)="clickSortByDate()"
+              (click)="onClickSortByDate()"
               tabindex="0"
               role="button"
             >
@@ -51,7 +51,7 @@ import { YoutubeService } from '../../youtube-service.service';
             </div>
             <div
               class="sort-settings__position"
-              (click)="clickSortByViews()"
+              (click)="onClickSortByViews()"
               tabindex="0"
               role="button"
             >
@@ -87,7 +87,7 @@ export default class HeaderComponent {
     this.youtubeServiceData.getVideos(word);
   }
 
-  clickSortByDate() {
+  onClickSortByDate() {
     this.isSortDateUp = !this.isSortDateUp;
 
     if (this.isSortDateUp) {
@@ -97,7 +97,7 @@ export default class HeaderComponent {
     }
   }
 
-  clickSortByViews() {
+  onClickSortByViews() {
     this.isSortViewsUp = !this.isSortViewsUp;
 
     if (this.isSortViewsUp) {

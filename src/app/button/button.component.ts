@@ -5,7 +5,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
   standalone: true,
   imports: [],
   template: `
-    <button class="custom-button" type="button" (click)="handleClick()">
+    <button class="custom-button" type="button" (click)="onHandleClick()">
       <ng-content></ng-content>
     </button>
   `,
@@ -14,7 +14,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class ButtonComponent {
   @Output() clicked = new EventEmitter<void>();
 
-  handleClick() {
+  onHandleClick() {
     this.clicked.emit();
   }
 }
