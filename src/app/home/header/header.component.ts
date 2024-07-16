@@ -8,24 +8,24 @@ import { YoutubeService } from '../../youtube-service.service';
   standalone: true,
   imports: [ButtonComponent],
   template: `
-    <div class="header-wrapper">
-      <section class="search-field">
+    <header class="header">
+      <section class="header__search-field">
         <img src="assets/logo.svg" alt="logo" />
-        <form class="search-field__form">
+        <form class="header__search-field-form">
           <input
-            class="search-field__input"
+            class="header__search-field-input"
             type="text"
             placeholder="What are you want to find out?"
             #filter
           />
           <app-button
-            class="search-field__button"
+            class="header__search-field-button"
             (clicked)="getFilterValue(filter.value)"
             >Search</app-button
           >
         </form>
         <img
-          class="search-field__show-sort-field"
+          class="header__show-sort-field"
           src="assets/search_settings.svg"
           alt="search_settings"
           (click)="toggleSortField()"
@@ -33,16 +33,16 @@ import { YoutubeService } from '../../youtube-service.service';
           role="button"
         />
       </section>
-      <section class="profile-section">
+      <section class="header__profile-section">
         <p>Your Name</p>
         <img src="assets/login.svg" alt="login" />
       </section>
       @if (isSortFieldVisible) {
-        <section class="sort-field">
+        <section class="header__sort-field">
           <p>Sorting by:</p>
-          <div class="sort-settings">
+          <div class="header__sort-settings">
             <div
-              class="sort-settings__position"
+              class="header__sort-settings-position"
               (click)="onClickSortByDate()"
               tabindex="0"
               role="button"
@@ -50,14 +50,14 @@ import { YoutubeService } from '../../youtube-service.service';
               date
             </div>
             <div
-              class="sort-settings__position"
+              class="header__sort-settings-position"
               (click)="onClickSortByViews()"
               tabindex="0"
               role="button"
             >
               count of views
             </div>
-            <div class="sort-input">
+            <div class="header__sort-input">
               <p>by word of sentance</p>
               <form>
                 <input
@@ -70,7 +70,7 @@ import { YoutubeService } from '../../youtube-service.service';
           </div>
         </section>
       }
-    </div>
+    </header>
   `,
   styleUrl: './header.component.scss',
 })

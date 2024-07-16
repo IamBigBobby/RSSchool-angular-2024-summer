@@ -1,4 +1,11 @@
-.header-wrapper {
+.header__sort-field, .header__sort-settings, .header__sort-input, .header__search-field, .header__profile-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.header {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto auto; 
@@ -6,53 +13,46 @@
     background-color: rgb(223, 218, 218);
 }
 
-.search-field__form {
+.header__search-field-form {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.search-field{
+.header__search-field {
     grid-column: 2;
 }
 
-.profile-section {
+.header__profile-section {
     grid-column: 3;
     justify-self: end;
 }
 
-.sort-field {
+.header__sort-field {
     grid-column: 1 / 4;
     grid-row: 2;
 }
 
-.sort-field, .sort-settings, .sort-input, .search-field, .profile-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-
-.search-field__show-sort-field {
+.header__show-sort-field {
     cursor: pointer;
 }
 
-.sort-settings__position {
+.header__sort-settings-position {
     cursor: pointer;
 }
 
-.search-field__input[type="text"] {
+.header__search-field-input[type="text"] {
     padding: 10px;
     width: 300px;
     height: 10px;
     margin-right: 4px;
 }
 
-.sort-settings {
+.header__sort-settings {
     color: #2F80ED;
 }
 
-.sort-settings__position:hover{
+.header__sort-settings-position:hover{
     cursor: pointer;
     text-decoration-line: underline;
     text-decoration-style: solid;
