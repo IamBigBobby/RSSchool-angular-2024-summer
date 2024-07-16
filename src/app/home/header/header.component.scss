@@ -1,9 +1,11 @@
+@import '../../../constants.scss';
+
 .header {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: auto auto; 
     align-items: center;
-    background-color: rgb(223, 218, 218);
+    background-color: $background-color;
 
     &__sort-field, &__sort-settings, &__sort-input, &__search-field, &__profile-section {
         display: flex;
@@ -56,6 +58,6 @@
     }
 
     &__sort-settings {
-        color: #2F80ED;
+        color: $primary-color;
     }
 }
