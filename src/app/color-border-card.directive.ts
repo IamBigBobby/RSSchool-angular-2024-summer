@@ -10,7 +10,7 @@ import {
   selector: '[appColorBorderCard]',
   standalone: true,
 })
-export default class ColorBorderCardDirective implements OnChanges {
+export class ColorBorderCardDirective implements OnChanges {
   @Input() date: string | undefined;
 
   constructor(private element: ElementRef) {}

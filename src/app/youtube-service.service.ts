@@ -7,7 +7,7 @@ import { VideoItem, YouTubeInterface } from './you-tube-interface';
 @Injectable({
   providedIn: 'root',
 })
-export default class YoutubeService {
+export class YoutubeService {
   protected youTubeData: YouTubeInterface = mockData;
 
   protected keyword: string | undefined;

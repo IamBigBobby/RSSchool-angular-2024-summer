@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-
-import ButtonComponent from '../../../button/button.component';
-import ColorBorderCardDirective from '../../../color-border-card.directive';
-import FilteringKeyWordPipe from '../../../filtering-key-word.pipe';
+import { ButtonComponent } from '../../../button/button.component';
+import { ColorBorderCardDirective } from '../../../color-border-card.directive';
+import { FilteringKeyWordPipe } from '../../../filtering-key-word.pipe';
 import { VideoItem } from '../../../you-tube-interface';
-import YoutubeService from '../../../youtube-service.service';
+import { YoutubeService } from '../../../youtube-service.service';
 
 @Component({
   selector: 'app-main-content',
@@ -61,7 +60,7 @@ import YoutubeService from '../../../youtube-service.service';
     ButtonComponent,
   ],
 })
-export default class MainContentComponent {
+export class MainContentComponent {
   youtubeList: VideoItem[] = [];
 
   keyword: string = '';

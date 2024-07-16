@@ -11,7 +11,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
   `,
   styleUrl: './button.component.scss',
 })
-export default class ButtonComponent {
+export class ButtonComponent {
   @Output() clicked = new EventEmitter<void>();
 
   handleClick() {

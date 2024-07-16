@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
-import ButtonComponent from '../../button/button.component';
-import YoutubeService from '../../youtube-service.service';
+import { ButtonComponent } from '../../button/button.component';
+import { YoutubeService } from '../../youtube-service.service';
 
 @Component({
   selector: 'app-header',

@@ -7,7 +7,7 @@ import { VideoItem } from './you-tube-interface';
   standalone: true,
   pure: false,
 })
-export default class FilteringKeyWordPipe implements PipeTransform {
+export class FilteringKeyWordPipe implements PipeTransform {
   // eslint-disable-next-line class-methods-use-this
   transform(videos: VideoItem[], keyword: string): VideoItem[] {
     return videos.filter((video) =>
