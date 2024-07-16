@@ -1,22 +1,61 @@
-.video-card{
+.video-card {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
-
     width: 320px;
     padding: 15px;
-
     background-color: rgb(223, 218, 218);
     border-radius: 10px;
-}
 
-.video-card__statistic{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
+    &__statistic {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+    }
+
+    &__views, &__likes, &__dislikes, &__comments {
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 2.5px;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    }
+
+    &__views::before {
+        left: -25px;
+        width: 20px;
+        height: 13px;
+        background-image: url('../../../../assets/viewed.svg');
+    }
+
+    &__likes::before {
+        left: -18px;
+        width: 15px;
+        height: 13px;
+        background-image: url('../../../../assets/liked.svg');
+    }
+
+    &__dislikes::before {
+        left: -18px;
+        width: 15px;
+        height: 13px;
+        background-image: url('../../../../assets/dislike.svg');
+    }
+
+    &__comments::before {
+        left: -18px;
+        width: 13px;
+        height: 13px;
+        background-image: url('../../../../assets/Group\ 9.svg');
+    }
 }
 
 .main-container {
@@ -27,60 +66,4 @@
     display: flex;
     flex-wrap: wrap;
     gap: 80px;
-}
-
-.video-card__views, .video-card__likes, .video-card__dislikes, .video-card__comments {
-    position: relative;
-}
-
-.video-card__views::before {
-    content: "";
-    position: absolute;
-    top: 2.5px;
-    left: -25px;
-    width: 20px;
-    height: 13px;
-    background-image: url('../../../../assets/viewed.svg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.video-card__likes::before {
-    content: "";
-    position: absolute;
-    top: 2.5px;
-    left: -18px;
-    width: 15px;
-    height: 13px;
-    background-image: url('../../../../assets/liked.svg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.video-card__dislikes::before {
-    content: "";
-    position: absolute;
-    top: 2.5px;
-    left: -18px;
-    width: 15px;
-    height: 13px;
-    background-image: url('../../../../assets/dislike.svg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.video-card__comments::before {
-    content: "";
-    position: absolute;
-    top: 2.5px;
-    left: -18px;
-    width: 13px;
-    height: 13px;
-    background-image: url('../../../../assets/Group\ 9.svg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
 }
