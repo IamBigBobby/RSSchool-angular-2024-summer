@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
+import { NgOptimizedImage } from '@angular/common';
 import { ButtonComponent } from '../../button/button.component';
 import { YoutubeService } from '../../youtube-service.service';
-import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -17,6 +17,7 @@ import { NgOptimizedImage } from '@angular/common';
           width="50"
           height="50"
           priority
+          alt="logo"
         />
         <form class="header__search-field-form">
           <input
@@ -38,6 +39,9 @@ import { NgOptimizedImage } from '@angular/common';
           height="25"
           (click)="toggleSortField()"
           priority
+          alt="sort-button"
+          tabindex="0"
+          role="button"
         />
       </section>
       <section class="header__profile-section">

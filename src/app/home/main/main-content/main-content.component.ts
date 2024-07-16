@@ -21,17 +21,13 @@ import { YoutubeService } from '../../../youtube-service.service';
             [date]="youtubeElement.snippet.publishedAt"
             class="video-card"
           >
-            <!-- <img
-              class="video-card__title"
-              [src]="youtubeElement.snippet.thumbnails.medium.url"
-              alt="video_card_img"
-            /> -->
             <img
               class="video-card__title"
               [ngSrc]="youtubeElement.snippet.thumbnails.medium.url"
               width="320"
               height="180"
               priority
+              alt="title"
             />
             <div class="video-card__title">
               {{ youtubeElement.snippet.title }}
