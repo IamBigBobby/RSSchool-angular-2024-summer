@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
 import { ButtonComponent } from '../../../button/button.component';
 import { ColorBorderCardDirective } from '../../../color-border-card.directive';
@@ -21,10 +21,17 @@ import { YoutubeService } from '../../../youtube-service.service';
             [date]="youtubeElement.snippet.publishedAt"
             class="video-card"
           >
-            <img
+            <!-- <img
               class="video-card__title"
               [src]="youtubeElement.snippet.thumbnails.medium.url"
               alt="video_card_img"
+            /> -->
+            <img
+              class="video-card__title"
+              [ngSrc]="youtubeElement.snippet.thumbnails.medium.url"
+              width="320"
+              height="180"
+              priority
             />
             <div class="video-card__title">
               {{ youtubeElement.snippet.title }}
@@ -58,6 +65,7 @@ import { YoutubeService } from '../../../youtube-service.service';
     FilteringKeyWordPipe,
     ColorBorderCardDirective,
     ButtonComponent,
+    NgOptimizedImage,
   ],
 })
 export class MainContentComponent {

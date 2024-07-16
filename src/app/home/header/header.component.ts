@@ -2,15 +2,22 @@ import { Component } from '@angular/core';
 
 import { ButtonComponent } from '../../button/button.component';
 import { YoutubeService } from '../../youtube-service.service';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [ButtonComponent],
+  imports: [ButtonComponent, NgOptimizedImage],
   template: `
     <header class="header">
       <section class="header__search-field">
-        <img src="assets/logo.svg" alt="logo" />
+        <img
+          class="header__logo"
+          ngSrc="assets/logo.svg"
+          width="50"
+          height="50"
+          priority
+        />
         <form class="header__search-field-form">
           <input
             class="header__search-field-input"
@@ -26,11 +33,11 @@ import { YoutubeService } from '../../youtube-service.service';
         </form>
         <img
           class="header__show-sort-field"
-          src="assets/search_settings.svg"
-          alt="search_settings"
+          ngSrc="assets/search_settings.svg"
+          width="25"
+          height="25"
           (click)="toggleSortField()"
-          tabindex="0"
-          role="button"
+          priority
         />
       </section>
       <section class="header__profile-section">
