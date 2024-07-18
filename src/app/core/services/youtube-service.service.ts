@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-
-import { mockData } from '../../mock-data';
+import { mockData } from '../../../../mock-data';
 import { VideoItem, YouTubeInterface } from './you-tube-interface';
 
 @Injectable({

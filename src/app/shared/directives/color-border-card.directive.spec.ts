@@ -1,4 +1,4 @@
-import { ColorBorderCardDirective } from './color-border-card.directive';
+import { ColorBorderCardDirective } from './shared/directives/color-border-card.directive';
 
 describe('ColorBorderCardDirective', () => {
   it('should create an instance', () => {

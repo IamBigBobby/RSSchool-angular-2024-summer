@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { VideoItem } from '../you-tube-interface';
+import { VideoItem } from '../../../core/services/you-tube-interface';
 import { ButtonComponent } from '../button/button.component';
-import { FilteringKeyWordPipe } from '../filtering-key-word.pipe';
-import { ColorBorderCardDirective } from '../color-border-card.directive';
+import { FilteringKeyWordPipe } from '../../pipes/filtering-key-word.pipe';
+import { ColorBorderCardDirective } from '../../directives/color-border-card.directive';
 
 @Component({
   selector: 'app-video-card',

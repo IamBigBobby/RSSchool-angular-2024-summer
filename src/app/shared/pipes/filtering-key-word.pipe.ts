@@ -1,6 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-
-import { VideoItem } from './you-tube-interface';
+import { VideoItem } from '../../core/services/you-tube-interface';
 
 @Pipe({
   name: 'filteringKeyWord',

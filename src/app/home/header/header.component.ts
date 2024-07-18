@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { NgOptimizedImage } from '@angular/common';
-import { ButtonComponent } from '../../button/button.component';
+import { ButtonComponent } from '../../shared/components/button/button.component';
 import { YoutubeService } from '../../youtube-service.service';
 
 @Component({

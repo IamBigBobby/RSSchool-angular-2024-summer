@@ -1,11 +1,11 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component } from '@angular/core';
-import { ButtonComponent } from '../../button/button.component';
-import { ColorBorderCardDirective } from '../../color-border-card.directive';
-import { FilteringKeyWordPipe } from '../../filtering-key-word.pipe';
-import { VideoItem } from '../../you-tube-interface';
-import { YoutubeService } from '../../youtube-service.service';
-import { VideoCardComponent } from '../../video-card/video-card.component';
+import { ButtonComponent } from '../../shared/components/button/button.component';
+import { ColorBorderCardDirective } from '../../shared/directives/color-border-card.directive';
+import { FilteringKeyWordPipe } from '../../shared/pipes/filtering-key-word.pipe';
+import { VideoItem } from '../../core/services/you-tube-interface';
+import { YoutubeService } from '../../core/services/youtube-service.service';
+import { VideoCardComponent } from '../../shared/components/video-card/video-card.component';
 
 @Component({
   selector: 'app-main-content',
