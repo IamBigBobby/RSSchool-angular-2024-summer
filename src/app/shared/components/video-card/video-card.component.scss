@@ -1,4 +1,4 @@
-@import '../../constants.scss';
+@import '../../../../constants.scss';
 
 .video-card {
     display: flex;
@@ -35,28 +35,28 @@
         left: -25px;
         width: 20px;
         height: 13px;
-        background-image: url('../../assets/viewed.svg');
+        background-image: url('../../../../assets/viewed.svg');
     }
 
     &__likes::before {
         left: -18px;
         width: 15px;
         height: 13px;
-        background-image: url('../../assets/liked.svg');
+        background-image: url('../../../../assets/liked.svg');
     }
 
     &__dislikes::before {
         left: -18px;
         width: 15px;
         height: 13px;
-        background-image: url('../../assets/dislike.svg');
+        background-image: url('../../../../assets/dislike.svg');
     }
 
     &__comments::before {
         left: -18px;
         width: 13px;
         height: 13px;
-        background-image: url('../../assets/Group\ 9.svg');
+        background-image: url('../../../../assets/Group\ 9.svg');
     }
 }
 

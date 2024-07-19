@@ -3,11 +3,18 @@ import { Component } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { YoutubeService } from '../../core/services/youtube-service.service';
+import { SearchInputComponent } from './components/search-input/search-input.component';
+import { FiltersInputComponent } from './components/filters-input/filters-input.component';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [ButtonComponent, NgOptimizedImage],
+  imports: [
+    ButtonComponent,
+    NgOptimizedImage,
+    SearchInputComponent,
+    FiltersInputComponent,
+  ],
   template: `
     <header class="header">
       <section class="header__search-field">
@@ -19,19 +26,7 @@ import { YoutubeService } from '../../core/services/youtube-service.service';
           priority
           alt="logo"
         />
-        <form class="header__search-field-form">
-          <input
-            class="header__search-field-input"
-            type="text"
-            placeholder="What are you want to find out?"
-            #filter
-          />
-          <app-button
-            class="header__search-field-button"
-            (clicked)="getFilterValue(filter.value)"
-            >Search</app-button
-          >
-        </form>
+        <app-search-input></app-search-input>
         <img
           class="header__show-sort-field"
           ngSrc="assets/search_settings.svg"
@@ -48,39 +43,10 @@ import { YoutubeService } from '../../core/services/youtube-service.service';
         <p>Your Name</p>
         <img src="assets/login.svg" alt="login" />
       </section>
-      @if (isSortFieldVisible) {
-        <section class="header__sort-field">
-          <p>Sorting by:</p>
-          <div class="header__sort-settings">
-            <div
-              class="header__sort-settings-position"
-              (click)="onSortByDateClick()"
-              tabindex="0"
-              role="button"
-            >
-              date
-            </div>
-            <div
-              class="header__sort-settings-position"
-              (click)="onSortByViewsClick()"
-              tabindex="0"
-              role="button"
-            >
-              count of views
-            </div>
-            <div class="header__sort-input">
-              <p>by word of sentance</p>
-              <form>
-                <input
-                  type="text"
-                  placeholder=""
-                  (input)="onSortByKeyWordTap($event)"
-                />
-              </form>
-            </div>
-          </div>
-        </section>
-      }
+      <app-filters-input
+        class="header__sort-field"
+        [isSortFieldVisibleToggle]="isSortFieldVisible"
+      ></app-filters-input>
     </header>
   `,
   styleUrl: './header.component.scss',
@@ -88,43 +54,13 @@ import { YoutubeService } from '../../core/services/youtube-service.service';
 export default class HeaderComponent {
   isSortFieldVisible: boolean = false;
 
-  isSortDateUp: boolean = false;
-
-  isSortViewsUp: boolean = false;
-
   constructor(private youtubeServiceData: YoutubeService) {}
 
   getFilterValue(word: string) {
     this.youtubeServiceData.getVideos(word);
   }
 
-  onSortByDateClick() {
-    this.isSortDateUp = !this.isSortDateUp;
-
-    if (this.isSortDateUp) {
-      this.youtubeServiceData.sortByDateDown();
-    } else {
-      this.youtubeServiceData.sortByDateUp();
-    }
-  }
-
-  onSortByViewsClick() {
-    this.isSortViewsUp = !this.isSortViewsUp;
-
-    if (this.isSortViewsUp) {
-      this.youtubeServiceData.sortByViewsDown();
-    } else {
-      this.youtubeServiceData.sortByViewsUp();
-    }
-  }
-
   toggleSortField() {
     this.isSortFieldVisible = !this.isSortFieldVisible;
-  }
-
-  onSortByKeyWordTap(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    const keyword = inputElement.value;
-    this.youtubeServiceData.sortByKeyWord(keyword);
   }
 }
