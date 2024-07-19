@@ -1,10 +1,12 @@
+@import "../../../../styles/variables";
+
 .custom-button {
     display: block;
     height: 33px;
     width: 100px;
     text-align: center;
     margin-left: -5px;
-    background-color: #2F80ED;
+    background-color: $primary-color;
     color: white;
     outline: none;
     cursor: pointer;
