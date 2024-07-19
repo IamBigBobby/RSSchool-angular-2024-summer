@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 
 import { NgOptimizedImage } from '@angular/common';
 import { ButtonComponent } from '../../shared/components/button/button.component';
-import { YoutubeService } from '../../core/services/youtube-service.service';
 import { SearchInputComponent } from './components/search-input/search-input.component';
 import { FiltersInputComponent } from './components/filters-input/filters-input.component';
 
@@ -53,12 +52,6 @@ import { FiltersInputComponent } from './components/filters-input/filters-input.
 })
 export default class HeaderComponent {
   isSortFieldVisible: boolean = false;
-
-  constructor(private youtubeServiceData: YoutubeService) {}
-
-  getFilterValue(word: string) {
-    this.youtubeServiceData.getVideos(word);
-  }
 
   toggleSortField() {
     this.isSortFieldVisible = !this.isSortFieldVisible;
