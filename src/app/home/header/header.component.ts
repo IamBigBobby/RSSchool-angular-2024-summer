@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { NgOptimizedImage } from '@angular/common';
 import { ButtonComponent } from '../../shared/components/button/button.component';
-import { YoutubeService } from '../../youtube-service.service';
+import { YoutubeService } from '../../core/services/youtube-service.service';
 
 @Component({
   selector: 'app-header',
@@ -54,7 +54,7 @@ import { YoutubeService } from '../../youtube-service.service';
           <div class="header__sort-settings">
             <div
               class="header__sort-settings-position"
-              (click)="onClickSortByDate()"
+              (click)="onSortByDateClick()"
               tabindex="0"
               role="button"
             >
@@ -62,7 +62,7 @@ import { YoutubeService } from '../../youtube-service.service';
             </div>
             <div
               class="header__sort-settings-position"
-              (click)="onClickSortByViews()"
+              (click)="onSortByViewsClick()"
               tabindex="0"
               role="button"
             >
@@ -74,7 +74,7 @@ import { YoutubeService } from '../../youtube-service.service';
                 <input
                   type="text"
                   placeholder=""
-                  (input)="sortByKeyWordTap($event)"
+                  (input)="onSortByKeyWordTap($event)"
                 />
               </form>
             </div>
@@ -98,7 +98,7 @@ export default class HeaderComponent {
     this.youtubeServiceData.getVideos(word);
   }
 
-  onClickSortByDate() {
+  onSortByDateClick() {
     this.isSortDateUp = !this.isSortDateUp;
 
     if (this.isSortDateUp) {
@@ -108,7 +108,7 @@ export default class HeaderComponent {
     }
   }
 
-  onClickSortByViews() {
+  onSortByViewsClick() {
     this.isSortViewsUp = !this.isSortViewsUp;
 
     if (this.isSortViewsUp) {
@@ -122,7 +122,7 @@ export default class HeaderComponent {
     this.isSortFieldVisible = !this.isSortFieldVisible;
   }
 
-  sortByKeyWordTap(event: Event) {
+  onSortByKeyWordTap(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     const keyword = inputElement.value;
     this.youtubeServiceData.sortByKeyWord(keyword);
