@@ -49,5 +49,6 @@ export class MainContentComponent {
   private youtubeService = inject(YoutubeService);
 
   videos$ = this.youtubeService.videos$;
+
   keyword$ = this.youtubeService.keyword$;
 }
