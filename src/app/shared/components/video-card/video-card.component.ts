@@ -55,5 +55,8 @@ import { ColorBorderCardDirective } from '../../directives/color-border-card.dir
   styleUrl: './video-card.component.scss',
 })
 export class VideoCardComponent {
-  @Input() videoItem!: VideoItem;
+  @Input({
+    required: true,
+  })
+  videoItem!: VideoItem;
 }
