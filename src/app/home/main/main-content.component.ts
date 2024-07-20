@@ -1,9 +1,8 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { ColorBorderCardDirective } from '../../shared/directives/color-border-card.directive';
 import { FilteringKeyWordPipe } from '../../shared/pipes/filtering-key-word.pipe';
-import { VideoItem } from '../../core/services/you-tube-interface';
 import { YoutubeService } from '../../core/services/youtube-service.service';
 import { VideoCardComponent } from '../../shared/components/video-card/video-card.component';
 
@@ -14,7 +13,8 @@ import { VideoCardComponent } from '../../shared/components/video-card/video-car
     <main class="main">
       <div class="main-container">
         @for (
-          youtubeElement of youtubeList | filteringKeyWord: keyword;
+          youtubeElement of (videos$ | async) ?? []
+            | filteringKeyWord: (keyword$ | async) ?? '';
           track youtubeElement.id
         ) {
           <app-video-card [videoItem]="youtubeElement"></app-video-card>
@@ -33,16 +33,21 @@ import { VideoCardComponent } from '../../shared/components/video-card/video-car
   ],
 })
 export class MainContentComponent {
-  youtubeList: VideoItem[] = [];
+  // youtubeList: VideoItem[] = [];
 
-  keyword: string = '';
+  // keyword: string = '';
 
-  constructor(youtubeServiceData: YoutubeService) {
-    youtubeServiceData.youtubeSet$.subscribe((videos) => {
-      this.youtubeList = videos || [];
-    });
-    youtubeServiceData.keywordSet$.subscribe((keyword) => {
-      this.keyword = keyword || '';
-    });
-  }
+  // constructor(youtubeServiceData: YoutubeService) {
+  //   youtubeServiceData.youtubeSet$.subscribe((videos) => {
+  //     this.youtubeList = videos || [];
+  //   });
+  //   youtubeServiceData.keywordSet$.subscribe((keyword) => {
+  //     this.keyword = keyword || '';
+  //   });
+  // }
+
+  private youtubeService = inject(YoutubeService);
+
+  videos$ = this.youtubeService.videos$;
+  keyword$ = this.youtubeService.keyword$;
 }

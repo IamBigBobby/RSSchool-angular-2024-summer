@@ -14,9 +14,7 @@ import { ButtonComponent } from '../../../../shared/components/button/button.com
         placeholder="What are you want to find out?"
         #filter
       />
-      <app-button
-        class="search-field-form__button"
-        (clicked)="getFilterValue(filter.value)"
+      <app-button class="search-field-form__button" (clicked)="filterValue()"
         >Search</app-button
       >
     </form>
@@ -26,7 +24,7 @@ import { ButtonComponent } from '../../../../shared/components/button/button.com
 export class SearchInputComponent {
   constructor(private youtubeServiceData: YoutubeService) {}
 
-  getFilterValue(word: string) {
-    this.youtubeServiceData.getVideos(word);
+  filterValue() {
+    this.youtubeServiceData.loadVideos();
   }
 }

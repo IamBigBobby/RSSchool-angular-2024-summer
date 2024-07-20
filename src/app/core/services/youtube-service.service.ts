@@ -31,100 +31,58 @@ export class YoutubeService {
     youtubeResponse: this.youtubeResponse$,
     sortCallback: this.sortCallback$,
   }).pipe(
-    map(({youtubeResponse, sortCallback}) => sortCallback(youtubeResponse.items)),
+    map(({ youtubeResponse, sortCallback }) =>
+      sortCallback(youtubeResponse.items),
+    ),
   );
 
   public keyword$ = new BehaviorSubject('');
 
-
-  getVideos(value: string) { // rename with 'load'
-    // if (value === '') {
-    //   this.currentData = [];
-    //   this.youTubeSetData.next(this.currentData);
-    // } else {
-    //   this.currentData = this.youTubeData.items.filter((video) =>
-    //     video.snippet.title
-    //       .toLocaleLowerCase()
-    //       .includes(value.toLocaleLowerCase()),
-    //   );
-    //   this.youTubeSetData.next(this.currentData);
-    // }
-
+  loadVideos() {
     this.youtubeResponse$.next(MOCK_RESPONSE);
   }
 
-  sortByDateUp() { // use Desc/Asc in methhods names
-    // if (this.currentData) {
-    //   this.currentData.sort((a, b) => {
-    //     const dateA = new Date(a.snippet.publishedAt);
-    //     const dateB = new Date(b.snippet.publishedAt);
-    //     return dateB.getTime() - dateA.getTime();
-    //   });
-    //   this.youTubeSetData.next(this.currentData);
-    // }
-
-    this.sortCallback$.next((videos) => videos.sort((a, b) => {
-      const dateA = new Date(a.snippet.publishedAt);
-      const dateB = new Date(b.snippet.publishedAt);
-      return dateB.getTime() - dateA.getTime();
-    }));
+  sortByDateAsc() {
+    this.sortCallback$.next((videos) =>
+      videos.sort((a, b) => {
+        const dateA = new Date(a.snippet.publishedAt);
+        const dateB = new Date(b.snippet.publishedAt);
+        return dateB.getTime() - dateA.getTime();
+      }),
+    );
   }
 
-  sortByDateDown() {
-    // if (this.currentData) {
-    //   this.currentData.sort((a, b) => {
-    //     const dateA = new Date(a.snippet.publishedAt);
-    //     const dateB = new Date(b.snippet.publishedAt);
-    //     return dateA.getTime() - dateB.getTime();
-    //   });
-    //   this.youTubeSetData.next(this.currentData);
-    // }
-
-    this.sortCallback$.next((videos) => videos.sort((a, b) => {
-      const dateA = new Date(a.snippet.publishedAt);
-      const dateB = new Date(b.snippet.publishedAt);
-      return dateA.getTime() - dateB.getTime();
-    }));
+  sortByDateDesc() {
+    this.sortCallback$.next((videos) =>
+      videos.sort((a, b) => {
+        const dateA = new Date(a.snippet.publishedAt);
+        const dateB = new Date(b.snippet.publishedAt);
+        return dateA.getTime() - dateB.getTime();
+      }),
+    );
   }
 
-  sortByViewsUp() {
-    // if (this.currentData) {
-    //   this.currentData.sort((a, b) => {
-    //     const viewsA: number = Number(a.statistics.viewCount);
-    //     const viewsB: number = Number(b.statistics.viewCount);
-    //     return viewsB - viewsA;
-    //   });
-    //   this.youTubeSetData.next(this.currentData);
-    // }
-
-    this.sortCallback$.next((videos) => videos.sort((a, b) => {
-      const viewsA: number = Number(a.statistics.viewCount);
-      const viewsB: number = Number(b.statistics.viewCount);
-      return viewsB - viewsA;
-    }));
+  sortByViewsAsc() {
+    this.sortCallback$.next((videos) =>
+      videos.sort((a, b) => {
+        const viewsA: number = Number(a.statistics.viewCount);
+        const viewsB: number = Number(b.statistics.viewCount);
+        return viewsB - viewsA;
+      }),
+    );
   }
 
-  sortByViewsDown() {
-    // if (this.currentData) {
-    //   this.currentData.sort((a, b) => {
-    //     const viewsA: number = Number(a.statistics.viewCount);
-    //     const viewsB: number = Number(b.statistics.viewCount);
-    //     return viewsA - viewsB;
-    //   });
-    //   this.youTubeSetData.next(this.currentData);
-    // }
-
-    this.sortCallback$.next((videos) => videos.sort((a, b) => {
-      const viewsA: number = Number(a.statistics.viewCount);
-      const viewsB: number = Number(b.statistics.viewCount);
-      return viewsA - viewsB;
-    }));
+  sortByViewsDesc() {
+    this.sortCallback$.next((videos) =>
+      videos.sort((a, b) => {
+        const viewsA: number = Number(a.statistics.viewCount);
+        const viewsB: number = Number(b.statistics.viewCount);
+        return viewsA - viewsB;
+      }),
+    );
   }
 
   sortByKeyWord(keyword: string) {
-    // this.keyword = keyword;
-    // this.keywordSet.next(this.keyword);
-
     this.keyword$.next(keyword);
   }
 }

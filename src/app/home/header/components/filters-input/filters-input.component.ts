@@ -55,9 +55,9 @@ export class FiltersInputComponent {
     this.isSortDateUp = !this.isSortDateUp;
 
     if (this.isSortDateUp) {
-      this.youtubeServiceData.sortByDateDown();
+      this.youtubeServiceData.sortByDateDesc();
     } else {
-      this.youtubeServiceData.sortByDateUp();
+      this.youtubeServiceData.sortByDateAsc();
     }
   }
 
@@ -65,9 +65,9 @@ export class FiltersInputComponent {
     this.isSortViewsUp = !this.isSortViewsUp;
 
     if (this.isSortViewsUp) {
-      this.youtubeServiceData.sortByViewsDown();
+      this.youtubeServiceData.sortByViewsDesc();
     } else {
-      this.youtubeServiceData.sortByViewsUp();
+      this.youtubeServiceData.sortByViewsAsc();
     }
   }
 
