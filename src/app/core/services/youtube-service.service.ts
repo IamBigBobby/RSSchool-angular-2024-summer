@@ -10,6 +10,7 @@ const MOCK_RESPONSE = mockData;
 })
 export class YoutubeService {
   private youtubeResponse$ = new Subject<YouTubeInterface>();
+
   private sortCallback$ = new BehaviorSubject((data: VideoItem[]) => data);
 
   public videos$: Observable<VideoItem[]> = combineLatest({
