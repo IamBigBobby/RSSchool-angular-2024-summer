@@ -32,7 +32,7 @@ import { YoutubeService } from '../../../../core/services/youtube-service.servic
               <input
                 type="text"
                 placeholder=""
-                (input)="onSortByKeyWordTap($event)"
+                (input)="onFilterWordChange($event)"
               />
             </form>
           </div>
@@ -71,7 +71,7 @@ export class FiltersInputComponent {
     }
   }
 
-  onSortByKeyWordTap(event: Event) {
+  onFilterWordChange(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     const keyword = inputElement.value;
     this.youtubeServiceData.sortByKeyWord(keyword);
