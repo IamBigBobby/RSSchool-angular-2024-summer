@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import HeaderComponent from './header/header.component';
 import { MainContentComponent } from './main/main-content.component';
 
@@ -15,4 +14,5 @@ import { MainContentComponent } from './main/main-content.component';
   `,
   styleUrl: './home.component.scss',
 })
+
 export default class HomeComponent {}
