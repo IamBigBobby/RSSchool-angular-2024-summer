@@ -1,0 +1,33 @@
+@import 'variables';
+
+.sort-field {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: $primary-color;
+
+    &__settings {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    &__position {
+        cursor: pointer;
+
+        &:hover {
+            text-decoration-line: underline;
+            text-decoration-style: solid;
+            text-decoration-color: $primary-color;
+        }
+    }
+
+    &__input {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+}

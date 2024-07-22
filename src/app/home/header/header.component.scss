@@ -1,0 +1,34 @@
+@import 'variables';
+
+.header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto; 
+    align-items: center;
+    background-color: $background-color;
+
+    &__sort-settings, &__sort-input, &__search-field, &__profile-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    &__search-field {
+        grid-column: 2;
+    }
+
+    &__profile-section {
+        grid-column: 3;
+        justify-self: end;
+    }
+
+    &__sort-field {
+        grid-column: 1 / 4;
+        grid-row: 2;
+    }
+
+    &__show-sort-field {
+        cursor: pointer;
+    }
+}

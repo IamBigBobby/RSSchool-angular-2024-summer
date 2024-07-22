@@ -34,9 +34,8 @@
             "style": "kebab-case"
           }
         ],
-        "simple-import-sort/imports": "error",
-        "simple-import-sort/exports": "error",
-        "@typescript-eslint/await-thenable": "error"
+        "@typescript-eslint/await-thenable": "error",
+        "import/prefer-default-export": "off"
       }
     },
     {
@@ -46,8 +45,7 @@
         "plugin:@angular-eslint/template/accessibility"
       ],
       "rules": {
-        "@angular-eslint/template/click-events-have-key-events": "off",
-        "class-methods-use-this": "off"
+        "@angular-eslint/template/click-events-have-key-events": "off"
       }
     }
   ]
