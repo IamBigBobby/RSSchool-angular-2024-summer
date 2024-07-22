@@ -8,23 +8,9 @@ const MOCK_RESPONSE = mockData;
 @Injectable({
   providedIn: 'root',
 })
+
 export class YoutubeService {
-  // protected youTubeData: YouTubeInterface = mockData;
-
-  // protected keyword: string | undefined;
-
-  // private youTubeSetData = new Subject<VideoItem[] | undefined>();
-
-  // private keywordSet = new Subject<string | undefined>();
-
-  // currentData: VideoItem[] | undefined;
-
-  // youtubeSet$ = this.youTubeSetData.asObservable();
-
-  // keywordSet$ = this.keywordSet.asObservable();
-
   private youtubeResponse$ = new Subject<YouTubeInterface>();
-
   private sortCallback$ = new BehaviorSubject((data: VideoItem[]) => data);
 
   public videos$: Observable<VideoItem[]> = combineLatest({
