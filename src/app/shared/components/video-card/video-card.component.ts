@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { VideoItem } from '../../../core/services/you-tube-interface';
 import { ButtonComponent } from '../button/button.component';
 import { FilteringKeyWordPipe } from '../../pipes/filtering-key-word.pipe';
@@ -14,6 +15,9 @@ import { ColorBorderCardDirective } from '../../directives/color-border-card.dir
     FilteringKeyWordPipe,
     ColorBorderCardDirective,
     NgOptimizedImage,
+    RouterLink,
+    RouterOutlet,
+    RouterLinkActive,
   ],
   template: `
     <div
@@ -49,7 +53,13 @@ import { ColorBorderCardDirective } from '../../directives/color-border-card.dir
       <div class="video-card__date">
         {{ videoItem.snippet.publishedAt | date }}
       </div>
-      <app-button>Detaled page</app-button>
+      <a
+        routerLink="/detailed-page"
+        routerLinkActive="active"
+        ariaCurrentWhenActive="page"
+      >
+        <app-button>Detaled page</app-button>
+      </a>
     </div>
   `,
   styleUrl: './video-card.component.scss',

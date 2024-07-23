@@ -10,7 +10,6 @@ import HomeComponent from './home/home.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-
 export class AppComponent {
   title = 'youtube-client-app';
 }
