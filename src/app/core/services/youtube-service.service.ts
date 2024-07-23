@@ -13,16 +13,22 @@ export class YoutubeService {
 
   private sortCallback$ = new BehaviorSubject((data: VideoItem[]) => data);
 
+  public keyword$ = new BehaviorSubject('');
+
+  public searchword$ = new BehaviorSubject('');
+
   public videos$: Observable<VideoItem[]> = combineLatest({
     youtubeResponse: this.youtubeResponse$,
     sortCallback: this.sortCallback$,
+    searchword: this.searchword$,
   }).pipe(
-    map(({ youtubeResponse, sortCallback }) =>
-      sortCallback(youtubeResponse.items),
-    ),
+    map(({ youtubeResponse, sortCallback, searchword }) => {
+      const filteredVideos = youtubeResponse.items.filter((video) =>
+        video.snippet.title.toLowerCase().includes(searchword.toLowerCase()),
+      );
+      return sortCallback(filteredVideos);
+    }),
   );
-
-  public keyword$ = new BehaviorSubject('');
 
   loadVideos() {
     this.youtubeResponse$.next(MOCK_RESPONSE);
@@ -70,5 +76,9 @@ export class YoutubeService {
 
   sortByKeyWord(keyword: string) {
     this.keyword$.next(keyword);
+  }
+
+  fetchBySearchWord(searchword: string) {
+    this.searchword$.next(searchword);
   }
 }

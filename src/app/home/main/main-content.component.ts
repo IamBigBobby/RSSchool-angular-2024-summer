@@ -33,19 +33,6 @@ import { VideoCardComponent } from '../../shared/components/video-card/video-car
   ],
 })
 export class MainContentComponent {
-  // youtubeList: VideoItem[] = [];
-
-  // keyword: string = '';
-
-  // constructor(youtubeServiceData: YoutubeService) {
-  //   youtubeServiceData.youtubeSet$.subscribe((videos) => {
-  //     this.youtubeList = videos || [];
-  //   });
-  //   youtubeServiceData.keywordSet$.subscribe((keyword) => {
-  //     this.keyword = keyword || '';
-  //   });
-  // }
-
   private youtubeService = inject(YoutubeService);
 
   videos$ = this.youtubeService.videos$;

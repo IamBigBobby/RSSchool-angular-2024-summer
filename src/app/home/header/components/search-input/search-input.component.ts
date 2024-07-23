@@ -20,7 +20,9 @@ import { ButtonComponent } from '../../../../shared/components/button/button.com
         routerLinkActive="active"
         ariaCurrentWhenActive="page"
       >
-        <app-button class="search-field-form__button" (clicked)="filterValue()"
+        <app-button
+          class="search-field-form__button"
+          (clicked)="filterValue(filter.value)"
           >Search</app-button
         >
       </a>
@@ -31,7 +33,8 @@ import { ButtonComponent } from '../../../../shared/components/button/button.com
 export class SearchInputComponent {
   constructor(private youtubeServiceData: YoutubeService) {}
 
-  filterValue() {
+  filterValue(searchword: string) {
+    this.youtubeServiceData.fetchBySearchWord(searchword);
     this.youtubeServiceData.loadVideos();
   }
 }
