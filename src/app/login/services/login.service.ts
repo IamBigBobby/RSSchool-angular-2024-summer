@@ -11,12 +11,13 @@ export class LoginService {
     );
   }
 
+  // eslint-disable-next-line class-methods-use-this
   private generateRandomToken(): string {
     const length = 16;
     const characters =
       'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let token = '';
-    for (let i = 0; i < length; i++) {
+    for (let i = 0; i < length; i += 1) {
       const randomIndex = Math.floor(Math.random() * characters.length);
       token += characters[randomIndex];
     }

@@ -31,6 +31,7 @@ import { LoginService } from './services/login.service';
 })
 export class LoginComponent {
   public user?: string;
+
   public password?: string;
 
   private loginService = inject(LoginService);
