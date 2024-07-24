@@ -10,7 +10,6 @@ import { MainContentComponent } from './main/main-content.component';
   template: `
     <div class="app-wrapper">
       <app-header></app-header>
-      <!-- <app-main-content></app-main-content> -->
       <router-outlet></router-outlet>
     </div>
   `,

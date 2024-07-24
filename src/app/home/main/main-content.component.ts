@@ -1,5 +1,5 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { ColorBorderCardDirective } from '../../shared/directives/color-border-card.directive';
 import { FilteringKeyWordPipe } from '../../shared/pipes/filtering-key-word.pipe';
@@ -32,10 +32,15 @@ import { VideoCardComponent } from '../../shared/components/video-card/video-car
     VideoCardComponent,
   ],
 })
-export class MainContentComponent {
-  private youtubeService = inject(YoutubeService);
-
+export class MainContentComponent implements OnInit {
+  // private youtubeService = inject(YoutubeService);
   videos$ = this.youtubeService.videos$;
 
   keyword$ = this.youtubeService.keyword$;
+
+  constructor(private youtubeService: YoutubeService) {}
+
+  ngOnInit() {
+    this.youtubeService.loadVideos();
+  }
 }

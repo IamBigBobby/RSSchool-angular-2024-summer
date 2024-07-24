@@ -4,6 +4,7 @@ import { NgOptimizedImage } from '@angular/common';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { SearchInputComponent } from './components/search-input/search-input.component';
 import { FiltersInputComponent } from './components/filters-input/filters-input.component';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +14,9 @@ import { FiltersInputComponent } from './components/filters-input/filters-input.
     NgOptimizedImage,
     SearchInputComponent,
     FiltersInputComponent,
+    RouterLink,
+    RouterOutlet,
+    RouterLinkActive,
   ],
   template: `
     <header class="header">
@@ -38,10 +42,16 @@ import { FiltersInputComponent } from './components/filters-input/filters-input.
           role="button"
         />
       </section>
-      <section class="header__profile-section">
-        <p>Your Name</p>
-        <img src="assets/login.svg" alt="login" />
-      </section>
+      <a
+        routerLink="/login-page"
+        routerLinkActive="active"
+        ariaCurrentWhenActive="page"
+      >
+        <section class="header__profile-section">
+          <p>Your Name</p>
+          <img src="assets/login.svg" alt="login" />
+        </section>
+      </a>
       <app-filters-input
         class="header__sort-field"
         [isSortFieldVisibleToggle]="isSortFieldVisible"
