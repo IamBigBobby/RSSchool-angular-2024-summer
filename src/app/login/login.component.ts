@@ -29,7 +29,13 @@ import { ButtonComponent } from '../shared/components/button/button.component';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
+  public user?: string;
+  public password?: string;
+
   protected submitUser(user: string, password: string) {
-    console.log(user, password);
+    this.user = user;
+    this.password = password;
+    
+    console.log(this.user, this.password);
   }
 }
