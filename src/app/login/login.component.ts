@@ -35,7 +35,7 @@ export class LoginComponent {
   protected submitUser(user: string, password: string) {
     this.user = user;
     this.password = password;
-    
+
     console.log(this.user, this.password);
   }
 }
