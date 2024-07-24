@@ -4,7 +4,7 @@ import { DetailedPageComponent } from './detailed/detailed-page.component';
 import { LoginComponent } from './login/login.component';
 
 export const routes: Routes = [
-  { path: 'main-page', component: MainContentComponent, title: 'Main page' },
+  { path: '', component: MainContentComponent, title: 'Main page' },
   {
     path: 'detailed-page',
     component: DetailedPageComponent,
