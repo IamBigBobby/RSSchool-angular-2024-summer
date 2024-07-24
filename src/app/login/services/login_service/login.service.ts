@@ -12,6 +12,11 @@ export class LoginService {
   }
 
   // eslint-disable-next-line class-methods-use-this
+  public isLoggedIn(): boolean {
+    return !!localStorage.getItem('IamBigBobby_youtubeService');
+  }
+
+  // eslint-disable-next-line class-methods-use-this
   private generateRandomToken(): string {
     const length = 16;
     const characters =

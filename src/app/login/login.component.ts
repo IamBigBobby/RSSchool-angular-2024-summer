@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ButtonComponent } from '../shared/components/button/button.component';
-import { LoginService } from './services/login.service';
+import { LoginService } from './services/login_service/login.service';
 
 @Component({
   selector: 'app-login',
