@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 })
 export class LoginService {
   constructor(
+    // eslint-disable-next-line @typescript-eslint/ban-types
     @Inject(PLATFORM_ID) private platformId: Object,
     private router: Router,
   ) {}
@@ -18,12 +19,12 @@ export class LoginService {
     );
   }
 
+  // eslint-disable-next-line class-methods-use-this
   public logout() {
     localStorage.removeItem('IamBigBobby_youtubeService');
   }
 
   public isLoggedIn(): boolean {
-    console.log(this.platformId);
     if (isPlatformBrowser(this.platformId)) {
       if (localStorage.getItem('IamBigBobby_youtubeService')) {
         return true;
@@ -33,6 +34,7 @@ export class LoginService {
     return false;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   private generateRandomToken(): string {
     const length = 16;
     const characters =

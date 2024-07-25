@@ -1,16 +1,8 @@
 import { inject } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivateFn,
-  RouterStateSnapshot,
-} from '@angular/router';
+import { CanActivateFn } from '@angular/router';
 import { LoginService } from '../services/login.service';
 
-export const authGuard: CanActivateFn = (
-  route: ActivatedRouteSnapshot,
-  state: RouterStateSnapshot,
-) => {
+export const authGuard: CanActivateFn = () => {
   const loginService = inject(LoginService);
-  console.log('authGuard', loginService.isLoggedIn());
   return loginService.isLoggedIn();
 };
