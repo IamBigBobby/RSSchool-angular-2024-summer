@@ -23,6 +23,9 @@ export class YoutubeService {
     searchword: this.searchword$,
   }).pipe(
     map(({ youtubeResponse, sortCallback, searchword }) => {
+      if (searchword.trim() === '') {
+        return [];
+      }
       const filteredVideos = youtubeResponse.items.filter((video) =>
         video.snippet.title.toLowerCase().includes(searchword.toLowerCase()),
       );

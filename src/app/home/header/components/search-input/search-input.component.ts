@@ -15,11 +15,7 @@ import { ButtonComponent } from '../../../../shared/components/button/button.com
         placeholder="What are you want to find out?"
         #filter
       />
-      <a
-        routerLink="/main-page"
-        routerLinkActive="active"
-        ariaCurrentWhenActive="page"
-      >
+      <a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">
         <app-button
           class="search-field-form__button"
           (clicked)="filterValue(filter.value)"
