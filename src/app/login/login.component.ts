@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ButtonComponent } from '../shared/components/button/button.component';
-import { LoginService } from './services/login_service/login.service';
+import { LoginService } from './services/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -36,11 +37,13 @@ export class LoginComponent {
 
   private loginService = inject(LoginService);
 
+  private router = inject(Router);
+
   protected submitUser(user: string, password: string) {
     this.user = user;
     this.password = password;
 
     this.loginService.login();
-    console.log(this.user, this.password);
+    this.router.navigate(['']);
   }
 }
