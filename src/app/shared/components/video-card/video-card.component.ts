@@ -54,9 +54,9 @@ import { ColorBorderCardDirective } from '../../directives/color-border-card.dir
         {{ videoItem.snippet.publishedAt | date }}
       </div>
       <a
-        routerLink="/detailed-page"
         routerLinkActive="active"
         ariaCurrentWhenActive="page"
+        [routerLink]="['detailed-page', videoItem.id]"
       >
         <app-button>Detaled page</app-button>
       </a>
