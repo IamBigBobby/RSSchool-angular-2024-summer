@@ -11,16 +11,14 @@ export class LoginService {
     );
   }
 
+  // eslint-disable-next-line class-methods-use-this
   public logout() {
     localStorage.removeItem('IamBigBobby_youtubeService');
   }
 
   // eslint-disable-next-line class-methods-use-this
-  isLoggedIn(): boolean {
-    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
-      return !!localStorage.getItem('token');
-    }
-    return false;
+  public isLoggedIn(): boolean {
+    return !!localStorage.getItem("IamBigBobby_youtubeService");
   }
 
   // eslint-disable-next-line class-methods-use-this
