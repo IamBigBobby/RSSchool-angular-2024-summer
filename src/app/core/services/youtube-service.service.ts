@@ -17,6 +17,8 @@ export class YoutubeService {
 
   public searchword$ = new BehaviorSubject('');
 
+  public idDetailedPage$ = new BehaviorSubject('');
+
   public videos$: Observable<VideoItem[]> = combineLatest({
     youtubeResponse: this.youtubeResponse$,
     sortCallback: this.sortCallback$,
@@ -83,5 +85,13 @@ export class YoutubeService {
 
   fetchBySearchWord(searchword: string) {
     this.searchword$.next(searchword);
+  }
+
+  getVideoById(videoId: string): Observable<VideoItem | undefined> {
+    return this.youtubeResponse$.pipe(
+      map((youtubeResponse) =>
+        youtubeResponse.items.find((video) => video.id === videoId),
+      ),
+    );
   }
 }
