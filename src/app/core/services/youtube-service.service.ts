@@ -13,6 +13,10 @@ export class YoutubeService {
 
   private sortCallback$ = new BehaviorSubject((data: VideoItem[]) => data);
 
+  private sortCallbackDetailed$ = new BehaviorSubject(
+    (data: VideoItem | undefined) => data,
+  );
+
   public keyword$ = new BehaviorSubject('');
 
   public searchword$ = new BehaviorSubject('');
@@ -31,7 +35,22 @@ export class YoutubeService {
       const filteredVideos = youtubeResponse.items.filter((video) =>
         video.snippet.title.toLowerCase().includes(searchword.toLowerCase()),
       );
+      console.log(filteredVideos);
       return sortCallback(filteredVideos);
+    }),
+  );
+
+  public detailedVideos$: Observable<VideoItem | undefined> = combineLatest({
+    youtubeResponse: this.youtubeResponse$,
+    sortCallbackDetailed: this.sortCallbackDetailed$,
+    idDetailedPage: this.idDetailedPage$,
+  }).pipe(
+    map(({ youtubeResponse, sortCallbackDetailed, idDetailedPage }) => {
+      const findedVideo = youtubeResponse.items.find(
+        (video) => video.id === idDetailedPage,
+      );
+      console.log(findedVideo);
+      return findedVideo ? sortCallbackDetailed(findedVideo) : undefined;
     }),
   );
 
@@ -87,11 +106,7 @@ export class YoutubeService {
     this.searchword$.next(searchword);
   }
 
-  getVideoById(videoId: string): Observable<VideoItem | undefined> {
-    return this.youtubeResponse$.pipe(
-      map((youtubeResponse) =>
-        youtubeResponse.items.find((video) => video.id === videoId),
-      ),
-    );
+  setDitailedPageId(id: string) {
+    this.idDetailedPage$.next(id);
   }
 }

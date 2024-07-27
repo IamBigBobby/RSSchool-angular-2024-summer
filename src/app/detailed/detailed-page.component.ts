@@ -1,26 +1,29 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { YoutubeService } from '../core/services/youtube-service.service';
-import { VideoItem } from '../core/services/you-tube-interface';
+import { copyFileSync } from 'fs';
 
 @Component({
   selector: 'app-detailed-page',
   standalone: true,
-  template: ``,
+  template: `
+    @let details = detailedInfo$ | async | json;
+    <p>{{ details }}</p>
+  `,
   styleUrls: ['./detailed-page.component.scss'],
-  imports: [CommonModule],
+  imports: [AsyncPipe, CommonModule],
 })
-export class DetailedPageComponent {
+export class DetailedPageComponent implements OnInit {
   private youtubeService = inject(YoutubeService);
 
-  route: ActivatedRoute = inject(ActivatedRoute);
+  private route: ActivatedRoute = inject(ActivatedRoute);
+  idPage$ = this.youtubeService.idDetailedPage$;
 
-  detailedInfo$: Observable<VideoItem | undefined>;
+  detailedInfo$ = this.youtubeService.detailedVideos$;
 
-  constructor() {
+  ngOnInit(): void {
     const videoId = this.route.snapshot.params['id'];
-    this.detailedInfo$ = this.youtubeService.getVideoById(videoId);
+    this.youtubeService.idDetailedPage$.next(videoId);
   }
 }
