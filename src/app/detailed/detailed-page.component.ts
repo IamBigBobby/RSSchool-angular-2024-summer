@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { YoutubeService } from '../core/services/youtube-service.service';
@@ -7,9 +7,9 @@ import { YoutubeService } from '../core/services/youtube-service.service';
   selector: 'app-detailed-page',
   standalone: true,
   template: `
-    @let details = (detailedInfo$ | async | json);
-     <p>{{details}}</p>
-`,
+    @let details = detailedInfo$ | async | json;
+    <p>{{ details }}</p>
+  `,
   styleUrls: ['./detailed-page.component.scss'],
   imports: [AsyncPipe, CommonModule],
 })
