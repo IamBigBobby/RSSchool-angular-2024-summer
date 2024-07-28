@@ -1,5 +1,10 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {
+  ActivatedRoute,
+  RouterLink,
+  RouterLinkActive,
+  RouterOutlet,
+} from '@angular/router';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { YoutubeService } from '../core/services/youtube-service.service';
 import { ColorBorderCardDirective } from '../shared/directives/color-border-card.directive';
@@ -10,14 +15,16 @@ import { ColorBorderCardDirective } from '../shared/directives/color-border-card
   template: `
     @let details = detailedInfo$ | async;
     <div class="detailed-page__wrapper">
-      <img
-        class="detailed-page__back-button"
-        ngSrc="assets/back_button.svg"
-        width="64"
-        height="64"
-        priority
-        alt="back_button"
-      />
+      <a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">
+        <img
+          class="detailed-page__back-button"
+          ngSrc="assets/back_button.svg"
+          width="64"
+          height="64"
+          priority
+          alt="back_button"
+        />
+      </a>
       <div class="detailed-page">
         <img
           class="detailed-page__img"
@@ -67,7 +74,14 @@ import { ColorBorderCardDirective } from '../shared/directives/color-border-card
     </div>
   `,
   styleUrls: ['./detailed-page.component.scss'],
-  imports: [CommonModule, NgOptimizedImage, ColorBorderCardDirective],
+  imports: [
+    CommonModule,
+    NgOptimizedImage,
+    ColorBorderCardDirective,
+    RouterLink,
+    RouterOutlet,
+    RouterLinkActive,
+  ],
 })
 export class DetailedPageComponent {
   private youtubeService = inject(YoutubeService);
