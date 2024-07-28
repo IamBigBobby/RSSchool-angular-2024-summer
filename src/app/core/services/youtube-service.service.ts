@@ -35,12 +35,11 @@ export class YoutubeService {
       const filteredVideos = youtubeResponse.items.filter((video) =>
         video.snippet.title.toLowerCase().includes(searchword.toLowerCase()),
       );
-      console.log(filteredVideos);
       return sortCallback(filteredVideos);
     }),
   );
 
-  public detailedVideos$: Observable<VideoItem | undefined> = combineLatest({
+  public detailedVideo$: Observable<VideoItem | undefined> = combineLatest({
     youtubeResponse: this.youtubeResponse$,
     sortCallbackDetailed: this.sortCallbackDetailed$,
     idDetailedPage: this.idDetailedPage$,
@@ -49,13 +48,14 @@ export class YoutubeService {
       const findedVideo = youtubeResponse.items.find(
         (video) => video.id === idDetailedPage,
       );
-      console.log(findedVideo);
       return findedVideo ? sortCallbackDetailed(findedVideo) : undefined;
     }),
   );
 
   loadVideos() {
-    this.youtubeResponse$.next(MOCK_RESPONSE);
+    setTimeout(() => {
+      this.youtubeResponse$.next(MOCK_RESPONSE);
+    }, 0);
   }
 
   sortByDateAsc() {
@@ -106,7 +106,7 @@ export class YoutubeService {
     this.searchword$.next(searchword);
   }
 
-  setDitailedPageId(id: string) {
+  getPageId(id: string) {
     this.idDetailedPage$.next(id);
   }
 }

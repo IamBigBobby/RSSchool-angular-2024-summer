@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AsyncPipe, CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { YoutubeService } from '../core/services/youtube-service.service';
 
 @Component({
@@ -11,20 +11,18 @@ import { YoutubeService } from '../core/services/youtube-service.service';
     <p>{{ details }}</p>
   `,
   styleUrls: ['./detailed-page.component.scss'],
-  imports: [AsyncPipe, CommonModule],
+  imports: [CommonModule],
 })
 export class DetailedPageComponent {
   private youtubeService = inject(YoutubeService);
 
   private route: ActivatedRoute = inject(ActivatedRoute);
 
-  private videoId = this.route.snapshot.params['id'];
-
-  idPage$ = this.youtubeService.idDetailedPage$;
-
-  detailedInfo$ = this.youtubeService.detailedVideos$;
+  detailedInfo$ = this.youtubeService.detailedVideo$;
 
   constructor() {
-    this.youtubeService.idDetailedPage$.next(this.videoId);
+    const videoId = this.route.snapshot.params['id'];
+    this.youtubeService.getPageId(videoId);
+    this.youtubeService.loadVideos();
   }
 }
