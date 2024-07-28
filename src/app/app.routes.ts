@@ -9,15 +9,13 @@ export const routes: Routes = [
   {
     path: '',
     component: MainContentComponent,
-    title: 'Main page',
     canActivate: [authGuard],
   },
   {
     path: 'detailed-page/:id',
     component: DetailedPageComponent,
-    title: 'Detailed page',
     canActivate: [authGuard],
   },
-  { path: 'login-page', component: LoginComponent, title: 'Login page' },
-  { path: '**', component: PageNotFoundComponent, title: 'Page not found' },
+  { path: 'login-page', component: LoginComponent},
+  { path: '**', component: PageNotFoundComponent},
 ];
