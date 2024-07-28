@@ -1,14 +1,19 @@
 @import "variables";
 
-.detailed-page {
+.detailed-page__wrapper {
+    position: relative;
     margin: 50px auto;
     display: flex;
-
     width: 80vw ;
+}
+
+.detailed-page {
+    display: flex;
+
     height: auto;
 
     border-radius: 0 20px 20px 20px;
-    overflow: hidden;
+    overflow: auto;
     box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
 
     background-color: $background-color;
@@ -79,5 +84,11 @@
         width: 13px;
         height: 13px;
         background-image: url('../../assets/Group\ 9.svg');
+    }
+
+    &__back-button {
+        position: absolute;
+        left: -60px;
+        top: -3px;
     }
 }

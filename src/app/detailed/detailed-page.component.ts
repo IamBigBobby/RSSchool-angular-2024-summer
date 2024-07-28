@@ -9,48 +9,58 @@ import { ColorBorderCardDirective } from '../shared/directives/color-border-card
   standalone: true,
   template: `
     @let details = detailedInfo$ | async;
-    <div class="detailed-page">
+    <div class="detailed-page__wrapper">
       <img
-        class="detailed-page__img"
-        [ngSrc]="
-          details?.snippet?.thumbnails?.maxres?.url ?? 'https://i.ytimg.com'
-        "
-        width="840"
-        height="auto"
+        class="detailed-page__back-button"
+        ngSrc="assets/back_button.svg"
+        width="64"
+        height="64"
         priority
-        alt="img"
+        alt="back_button"
       />
-      <div
-        appColorBorderCard
-        [date]="details?.snippet?.publishedAt ?? ''"
-        class="detailed-page__info"
-      >
-        <div class="detailed-page__title">
-          <h2 class="detailed-page__title-name">
-            {{ details?.snippet?.title }}
-          </h2>
-          <div class="detailed-page__title-time">
-            {{ details?.snippet?.publishedAt | date: 'EEEE, MMMM d, y' }}
+      <div class="detailed-page">
+        <img
+          class="detailed-page__img"
+          [ngSrc]="
+            details?.snippet?.thumbnails?.maxres?.url ?? 'https://i.ytimg.com'
+          "
+          width="840"
+          height="auto"
+          priority
+          alt="img"
+        />
+        <div
+          appColorBorderCard
+          [date]="details?.snippet?.publishedAt ?? ''"
+          class="detailed-page__info"
+        >
+          <div class="detailed-page__title">
+            <h2 class="detailed-page__title-name">
+              {{ details?.snippet?.title }}
+            </h2>
+            <div class="detailed-page__title-time">
+              {{ details?.snippet?.publishedAt | date: 'EEEE, MMMM d, y' }}
+            </div>
           </div>
-        </div>
-        <div class="detailed-page__description">
-          <h3 class="detailed-page__description-title">Description:</h3>
-          <p class="detailed-page__description-info">
-            {{ details?.snippet?.description }}
-          </p>
-        </div>
-        <div class="detailed-page__statistic">
-          <div class="detailed-page__views">
-            {{ details?.statistics?.viewCount }}
+          <div class="detailed-page__description">
+            <h3 class="detailed-page__description-title">Description:</h3>
+            <p class="detailed-page__description-info">
+              {{ details?.snippet?.description }}
+            </p>
           </div>
-          <div class="detailed-page__likes">
-            {{ details?.statistics?.likeCount }}
-          </div>
-          <div class="detailed-page__dislikes">
-            {{ details?.statistics?.dislikeCount }}
-          </div>
-          <div class="detailed-page__comments">
-            {{ details?.statistics?.commentCount }}
+          <div class="detailed-page__statistic">
+            <div class="detailed-page__views">
+              {{ details?.statistics?.viewCount }}
+            </div>
+            <div class="detailed-page__likes">
+              {{ details?.statistics?.likeCount }}
+            </div>
+            <div class="detailed-page__dislikes">
+              {{ details?.statistics?.dislikeCount }}
+            </div>
+            <div class="detailed-page__comments">
+              {{ details?.statistics?.commentCount }}
+            </div>
           </div>
         </div>
       </div>
