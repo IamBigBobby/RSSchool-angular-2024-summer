@@ -52,6 +52,7 @@ export class YoutubeService {
     }),
   );
 
+  // it's a temporary solution
   loadVideos() {
     setTimeout(() => {
       this.youtubeResponse$.next(MOCK_RESPONSE);
