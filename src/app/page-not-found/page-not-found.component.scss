@@ -1,0 +1,12 @@
+.page-not-found__wrapper{
+    display: flex;
+    gap: 20px;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.page-not-found__notification {
+    font-size: 35px;
+    width: 300px;
+  }
