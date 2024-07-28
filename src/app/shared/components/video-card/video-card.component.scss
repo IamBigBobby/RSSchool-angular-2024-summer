@@ -11,6 +11,10 @@
     background-color: $background-color;
     border-radius: 10px;
 
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+
     &__statistic {
         display: flex;
         justify-content: center;
