@@ -1,0 +1,22 @@
+@import "variables";
+
+.login__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    background-color: $background-color;
+    border-radius: 20px;
+
+    width: 20vw;
+    height: auto;
+
+    padding: 40px;
+}

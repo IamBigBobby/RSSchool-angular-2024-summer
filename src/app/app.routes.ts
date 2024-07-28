@@ -16,6 +16,6 @@ export const routes: Routes = [
     component: DetailedPageComponent,
     canActivate: [authGuard],
   },
-  { path: 'login-page', component: LoginComponent},
-  { path: '**', component: PageNotFoundComponent},
+  { path: 'login-page', component: LoginComponent },
+  { path: '**', component: PageNotFoundComponent },
 ];
