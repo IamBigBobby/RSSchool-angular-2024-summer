@@ -1,0 +1,26 @@
+@import "variables";
+
+:host{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+}
+
+.admin{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    background-color: $background-color;
+    border-radius: 20px;
+
+    width: 50vw;
+    height: auto;
+
+    padding: 40px;
+}
+
+input {
+    height: 40px;
+}
