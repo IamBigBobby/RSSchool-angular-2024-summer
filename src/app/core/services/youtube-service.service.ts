@@ -49,7 +49,6 @@ export class YoutubeService {
     }),
   );
 
-  // it's a temporary solution
   loadVideos() {
     this.youtubeResponse$.next(MOCK_RESPONSE);
   }
