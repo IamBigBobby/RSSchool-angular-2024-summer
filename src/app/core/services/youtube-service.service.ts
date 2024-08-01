@@ -13,10 +13,6 @@ export class YoutubeService {
 
   private sortCallback$ = new BehaviorSubject((data: VideoItem[]) => data);
 
-  private sortCallbackDetailed$ = new BehaviorSubject(
-    (data: VideoItem | undefined) => data,
-  );
-
   public keyword$ = new BehaviorSubject('');
 
   public searchword$ = new BehaviorSubject('');
@@ -41,14 +37,13 @@ export class YoutubeService {
 
   public detailedVideo$: Observable<VideoItem | undefined> = combineLatest({
     youtubeResponse: this.youtubeResponse$,
-    sortCallbackDetailed: this.sortCallbackDetailed$,
     idDetailedPage: this.idDetailedPage$,
   }).pipe(
-    map(({ youtubeResponse, sortCallbackDetailed, idDetailedPage }) => {
+    map(({ youtubeResponse, idDetailedPage }) => {
       const findedVideo = youtubeResponse.items.find(
         (video) => video.id === idDetailedPage,
       );
-      return findedVideo ? sortCallbackDetailed(findedVideo) : undefined;
+      return findedVideo || undefined;
     }),
   );
 
