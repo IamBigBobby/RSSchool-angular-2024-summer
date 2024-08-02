@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { ButtonComponent } from '../shared/components/button/button.component';
 import { LoginService } from './services/login.service';
+import { minLengthValidator } from '../shared/validators/custom-validators';
 
 @Component({
   selector: 'app-login',
@@ -35,7 +36,8 @@ import { LoginService } from './services/login.service';
           formControlName="login"
         />
         @if (
-          loginForm.get('login')?.invalid && loginForm.get('login')?.touched
+          loginForm.get('login')?.invalid &&
+          (loginForm.get('login')?.touched || loginForm.get('login')?.dirty)
         ) {
           @if (loginForm.get('login')?.hasError('required')) {
             <span>Please enter a login email</span>
@@ -53,6 +55,25 @@ import { LoginService } from './services/login.service';
           placeholder="Enter your password"
           formControlName="password"
         />
+        @if (
+          loginForm.get('password')?.invalid &&
+          (loginForm.get('password')?.touched ||
+            loginForm.get('password')?.dirty)
+        ) {
+          @if (loginForm.get('password')?.hasError('required')) {
+            <span>Please enter a password</span>
+          }
+          @if (loginForm.get('password')?.value?.length > 0) {
+            <span class="login__addition-password-error"
+              >Your password isn't strong enough
+              @if (loginForm.get('password')?.hasError('minLength')) {
+                <span class="login__addition-password-error"
+                  >at least 8 characters</span
+                >
+              }
+            </span>
+          }
+        }
         <app-button class="login__submit" type="submit">Login</app-button>
       </form>
     </div>
@@ -71,7 +92,7 @@ export class LoginComponent {
   constructor() {
     this.loginForm = this.formBuilder.group({
       login: ['', [Validators.required, Validators.email]],
-      password: [''],
+      password: ['', [Validators.required, minLengthValidator(8)]],
     });
   }
 
