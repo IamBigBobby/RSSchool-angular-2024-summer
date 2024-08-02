@@ -1,6 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ButtonComponent } from '../shared/components/button/button.component';
 import { LoginService } from './services/login.service';
 
@@ -29,6 +34,15 @@ import { LoginService } from './services/login.service';
           placeholder="Enter your login"
           formControlName="login"
         />
+        @if (
+          loginForm.get('login')?.invalid && loginForm.get('login')?.touched
+        ) {
+          @if (loginForm.get('login')?.hasError('required')) {
+            <span>Please enter a login email</span>
+          } @else if (loginForm.get('login')?.hasError('email')) {
+            <span>The login email is invalid</span>
+          }
+        }
         <label for="password-input" class="login__label-password"
           >Password</label
         >
@@ -50,10 +64,16 @@ export class LoginComponent {
 
   private router = inject(Router);
 
-  loginForm = new FormGroup({
-    login: new FormControl(''),
-    password: new FormControl(''),
-  });
+  private formBuilder = inject(FormBuilder);
+
+  loginForm: FormGroup;
+
+  constructor() {
+    this.loginForm = this.formBuilder.group({
+      login: ['', [Validators.required, Validators.email]],
+      password: [''],
+    });
+  }
 
   protected submitUser(user: string, password: string) {
     console.log('user: ', user, 'password: ', password);
