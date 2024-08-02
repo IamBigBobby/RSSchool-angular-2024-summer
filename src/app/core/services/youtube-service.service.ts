@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatest, map, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
 import { mockData } from '../../../../mock-data';
 import { VideoItem, YouTubeInterface } from './you-tube-interface';
 
@@ -9,7 +9,9 @@ const MOCK_RESPONSE = mockData;
   providedIn: 'root',
 })
 export class YoutubeService {
-  private youtubeResponse$ = new Subject<YouTubeInterface>();
+  private youtubeResponse$ = new BehaviorSubject<YouTubeInterface>(
+    MOCK_RESPONSE,
+  );
 
   private sortCallback$ = new BehaviorSubject((data: VideoItem[]) => data);
 
@@ -43,15 +45,12 @@ export class YoutubeService {
       const findedVideo = youtubeResponse.items.find(
         (video) => video.id === idDetailedPage,
       );
-      return findedVideo || undefined;
+      return findedVideo;
     }),
   );
 
-  // it's a temporary solution
   loadVideos() {
-    setTimeout(() => {
-      this.youtubeResponse$.next(MOCK_RESPONSE);
-    }, 0);
+    this.youtubeResponse$.next(MOCK_RESPONSE);
   }
 
   sortByDateAsc() {
