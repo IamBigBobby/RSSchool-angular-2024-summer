@@ -37,7 +37,7 @@ import { ColorBorderCardDirective } from '../shared/directives/color-border-card
               details?.snippet?.thumbnails?.maxres?.url ?? 'https://i.ytimg.com'
             "
             width="840"
-            height="600"
+            height="500"
             priority
             alt="img"
           />

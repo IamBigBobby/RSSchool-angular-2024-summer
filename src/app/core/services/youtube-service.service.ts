@@ -45,7 +45,7 @@ export class YoutubeService {
       const findedVideo = youtubeResponse.items.find(
         (video) => video.id === idDetailedPage,
       );
-      return findedVideo || undefined;
+      return findedVideo;
     }),
   );
 
