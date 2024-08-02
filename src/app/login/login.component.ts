@@ -8,7 +8,10 @@ import {
 } from '@angular/forms';
 import { ButtonComponent } from '../shared/components/button/button.component';
 import { LoginService } from './services/login.service';
-import { minLengthValidator } from '../shared/validators/custom-validators';
+import {
+  minLengthValidator,
+  mixedCaseValidator,
+} from '../shared/validators/custom-validators';
 
 @Component({
   selector: 'app-login',
@@ -64,12 +67,13 @@ import { minLengthValidator } from '../shared/validators/custom-validators';
             <span>Please enter a password</span>
           }
           @if (loginForm.get('password')?.value?.length > 0) {
-            <span class="login__addition-password-error"
+            <span
               >Your password isn't strong enough
               @if (loginForm.get('password')?.hasError('minLength')) {
-                <span class="login__addition-password-error"
-                  >at least 8 characters</span
-                >
+                <span>at least 8 characters</span>
+              }
+              @if (loginForm.get('password')?.hasError('mixedCase')) {
+                <span>a mixture of both uppercase and lowercase letters</span>
               }
             </span>
           }
@@ -92,7 +96,10 @@ export class LoginComponent {
   constructor() {
     this.loginForm = this.formBuilder.group({
       login: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, minLengthValidator(8)]],
+      password: [
+        '',
+        [Validators.required, minLengthValidator(8), mixedCaseValidator()],
+      ],
     });
   }
 

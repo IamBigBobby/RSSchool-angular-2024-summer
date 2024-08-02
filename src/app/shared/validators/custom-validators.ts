@@ -9,7 +9,22 @@ export function minLengthValidator(minLength: number): ValidatorFn {
     return isValid
       ? null
       : {
-          minLength: { requiredLength: minLength, actualLength: value.length },
+          minLength: true,
+        };
+  };
+}
+
+export function mixedCaseValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const value = control.value || '';
+    const hasUpperCase = /[A-Z]/.test(value);
+    const hasLowerCase = /[a-z]/.test(value);
+    const isValid = hasUpperCase && hasLowerCase;
+
+    return isValid
+      ? null
+      : {
+          mixedCase: true,
         };
   };
 }
