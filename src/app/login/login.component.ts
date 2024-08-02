@@ -9,8 +9,10 @@ import {
 import { ButtonComponent } from '../shared/components/button/button.component';
 import { LoginService } from './services/login.service';
 import {
+  lettersAndNumbersValidator,
   minLengthValidator,
   mixedCaseValidator,
+  specialCharacterValidator,
 } from '../shared/validators/custom-validators';
 
 @Component({
@@ -73,7 +75,16 @@ import {
                 <span>at least 8 characters</span>
               }
               @if (loginForm.get('password')?.hasError('mixedCase')) {
-                <span>a mixture of both uppercase and lowercase letters</span>
+                <span>, a mixture of both uppercase and lowercase letters</span>
+              }
+              @if (loginForm.get('password')?.hasError('lettersAndNumbers')) {
+                <span>, a mixture of letters and numbers</span>
+              }
+              @if (loginForm.get('password')?.hasError('specialCharacter')) {
+                <span
+                  >, inclusion of at least one special character, e.g., ! &#64;
+                  # ? ]</span
+                >
               }
             </span>
           }
@@ -98,7 +109,13 @@ export class LoginComponent {
       login: ['', [Validators.required, Validators.email]],
       password: [
         '',
-        [Validators.required, minLengthValidator(8), mixedCaseValidator()],
+        [
+          Validators.required,
+          minLengthValidator(8),
+          mixedCaseValidator(),
+          lettersAndNumbersValidator(),
+          specialCharacterValidator(),
+        ],
       ],
     });
   }

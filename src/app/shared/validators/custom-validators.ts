@@ -28,3 +28,32 @@ export function mixedCaseValidator(): ValidatorFn {
         };
   };
 }
+
+export function lettersAndNumbersValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const value = control.value || '';
+    const hasLetters = /[a-zA-Z]/.test(value);
+    const hasNumbers = /[0-9]/.test(value);
+    const isValid = hasLetters && hasNumbers;
+
+    return isValid
+      ? null
+      : {
+          lettersAndNumbers: true,
+        };
+  };
+}
+
+export function specialCharacterValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const value = control.value || '';
+    const hasSpecialChar = /[!@#$%^&*()+\-={};:'",.<>/?\\|`~]/.test(value);
+    const isValid = hasSpecialChar;
+
+    return isValid
+      ? null
+      : {
+          specialCharacter: true,
+        };
+  };
+}
