@@ -1,5 +1,10 @@
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ButtonComponent } from '../shared/components/button/button.component';
 
 @Component({
@@ -17,6 +22,20 @@ import { ButtonComponent } from '../shared/components/button/button.component';
         placeholder="Enter your login"
         formControlName="title"
       />
+      @let title = adminForm.get('title');
+      @if (title?.invalid && (title?.touched || title?.dirty)) {
+        @if (title?.hasError('required')) {
+          <span>Please enter a title</span>
+        }
+        @if (title?.value?.length > 0) {
+          @if (title?.hasError('minlength')) {
+            <span>The title is too short</span>
+          }
+          @if (title?.hasError('maxlength')) {
+            <span>The title is too long</span>
+          }
+        }
+      }
       <label for="description-input" class="admin__label-password"
         >Descriptions</label
       >
@@ -49,12 +68,25 @@ import { ButtonComponent } from '../shared/components/button/button.component';
   styleUrl: './admin.component.scss',
 })
 export class AdminComponent {
-  public adminForm = new FormGroup({
-    title: new FormControl(),
-    description: new FormControl(),
-    img: new FormControl(),
-    link: new FormControl(),
-  });
+  private formBuilder = inject(FormBuilder);
+
+  public adminForm: FormGroup;
+
+  constructor() {
+    this.adminForm = this.formBuilder.group({
+      title: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(21),
+        ],
+      ],
+      description: [''],
+      img: [''],
+      link: [''],
+    });
+  }
 
   public createCard() {
     console.log(this.adminForm.value.title);
