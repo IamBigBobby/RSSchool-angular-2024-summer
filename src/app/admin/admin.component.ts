@@ -78,8 +78,8 @@ export class AdminComponent {
         '',
         [
           Validators.required,
-          Validators.minLength(4),
-          Validators.maxLength(21),
+          Validators.minLength(3),
+          Validators.maxLength(20),
         ],
       ],
       description: [''],
