@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import {
+  FormArray,
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
@@ -74,6 +75,13 @@ import { ButtonComponent } from '../shared/components/button/button.component';
           <span>Please enter a link to the video</span>
         }
       }
+      @let tags = adminForm.get('tags')?.value;
+      @for (tag of tags; track tag) {
+        {{ tag }}
+        <app-button class="login__add-tag" (click)="addTag()"
+          >Add tag</app-button
+        >
+      }
       <app-button class="login__submit" type="submit">Create card</app-button>
     </form>
   `,
@@ -97,10 +105,19 @@ export class AdminComponent {
       description: ['', [Validators.maxLength(255)]],
       img: ['', [Validators.required]],
       video: ['', [Validators.required]],
+      tags: this.formBuilder.array([this.formBuilder.control('')]),
     });
   }
 
   public createCard() {
     console.log(this.adminForm.value.title);
+  }
+
+  get tags() {
+    return this.adminForm.get('tags') as FormArray;
+  }
+
+  public addTag() {
+    this.tags.push(this.formBuilder.control(''));
   }
 }
