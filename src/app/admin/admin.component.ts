@@ -19,7 +19,6 @@ import { ButtonComponent } from '../shared/components/button/button.component';
         id="title-input"
         class="admin__input-user"
         type="text"
-        placeholder="Enter your login"
         formControlName="title"
       />
       @let title = adminForm.get('title');
@@ -43,25 +42,38 @@ import { ButtonComponent } from '../shared/components/button/button.component';
         id="description-input"
         class="admin__input-password"
         type="text"
-        placeholder="Enter your password"
         formControlName="description"
       />
+      @let description = adminForm.get('description');
+      @if (description?.hasError('maxlength')) {
+        <span>The description is too long</span>
+      }
       <label for="img-input" class="admin__label-img">Img</label>
       <input
         id="img-input"
         class="admin__input-img"
         type="text"
-        placeholder="Enter your password"
         formControlName="img"
       />
+      @let img = adminForm.get('img');
+      @if (img?.invalid && (img?.touched || img?.dirty)) {
+        @if (img?.hasError('required')) {
+          <span>Please enter a link to the image</span>
+        }
+      }
       <label for="link-input" class="admin__label-link">Link video</label>
       <input
         id="link-input"
         class="admin__input-link"
         type="text"
-        placeholder="Enter your password"
-        formControlName="link"
+        formControlName="video"
       />
+      @let video = adminForm.get('video');
+      @if (video?.invalid && (video?.touched || video?.dirty)) {
+        @if (video?.hasError('required')) {
+          <span>Please enter a link to the video</span>
+        }
+      }
       <app-button class="login__submit" type="submit">Create card</app-button>
     </form>
   `,
@@ -82,9 +94,9 @@ export class AdminComponent {
           Validators.maxLength(20),
         ],
       ],
-      description: [''],
-      img: [''],
-      link: [''],
+      description: ['', [Validators.maxLength(255)]],
+      img: ['', [Validators.required]],
+      video: ['', [Validators.required]],
     });
   }
 
