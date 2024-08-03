@@ -40,13 +40,11 @@ import {
           placeholder="Enter your login"
           formControlName="login"
         />
-        @if (
-          loginForm.get('login')?.invalid &&
-          (loginForm.get('login')?.touched || loginForm.get('login')?.dirty)
-        ) {
-          @if (loginForm.get('login')?.hasError('required')) {
+        @let login = loginForm.get('login');
+        @if (login?.invalid && (login?.touched || login?.dirty)) {
+          @if (login?.hasError('required')) {
             <span>Please enter a login email</span>
-          } @else if (loginForm.get('login')?.hasError('email')) {
+          } @else if (login?.hasError('email')) {
             <span>The login email is invalid</span>
           }
         }
@@ -60,27 +58,24 @@ import {
           placeholder="Enter your password"
           formControlName="password"
         />
-        @if (
-          loginForm.get('password')?.invalid &&
-          (loginForm.get('password')?.touched ||
-            loginForm.get('password')?.dirty)
-        ) {
-          @if (loginForm.get('password')?.hasError('required')) {
+        @let password = loginForm.get('password');
+        @if (password?.invalid && (password?.touched || password?.dirty)) {
+          @if (password?.hasError('required')) {
             <span>Please enter a password</span>
           }
-          @if (loginForm.get('password')?.value?.length > 0) {
+          @if (password?.value?.length > 0) {
             <span
               >Your password isn't strong enough
-              @if (loginForm.get('password')?.hasError('minLength')) {
+              @if (password?.hasError('minLength')) {
                 <span>at least 8 characters</span>
               }
-              @if (loginForm.get('password')?.hasError('mixedCase')) {
+              @if (password?.hasError('mixedCase')) {
                 <span>, a mixture of both uppercase and lowercase letters</span>
               }
-              @if (loginForm.get('password')?.hasError('lettersAndNumbers')) {
+              @if (password?.hasError('lettersAndNumbers')) {
                 <span>, a mixture of letters and numbers</span>
               }
-              @if (loginForm.get('password')?.hasError('specialCharacter')) {
+              @if (password?.hasError('specialCharacter')) {
                 <span
                   >, inclusion of at least one special character, e.g., ! &#64;
                   # ? ]</span
