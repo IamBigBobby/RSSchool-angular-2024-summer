@@ -5,7 +5,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   standalone: true,
   imports: [],
   template: `
-    <button class="custom-button" [type]="type" (click)="onButtonClick()">
+    <button
+      class="custom-button"
+      [type]="type"
+      [disabled]="disabled"
+      (click)="onButtonClick()"
+    >
       <ng-content></ng-content>
     </button>
   `,
@@ -14,9 +19,13 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class ButtonComponent {
   @Input() type: 'button' | 'submit' = 'button';
 
+  @Input() disabled: false | true = false;
+
   @Output() clicked = new EventEmitter<void>();
 
   onButtonClick() {
-    this.clicked.emit();
+    if (!this.disabled) {
+      this.clicked.emit();
+    }
   }
 }

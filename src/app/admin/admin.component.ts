@@ -77,12 +77,16 @@ import { ButtonComponent } from '../shared/components/button/button.component';
       }
       @let tags = adminForm.get('tags')?.value;
       @for (tag of tags; track tag) {
-        {{ tag }}
         <app-button class="login__add-tag" (click)="addTag()"
           >Add tag</app-button
         >
       }
-      <app-button class="login__submit" type="submit">Create card</app-button>
+      <app-button
+        class="login__submit"
+        type="submit"
+        [disabled]="!adminForm.valid"
+        >Create card</app-button
+      >
     </form>
   `,
   styleUrl: './admin.component.scss',
@@ -110,7 +114,7 @@ export class AdminComponent {
   }
 
   public createCard() {
-    console.log(this.adminForm.value.title);
+    console.log(this.adminForm.value);
   }
 
   get tags() {

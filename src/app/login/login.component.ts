@@ -21,16 +21,7 @@ import {
   imports: [ButtonComponent, ReactiveFormsModule],
   template: `
     <div class="login__wrapper">
-      <form
-        class="login"
-        [formGroup]="loginForm"
-        (ngSubmit)="
-          submitUser(
-            this.loginForm.value.login ?? '',
-            this.loginForm.value.password ?? ''
-          )
-        "
-      >
+      <form class="login" [formGroup]="loginForm" (ngSubmit)="submitUser()">
         <h2 class="login__title">Login</h2>
         <label for="user-input" class="login__label-user">Username</label>
         <input
@@ -84,7 +75,12 @@ import {
             </span>
           }
         }
-        <app-button class="login__submit" type="submit">Login</app-button>
+        <app-button
+          class="login__submit"
+          type="submit"
+          [disabled]="!loginForm.valid"
+          >Login</app-button
+        >
       </form>
     </div>
   `,
@@ -115,8 +111,8 @@ export class LoginComponent {
     });
   }
 
-  protected submitUser(user: string, password: string) {
-    console.log('user: ', user, 'password: ', password);
+  protected submitUser() {
+    console.log(this.loginForm.value);
     this.loginService.login();
     this.router.navigate(['']);
   }
