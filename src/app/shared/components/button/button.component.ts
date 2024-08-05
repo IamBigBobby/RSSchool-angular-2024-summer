@@ -9,6 +9,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
       class="custom-button"
       [type]="type"
       [disabled]="disabled"
+      [class.disabled]="disabled"
       (click)="onButtonClick()"
     >
       <ng-content></ng-content>
