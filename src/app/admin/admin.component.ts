@@ -98,17 +98,20 @@ import { noFutureDate } from '../shared/validators/custom-validators';
             type="text"
             [formControlName]="i"
           />
+          <app-button class="admin__submit" (click)="removeTag(i)"
+            >Remove tag</app-button
+          >
         }
         <app-button class="login__add-tag" (click)="addTag()"
           >Add tag</app-button
         >
-        @let tagsArr = adminForm.get("tags")?.value;
-        @if (tagsArr.length >= maxTags){
+        @let tagsArr = adminForm.get('tags')?.value;
+        @if (tagsArr.length >= maxTags) {
           <span>Maximum of {{ maxTags }} tags allowed</span>
         }
       </div>
       <app-button
-        class="login__submit"
+        class="admin__submit"
         type="submit"
         [disabled]="!adminForm.valid"
         >Create card</app-button
@@ -121,6 +124,7 @@ export class AdminComponent {
   private formBuilder = inject(FormBuilder);
 
   public adminForm: FormGroup;
+
   public maxTags = 5;
 
   constructor() {
@@ -153,5 +157,9 @@ export class AdminComponent {
     if (this.tags.length < this.maxTags) {
       this.tags.push(this.formBuilder.control(''));
     }
+  }
+
+  public removeTag(index: number) {
+    this.tags.removeAt(index);
   }
 }
