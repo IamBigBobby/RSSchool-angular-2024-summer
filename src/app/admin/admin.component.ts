@@ -89,12 +89,21 @@ import { noFutureDate } from '../shared/validators/custom-validators';
           <span>The date is invalid</span>
         }
       }
-      @let tags = adminForm.get('tags')?.value;
-      @for (tag of tags; track tag) {
-        <app-button class="login__add-tag" (click)="addTag()"
-          >Add tag</app-button
-        >
-      }
+      <!-- @let tags = adminForm.get('tags'); -->
+      <div formArrayName="tags">
+        @for (tag of tags.controls; track tag; let i = $index) {
+          <label for="tag-input-{{ i }}" class="admin__label-tag">Tag</label>
+          <input
+            id="tag-input-{{ i }}"
+            class="admin__input-tag"
+            type="text"
+            [formControlName]="i"
+          />
+          <app-button class="login__add-tag" (click)="addTag()"
+            >Add tag</app-button
+          >
+        }
+      </div>
       <app-button
         class="login__submit"
         type="submit"
@@ -128,12 +137,12 @@ export class AdminComponent {
     });
   }
 
-  public createCard() {
-    console.log(this.adminForm.value);
-  }
-
   get tags() {
     return this.adminForm.get('tags') as FormArray;
+  }
+
+  public createCard() {
+    console.log(this.adminForm.value);
   }
 
   public addTag() {
