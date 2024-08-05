@@ -102,6 +102,10 @@ import { noFutureDate } from '../shared/validators/custom-validators';
         <app-button class="login__add-tag" (click)="addTag()"
           >Add tag</app-button
         >
+        @let tagsArr = adminForm.get("tags")?.value;
+        @if (tagsArr.length >= maxTags){
+          <span>Maximum of {{ maxTags }} tags allowed</span>
+        }
       </div>
       <app-button
         class="login__submit"
@@ -117,6 +121,7 @@ export class AdminComponent {
   private formBuilder = inject(FormBuilder);
 
   public adminForm: FormGroup;
+  public maxTags = 5;
 
   constructor() {
     this.adminForm = this.formBuilder.group({
@@ -145,6 +150,8 @@ export class AdminComponent {
   }
 
   public addTag() {
-    this.tags.push(this.formBuilder.control(''));
+    if (this.tags.length < this.maxTags) {
+      this.tags.push(this.formBuilder.control(''));
+    }
   }
 }
