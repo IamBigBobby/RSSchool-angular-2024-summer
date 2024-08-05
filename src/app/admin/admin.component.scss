@@ -1,13 +1,7 @@
 @import "variables";
 
-:host{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; 
-}
-
 .admin{
+    margin: 40px auto;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -16,12 +10,17 @@
     border-radius: 20px;
 
     width: 50vw;
-    height: auto;
+    min-height: 50vh;
 
     padding: 40px;
 
     &__tags-container {
         display: flex;
         flex-direction: column;
+        gap: 10px;
+    }
+
+    &__create-card, &__remove-tag, &__add-tag, &__reset {
+        align-self: center;
     }
 }

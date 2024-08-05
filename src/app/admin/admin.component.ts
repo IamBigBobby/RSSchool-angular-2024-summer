@@ -107,29 +107,35 @@ import { noFutureDate } from '../shared/validators/custom-validators';
             type="text"
             [formControlName]="i"
           />
-          <app-button class="admin__submit" (click)="removeTag(i)"
+          @if (tag.invalid && tag.touched) {
+            @if (tag.hasError('required')) {
+              <span class="error-validate-massage"
+                >All tags must be filled</span
+              >
+            }
+          }
+          <app-button class="admin__remove-tag" (click)="removeTag(i)"
             >Remove tag</app-button
           >
         }
-        <app-button class="login__add-tag" (click)="addTag()"
+        <app-button class="admin__add-tag" (click)="addTag()"
           >Add tag</app-button
         >
-        @let tagsArr = adminForm.get('tags')?.value;
-        @if (tagsArr.length >= maxTags) {
+        @if (tags.length >= maxTags) {
           <span class="error-validate-massage"
             >Maximum of {{ maxTags }} tags allowed</span
           >
         }
       </div>
+      <app-button class="admin__reset" (click)="resetForm()">
+        Reset form
+      </app-button>
       <app-button
-        class="admin__submit"
+        class="admin__create-card"
         type="submit"
         [disabled]="!adminForm.valid"
         >Create card</app-button
       >
-      <app-button class="admin__reset" (click)="resetForm()">
-        Reset form
-      </app-button>
     </form>
   `,
   styleUrl: './admin.component.scss',
@@ -155,7 +161,9 @@ export class AdminComponent {
       img: ['', [Validators.required]],
       video: ['', [Validators.required]],
       date: ['', [noFutureDate(), Validators.required]],
-      tags: this.formBuilder.array([this.formBuilder.control('')]),
+      tags: this.formBuilder.array([
+        this.formBuilder.control('', Validators.required),
+      ]),
     });
   }
 
@@ -169,7 +177,7 @@ export class AdminComponent {
 
   public addTag() {
     if (this.tags.length < this.maxTags) {
-      this.tags.push(this.formBuilder.control(''));
+      this.tags.push(this.formBuilder.control('', Validators.required));
     }
   }
 
