@@ -57,3 +57,16 @@ export function specialCharacterValidator(): ValidatorFn {
         };
   };
 }
+
+export function noFutureDate(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const today = new Date();
+    const selectedDate = new Date(control.value);
+
+    if (selectedDate > today) {
+      return { futureDate: true };
+    }
+
+    return null;
+  };
+}

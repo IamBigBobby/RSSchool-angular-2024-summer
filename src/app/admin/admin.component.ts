@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ButtonComponent } from '../shared/components/button/button.component';
+import { noFutureDate } from '../shared/validators/custom-validators';
 
 @Component({
   selector: 'app-admin',
@@ -75,6 +76,19 @@ import { ButtonComponent } from '../shared/components/button/button.component';
           <span>Please enter a link to the video</span>
         }
       }
+      <label for="date-input" class="admin__label-date">Link video</label>
+      <input
+        id="date-input"
+        class="admin__input-date"
+        type="date"
+        formControlName="date"
+      />
+      @let date = adminForm.get('date');
+      @if (date?.invalid && (date?.touched || date?.dirty)) {
+        @if (date?.hasError('futureDate')) {
+          <span>The date is invalid</span>
+        }
+      }
       @let tags = adminForm.get('tags')?.value;
       @for (tag of tags; track tag) {
         <app-button class="login__add-tag" (click)="addTag()"
@@ -109,6 +123,7 @@ export class AdminComponent {
       description: ['', [Validators.maxLength(255)]],
       img: ['', [Validators.required]],
       video: ['', [Validators.required]],
+      date: ['', noFutureDate()],
       tags: this.formBuilder.array([this.formBuilder.control('')]),
     });
   }
