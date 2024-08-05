@@ -89,8 +89,7 @@ import { noFutureDate } from '../shared/validators/custom-validators';
           <span>The date is invalid</span>
         }
       }
-      <!-- @let tags = adminForm.get('tags'); -->
-      <div formArrayName="tags">
+      <div class="admin__tags-container" formArrayName="tags">
         @for (tag of tags.controls; track tag; let i = $index) {
           <label for="tag-input-{{ i }}" class="admin__label-tag">Tag</label>
           <input
@@ -99,10 +98,10 @@ import { noFutureDate } from '../shared/validators/custom-validators';
             type="text"
             [formControlName]="i"
           />
-          <app-button class="login__add-tag" (click)="addTag()"
-            >Add tag</app-button
-          >
         }
+        <app-button class="login__add-tag" (click)="addTag()"
+          >Add tag</app-button
+        >
       </div>
       <app-button
         class="login__submit"

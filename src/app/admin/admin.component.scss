@@ -19,6 +19,11 @@
     height: auto;
 
     padding: 40px;
+
+    &__tags-container {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 input {
