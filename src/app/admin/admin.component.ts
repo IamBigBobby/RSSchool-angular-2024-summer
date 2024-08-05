@@ -85,6 +85,9 @@ import { noFutureDate } from '../shared/validators/custom-validators';
       />
       @let date = adminForm.get('date');
       @if (date?.invalid && (date?.touched || date?.dirty)) {
+        @if (date?.hasError('required')) {
+          <span>Please enter a creation date</span>
+        }
         @if (date?.hasError('futureDate')) {
           <span>The date is invalid</span>
         }
@@ -116,6 +119,9 @@ import { noFutureDate } from '../shared/validators/custom-validators';
         [disabled]="!adminForm.valid"
         >Create card</app-button
       >
+      <app-button class="admin__reset" (click)="resetForm()">
+        Reset form
+      </app-button>
     </form>
   `,
   styleUrl: './admin.component.scss',
@@ -140,7 +146,7 @@ export class AdminComponent {
       description: ['', [Validators.maxLength(255)]],
       img: ['', [Validators.required]],
       video: ['', [Validators.required]],
-      date: ['', noFutureDate()],
+      date: ['', [noFutureDate(), Validators.required]],
       tags: this.formBuilder.array([this.formBuilder.control('')]),
     });
   }
@@ -161,5 +167,16 @@ export class AdminComponent {
 
   public removeTag(index: number) {
     this.tags.removeAt(index);
+  }
+
+  public resetForm() {
+    this.adminForm.reset({
+      title: '',
+      description: '',
+      img: '',
+      video: '',
+      date: '',
+      tags: [''],
+    });
   }
 }
