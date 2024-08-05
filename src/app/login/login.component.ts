@@ -34,9 +34,13 @@ import {
         @let login = loginForm.get('login');
         @if (login?.invalid && (login?.touched || login?.dirty)) {
           @if (login?.hasError('required')) {
-            <span>Please enter a login email</span>
+            <span class="error-validate-massage"
+              >Please enter a login email</span
+            >
           } @else if (login?.hasError('email')) {
-            <span>The login email is invalid</span>
+            <span class="error-validate-massage"
+              >The login email is invalid</span
+            >
           }
         }
         <label for="password-input" class="login__label-password"
@@ -52,22 +56,28 @@ import {
         @let password = loginForm.get('password');
         @if (password?.invalid && (password?.touched || password?.dirty)) {
           @if (password?.hasError('required')) {
-            <span>Please enter a password</span>
+            <span class="error-validate-massage">Please enter a password</span>
           }
           @if (password?.value?.length > 0) {
-            <span
+            <span class="error-validate-massage"
               >Your password isn't strong enough
               @if (password?.hasError('minLength')) {
-                <span>at least 8 characters</span>
+                <span class="error-validate-massage"
+                  >at least 8 characters</span
+                >
               }
               @if (password?.hasError('mixedCase')) {
-                <span>, a mixture of both uppercase and lowercase letters</span>
+                <span class="error-validate-massage"
+                  >, a mixture of both uppercase and lowercase letters</span
+                >
               }
               @if (password?.hasError('lettersAndNumbers')) {
-                <span>, a mixture of letters and numbers</span>
+                <span class="error-validate-massage"
+                  >, a mixture of letters and numbers</span
+                >
               }
               @if (password?.hasError('specialCharacter')) {
-                <span
+                <span class="error-validate-massage"
                   >, inclusion of at least one special character, e.g., ! &#64;
                   # ? ]</span
                 >

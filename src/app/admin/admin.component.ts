@@ -26,14 +26,14 @@ import { noFutureDate } from '../shared/validators/custom-validators';
       @let title = adminForm.get('title');
       @if (title?.invalid && (title?.touched || title?.dirty)) {
         @if (title?.hasError('required')) {
-          <span>Please enter a title</span>
+          <span class="error-validate-massage">Please enter a title</span>
         }
         @if (title?.value?.length > 0) {
           @if (title?.hasError('minlength')) {
-            <span>The title is too short</span>
+            <span class="error-validate-massage">The title is too short</span>
           }
           @if (title?.hasError('maxlength')) {
-            <span>The title is too long</span>
+            <span class="error-validate-massage">The title is too long</span>
           }
         }
       }
@@ -48,7 +48,7 @@ import { noFutureDate } from '../shared/validators/custom-validators';
       />
       @let description = adminForm.get('description');
       @if (description?.hasError('maxlength')) {
-        <span>The description is too long</span>
+        <span class="error-validate-massage">The description is too long</span>
       }
       <label for="img-input" class="admin__label-img">Img</label>
       <input
@@ -60,7 +60,9 @@ import { noFutureDate } from '../shared/validators/custom-validators';
       @let img = adminForm.get('img');
       @if (img?.invalid && (img?.touched || img?.dirty)) {
         @if (img?.hasError('required')) {
-          <span>Please enter a link to the image</span>
+          <span class="error-validate-massage"
+            >Please enter a link to the image</span
+          >
         }
       }
       <label for="link-input" class="admin__label-link">Link video</label>
@@ -73,7 +75,9 @@ import { noFutureDate } from '../shared/validators/custom-validators';
       @let video = adminForm.get('video');
       @if (video?.invalid && (video?.touched || video?.dirty)) {
         @if (video?.hasError('required')) {
-          <span>Please enter a link to the video</span>
+          <span class="error-validate-massage"
+            >Please enter a link to the video</span
+          >
         }
       }
       <label for="date-input" class="admin__label-date">Link video</label>
@@ -86,10 +90,12 @@ import { noFutureDate } from '../shared/validators/custom-validators';
       @let date = adminForm.get('date');
       @if (date?.invalid && (date?.touched || date?.dirty)) {
         @if (date?.hasError('required')) {
-          <span>Please enter a creation date</span>
+          <span class="error-validate-massage"
+            >Please enter a creation date</span
+          >
         }
         @if (date?.hasError('futureDate')) {
-          <span>The date is invalid</span>
+          <span class="error-validate-massage">The date is invalid</span>
         }
       }
       <div class="admin__tags-container" formArrayName="tags">
@@ -110,7 +116,9 @@ import { noFutureDate } from '../shared/validators/custom-validators';
         >
         @let tagsArr = adminForm.get('tags')?.value;
         @if (tagsArr.length >= maxTags) {
-          <span>Maximum of {{ maxTags }} tags allowed</span>
+          <span class="error-validate-massage"
+            >Maximum of {{ maxTags }} tags allowed</span
+          >
         }
       </div>
       <app-button

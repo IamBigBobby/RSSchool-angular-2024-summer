@@ -7,3 +7,13 @@ body {
 a {
     text-decoration: none;
 }
+
+input {
+    outline: none;
+    border: none;
+    height: 30px;
+  }
+
+.error-validate-massage{
+    color: red;
+}
