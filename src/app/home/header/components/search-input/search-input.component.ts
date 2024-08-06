@@ -24,8 +24,12 @@ export class SearchInputComponent {
 
   @ViewChild('filter', { static: true }) filter!: ElementRef<HTMLInputElement>;
 
-  onFilterChange(event: Event): void {
+  onFilterChange(event: Event) {
     const input = event.target as HTMLInputElement;
-    this.youtubeService.searchword$.next(input.value);
+    const value = input.value.trim();
+
+    if (value.length >= 3) {
+      this.youtubeService.searchword$.next(value);
+    }
   }
 }
