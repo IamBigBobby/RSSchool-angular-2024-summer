@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import {
   BehaviorSubject,
   combineLatest,
@@ -6,6 +6,7 @@ import {
   map,
   Observable,
 } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { mockData } from '../../../../mock-data';
 import { VideoItem, YouTubeInterface } from './you-tube-interface';
 
@@ -15,11 +16,17 @@ const MOCK_RESPONSE = mockData;
   providedIn: 'root',
 })
 export class YoutubeService {
+  private API_KEY = 'AIzaSyAsslk2ZsR14rpQXl-gaqRyDkrs4Syi9w0';
+
+  private YOUTUBE_REQUES = `https://www.googleapis.com/youtube/v3/search?key=${this.API_KEY}&type=video&part=snippet&maxResults=15&q=js`;
+
   private youtubeResponse$ = new BehaviorSubject<YouTubeInterface>(
     MOCK_RESPONSE,
   );
 
   private sortCallback$ = new BehaviorSubject((data: VideoItem[]) => data);
+
+  private http = inject(HttpClient);
 
   public keyword$ = new BehaviorSubject('');
 
@@ -52,8 +59,24 @@ export class YoutubeService {
     }),
   );
 
+  constructor() {
+    this.testLoadVideos().subscribe({
+      next: (data) => console.log('Fetched data:', data),
+      error: (err) => console.error('Error fetching data:', err),
+    });
+  }
+
   loadVideos() {
     this.youtubeResponse$.next(MOCK_RESPONSE);
+  }
+
+  testLoadVideos() {
+    return this.http.get<YouTubeInterface>(this.YOUTUBE_REQUES).pipe(
+      map((data) => {
+        console.log('fetch data', data);
+        return data;
+      }),
+    );
   }
 
   sortByDateAsc() {
