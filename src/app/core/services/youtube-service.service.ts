@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest,
+  debounceTime,
+  map,
+  Observable,
+} from 'rxjs';
 import { mockData } from '../../../../mock-data';
 import { VideoItem, YouTubeInterface } from './you-tube-interface';
 
@@ -24,12 +30,9 @@ export class YoutubeService {
   public videos$: Observable<VideoItem[]> = combineLatest({
     youtubeResponse: this.youtubeResponse$,
     sortCallback: this.sortCallback$,
-    searchword: this.searchword$,
+    searchword: this.searchword$.pipe(debounceTime(500)),
   }).pipe(
     map(({ youtubeResponse, sortCallback, searchword }) => {
-      if (searchword.trim() === '') {
-        return [];
-      }
       const filteredVideos = youtubeResponse.items.filter((video) =>
         video.snippet.title.toLowerCase().includes(searchword.toLowerCase()),
       );
@@ -95,10 +98,6 @@ export class YoutubeService {
 
   sortByKeyWord(keyword: string) {
     this.keyword$.next(keyword);
-  }
-
-  fetchBySearchWord(searchword: string) {
-    this.searchword$.next(searchword);
   }
 
   getPageId(id: string) {
