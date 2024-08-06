@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { YoutubeService } from '../../../../core/services/youtube-service.service';
 
@@ -13,16 +13,19 @@ import { YoutubeService } from '../../../../core/services/youtube-service.servic
         type="text"
         placeholder="What are you want to find out?"
         #filter
+        (input)="onFilterChange($event)"
       />
     </form>
   `,
   styleUrl: './search-input.component.scss',
 })
 export class SearchInputComponent {
-  constructor(private youtubeServiceData: YoutubeService) {}
+  private youtubeService = inject(YoutubeService);
 
-  filterValue(searchword: string) {
-    this.youtubeServiceData.fetchBySearchWord(searchword);
-    this.youtubeServiceData.loadVideos();
+  @ViewChild('filter', { static: true }) filter!: ElementRef<HTMLInputElement>;
+
+  onFilterChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.youtubeService.searchword$.next(input.value);
   }
 }
