@@ -8,8 +8,8 @@ import {
   switchMap,
 } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-// import { mockData } from '../../../../mock-data';
 import { VideoItem, YouTubeInterface } from './you-tube-interface';
+// import { mockData } from '../../../../mock-data';
 
 // const MOCK_RESPONSE = mockData;
 
@@ -18,9 +18,6 @@ import { VideoItem, YouTubeInterface } from './you-tube-interface';
 })
 export class YoutubeService {
   private API_KEY = 'AIzaSyAsslk2ZsR14rpQXl-gaqRyDkrs4Syi9w0';
-
-  private YOUTUBE_REQEST_STATISTICS = `https://www.googleapis.com/youtube/v3/videos?key=AIzaSyCTWC75i70moJLzyNh3tt4jzCljZcRkU8Y&id=nq4aU9gmZQk,REu2BcnlD34,qbPTdW7KgOg&part=snippet,statistics
-`;
 
   // with MOCK_RESPONSE private youtubeResponse$ = new BehaviorSubject<YouTubeInterface>(MOCK_RESPONSE);
   private youtubeResponse$ = new BehaviorSubject<YouTubeInterface | null>(null);
@@ -53,9 +50,12 @@ export class YoutubeService {
     idDetailedPage: this.idDetailedPage$,
   }).pipe(
     map(({ youtubeResponse, idDetailedPage }) => {
-      const findedVideo = youtubeResponse?.items.find(
-        (video) => video.id.videoId === idDetailedPage,
-      );
+      const findedVideo = youtubeResponse?.items.find((video) => {
+        if (typeof video.id === 'string') {
+          return video.id === idDetailedPage;
+        }
+        return undefined;
+      });
       return findedVideo;
     }),
   );
@@ -63,11 +63,6 @@ export class YoutubeService {
   constructor() {
     this.loadVideos().subscribe({
       next: (data) => {
-        if (data?.items) {
-          console.log('Fetched items:', data);
-        } else {
-          console.log('No items found in response');
-        }
         this.youtubeResponse$.next(data);
       },
       error: (err) => console.error('Error fetching data:', err),
@@ -81,13 +76,16 @@ export class YoutubeService {
 
   searchVideos(
     query: string = 'js',
-    maxResults: number = 15,
+    maxResults: number = 20,
   ): Observable<string[]> {
     const url = `https://www.googleapis.com/youtube/v3/search?key=${this.API_KEY}&type=video&part=snippet&maxResults=${maxResults}&q=${query}`;
     return this.http.get<YouTubeInterface>(url).pipe(
       map((response) =>
         response.items.map((item: VideoItem) => {
-          return item.id.videoId;
+          if (typeof item.id === 'object') {
+            return item.id.videoId;
+          }
+          return '';
         }),
       ),
     );

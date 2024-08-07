@@ -1,7 +1,7 @@
 export interface VideoItem {
   kind: string;
   etag: string;
-  id: IdField;
+  id: IdField | string;
   snippet: Snippet;
   statistics: Statistics;
 }
