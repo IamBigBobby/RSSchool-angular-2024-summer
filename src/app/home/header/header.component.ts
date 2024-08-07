@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { NgOptimizedImage } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { ButtonComponent } from '../../shared/components/button/button.component';
@@ -60,7 +59,7 @@ import { FiltersInputComponent } from './components/filters-input/filters-input.
   `,
   styleUrl: './header.component.scss',
 })
-export default class HeaderComponent {
+export class HeaderComponent {
   isSortFieldVisible: boolean = false;
 
   toggleSortField() {

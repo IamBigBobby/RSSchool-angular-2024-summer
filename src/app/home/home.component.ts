@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import HeaderComponent from './header/header.component';
+import { HeaderComponent } from './header/header.component';
 import { MainContentComponent } from './main/main-content.component';
 
 @Component({
@@ -15,4 +15,4 @@ import { MainContentComponent } from './main/main-content.component';
   `,
   styleUrl: './home.component.scss',
 })
-export default class HomeComponent {}
+export class HomeComponent {}
