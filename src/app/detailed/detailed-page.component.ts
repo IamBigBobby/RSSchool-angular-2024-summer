@@ -99,6 +99,6 @@ export class DetailedPageComponent {
   constructor() {
     const videoId = this.route.snapshot.params['id'];
     this.youtubeService.getPageId(videoId);
-    this.youtubeService.loadVideos();
+    // this.youtubeService.loadVideos();
   }
 }

@@ -5,12 +5,14 @@ import {
   debounceTime,
   map,
   Observable,
+  switchMap,
+  tap,
 } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { mockData } from '../../../../mock-data';
+// import { mockData } from '../../../../mock-data';
 import { VideoItem, YouTubeInterface } from './you-tube-interface';
 
-const MOCK_RESPONSE = mockData;
+// const MOCK_RESPONSE = mockData;
 
 @Injectable({
   providedIn: 'root',
@@ -18,11 +20,11 @@ const MOCK_RESPONSE = mockData;
 export class YoutubeService {
   private API_KEY = 'AIzaSyAsslk2ZsR14rpQXl-gaqRyDkrs4Syi9w0';
 
-  private YOUTUBE_REQUES = `https://www.googleapis.com/youtube/v3/search?key=${this.API_KEY}&type=video&part=snippet&maxResults=15&q=js`;
+  private YOUTUBE_REQEST_STATISTICS = `https://www.googleapis.com/youtube/v3/videos?key=AIzaSyCTWC75i70moJLzyNh3tt4jzCljZcRkU8Y&id=nq4aU9gmZQk,REu2BcnlD34,qbPTdW7KgOg&part=snippet,statistics
+`;
 
-  private youtubeResponse$ = new BehaviorSubject<YouTubeInterface>(
-    MOCK_RESPONSE,
-  );
+  // with MOCK_RESPONSE private youtubeResponse$ = new BehaviorSubject<YouTubeInterface>(MOCK_RESPONSE);
+  private youtubeResponse$ = new BehaviorSubject<YouTubeInterface | null>(null);
 
   private sortCallback$ = new BehaviorSubject((data: VideoItem[]) => data);
 
@@ -34,16 +36,17 @@ export class YoutubeService {
 
   public idDetailedPage$ = new BehaviorSubject('');
 
-  public videos$: Observable<VideoItem[]> = combineLatest({
+  public videos$: Observable<VideoItem[] | undefined> = combineLatest({
     youtubeResponse: this.youtubeResponse$,
     sortCallback: this.sortCallback$,
     searchword: this.searchword$.pipe(debounceTime(500)),
   }).pipe(
     map(({ youtubeResponse, sortCallback, searchword }) => {
-      const filteredVideos = youtubeResponse.items.filter((video) =>
+      const filteredVideos = youtubeResponse?.items.filter((video) =>
         video.snippet.title.toLowerCase().includes(searchword.toLowerCase()),
       );
-      return sortCallback(filteredVideos);
+      console.log('filtered videos', filteredVideos);
+      return filteredVideos ? sortCallback(filteredVideos) : undefined;
     }),
   );
 
@@ -52,7 +55,7 @@ export class YoutubeService {
     idDetailedPage: this.idDetailedPage$,
   }).pipe(
     map(({ youtubeResponse, idDetailedPage }) => {
-      const findedVideo = youtubeResponse.items.find(
+      const findedVideo = youtubeResponse?.items.find(
         (video) => video.id === idDetailedPage,
       );
       return findedVideo;
@@ -60,21 +63,57 @@ export class YoutubeService {
   );
 
   constructor() {
-    this.testLoadVideos().subscribe({
-      next: (data) => console.log('Fetched data:', data),
+    this.loadVideos().subscribe({
+      next: (data) => {
+        if (data?.items) {
+          console.log('Fetched items:', data.items);
+        } else {
+          console.log('No items found in response');
+        }
+        this.youtubeResponse$.next(data);
+      },
       error: (err) => console.error('Error fetching data:', err),
     });
   }
 
-  loadVideos() {
-    this.youtubeResponse$.next(MOCK_RESPONSE);
+  // for MOCK_RESPONSE
+  // loadVideos() {
+  //   this.youtubeResponse$.next(MOCK_RESPONSE);
+  // }
+
+  searchVideos(
+    query: string = 'js',
+    maxResults: number = 15,
+  ): Observable<string[]> {
+    const url = `https://www.googleapis.com/youtube/v3/search?key=${this.API_KEY}&type=video&part=snippet&maxResults=${maxResults}&q=${query}`;
+    return this.http.get<YouTubeInterface>(url).pipe(
+      map((response) =>
+        response.items.map((item: VideoItem) => {
+          return item.id;
+        }),
+      ),
+    );
   }
 
-  testLoadVideos() {
-    return this.http.get<YouTubeInterface>(this.YOUTUBE_REQUES).pipe(
-      map((data) => {
-        console.log('fetch data', data);
-        return data;
+  getVideoStatistics(videoIds: string[]): Observable<YouTubeInterface> {
+    const ids = videoIds.join(',');
+    const url = `https://www.googleapis.com/youtube/v3/videos?key=${this.API_KEY}&id=${ids}&part=snippet,statistics`;
+    this.http.get<YouTubeInterface>(url).pipe(
+      map((response) => {
+        console.log('statistic', response);
+      }),
+    );
+    return this.http.get<YouTubeInterface>(url);
+  }
+
+  loadVideos(): Observable<YouTubeInterface> {
+    return this.searchVideos().pipe(
+      switchMap((videoIds) => {
+        console.log('Video IDs:', videoIds);
+        const statistic = this.getVideoStatistics(videoIds);
+        return statistic.pipe(
+          tap((response) => console.log('Fetched statistics:', response)),
+        );
       }),
     );
   }
