@@ -6,7 +6,6 @@ import {
   map,
   Observable,
   switchMap,
-  tap,
 } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 // import { mockData } from '../../../../mock-data';
@@ -45,7 +44,6 @@ export class YoutubeService {
       const filteredVideos = youtubeResponse?.items.filter((video) =>
         video.snippet.title.toLowerCase().includes(searchword.toLowerCase()),
       );
-      console.log('filtered videos', filteredVideos);
       return filteredVideos ? sortCallback(filteredVideos) : undefined;
     }),
   );
@@ -56,7 +54,7 @@ export class YoutubeService {
   }).pipe(
     map(({ youtubeResponse, idDetailedPage }) => {
       const findedVideo = youtubeResponse?.items.find(
-        (video) => video.id === idDetailedPage,
+        (video) => video.id.videoId === idDetailedPage,
       );
       return findedVideo;
     }),
@@ -66,7 +64,7 @@ export class YoutubeService {
     this.loadVideos().subscribe({
       next: (data) => {
         if (data?.items) {
-          console.log('Fetched items:', data.items);
+          console.log('Fetched items:', data);
         } else {
           console.log('No items found in response');
         }
@@ -89,7 +87,7 @@ export class YoutubeService {
     return this.http.get<YouTubeInterface>(url).pipe(
       map((response) =>
         response.items.map((item: VideoItem) => {
-          return item.id;
+          return item.id.videoId;
         }),
       ),
     );
@@ -98,22 +96,13 @@ export class YoutubeService {
   getVideoStatistics(videoIds: string[]): Observable<YouTubeInterface> {
     const ids = videoIds.join(',');
     const url = `https://www.googleapis.com/youtube/v3/videos?key=${this.API_KEY}&id=${ids}&part=snippet,statistics`;
-    this.http.get<YouTubeInterface>(url).pipe(
-      map((response) => {
-        console.log('statistic', response);
-      }),
-    );
     return this.http.get<YouTubeInterface>(url);
   }
 
   loadVideos(): Observable<YouTubeInterface> {
     return this.searchVideos().pipe(
       switchMap((videoIds) => {
-        console.log('Video IDs:', videoIds);
-        const statistic = this.getVideoStatistics(videoIds);
-        return statistic.pipe(
-          tap((response) => console.log('Fetched statistics:', response)),
-        );
+        return this.getVideoStatistics(videoIds);
       }),
     );
   }

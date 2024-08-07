@@ -1,7 +1,7 @@
 export interface VideoItem {
   kind: string;
   etag: string;
-  id: string;
+  id: IdField;
   snippet: Snippet;
   statistics: Statistics;
 }
@@ -11,6 +11,11 @@ export interface YouTubeInterface {
   etag: string;
   pageInfo: PageInfo;
   items: VideoItem[];
+}
+
+interface IdField {
+  kind: string;
+  videoId: string;
 }
 
 interface Thumbnail {
