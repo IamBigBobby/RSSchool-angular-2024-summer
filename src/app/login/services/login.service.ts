@@ -1,11 +1,18 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
+  public loggedInSubject$: BehaviorSubject<boolean> =
+    new BehaviorSubject<boolean>(
+      isPlatformBrowser(this.platformId) &&
+        !!localStorage.getItem('IamBigBobby_youtubeService'),
+    );
+
   constructor(
     // eslint-disable-next-line @typescript-eslint/ban-types
     @Inject(PLATFORM_ID) private platformId: Object,
@@ -17,11 +24,13 @@ export class LoginService {
       'IamBigBobby_youtubeService',
       this.generateRandomToken(),
     );
+    this.loggedInSubject$.next(true);
   }
 
   // eslint-disable-next-line class-methods-use-this
   public logout() {
     localStorage.removeItem('IamBigBobby_youtubeService');
+    this.loggedInSubject$.next(false);
   }
 
   public isLoggedIn(): boolean {
