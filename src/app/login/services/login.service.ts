@@ -39,7 +39,6 @@ export class LoginService {
         return true;
       }
     }
-    this.router.navigate(['/login-page']);
     return false;
   }
 

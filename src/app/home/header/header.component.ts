@@ -70,7 +70,7 @@ import { LoginService } from '../../login/services/login.service';
   `,
   styleUrl: './header.component.scss',
 })
-export default class HeaderComponent {
+export class HeaderComponent {
   isSortFieldVisible: boolean = false;
 
   private loginService = inject(LoginService);
