@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { authGuard } from './login/guards/auth.guard';
-import { AdminComponent } from './admin/admin.component';
 
 export const routes: Routes = [
   {
@@ -24,6 +23,11 @@ export const routes: Routes = [
     path: 'login-page',
     loadComponent: () =>
       import('./login/login.component').then((m) => m.LoginComponent),
+  },
+  {
+    path: 'admin',
+    loadComponent: () =>
+      import('./admin/admin.component').then((m) => m.AdminComponent),
   },
   { path: '**', component: PageNotFoundComponent },
 ];
