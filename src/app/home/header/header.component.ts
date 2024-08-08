@@ -46,10 +46,17 @@ import { LoginService } from '../../login/services/login.service';
       </section>
       @let loginStatus = loginStatus$ | async;
       @if (loginStatus) {
-        <section class="header__profile-section">
-          <p>Logout {{ loginStatus }}</p>
-          <img src="assets/login.svg" alt="login" />
-        </section>
+        <a
+          routerLink="/login-page"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+          (click)="logOut()"
+        >
+          <section class="header__profile-section">
+            <p>Log out</p>
+            <img src="assets/login.svg" alt="login" />
+          </section>
+        </a>
       } @else {
         <a
           routerLink="/login-page"
@@ -57,7 +64,7 @@ import { LoginService } from '../../login/services/login.service';
           ariaCurrentWhenActive="page"
         >
           <section class="header__profile-section">
-            <p>Your Name {{ loginStatus }}</p>
+            <p>Log in</p>
             <img src="assets/login.svg" alt="login" />
           </section>
         </a>
@@ -79,5 +86,9 @@ export class HeaderComponent {
 
   toggleSortField() {
     this.isSortFieldVisible = !this.isSortFieldVisible;
+  }
+
+  logOut() {
+    this.loginService.logout();
   }
 }
