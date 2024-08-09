@@ -74,27 +74,37 @@ export class YoutubeService {
   //   this.youtubeResponse$.next(MOCK_RESPONSE);
   // }
 
-  searchVideos(
-    query: string = 'js',
-    maxResults: number = 20,
-  ): Observable<string[]> {
-    const url = `https://www.googleapis.com/youtube/v3/search?key=${this.API_KEY}&type=video&part=snippet&maxResults=${maxResults}&q=${query}`;
-    return this.http.get<YouTubeInterface>(url).pipe(
-      map((response) =>
-        response.items.map((item: VideoItem) => {
-          if (typeof item.id === 'object') {
-            return item.id.videoId;
-          }
-          return '';
-        }),
-      ),
-    );
+  searchVideos(query: string = 'js'): Observable<string[]> {
+    // const url = `https://www.googleapis.com/youtube/v3/search?key=${this.API_KEY}&type=video&part=snippet&maxResults=${maxResults}&q=${query}`;
+    return this.http
+      .get<YouTubeInterface>('search', {
+        params: {
+          type: 'video',
+          maxResults: 15,
+          query,
+        },
+      })
+      .pipe(
+        map((response) =>
+          response.items.map((item: VideoItem) => {
+            if (typeof item.id === 'object') {
+              return item.id.videoId;
+            }
+            return '';
+          }),
+        ),
+      );
   }
 
   getVideoStatistics(videoIds: string[]): Observable<YouTubeInterface> {
     const ids = videoIds.join(',');
-    const url = `https://www.googleapis.com/youtube/v3/videos?key=${this.API_KEY}&id=${ids}&part=snippet,statistics`;
-    return this.http.get<YouTubeInterface>(url);
+    // const url = `https://www.googleapis.com/youtube/v3/videos?key=${this.API_KEY}&id=${ids}&part=snippet,statistics`;
+    return this.http.get<YouTubeInterface>('videos', {
+      params: {
+        part: 'snippet,statistics',
+        id: ids,
+      },
+    });
   }
 
   loadVideos(): Observable<YouTubeInterface> {
