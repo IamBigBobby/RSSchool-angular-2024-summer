@@ -7,6 +7,7 @@ import {
   withFetch,
   withInterceptors,
 } from '@angular/common/http';
+import { provideStore } from '@ngrx/store';
 import { routes } from './app.routes';
 import { youtubeInterceptor } from './shared/interceptors/youtube-interseptor';
 import { APIInterceptor } from './shared/interceptors/api-interseptor';
@@ -20,5 +21,6 @@ export const appConfig: ApplicationConfig = {
       withFetch(),
       withInterceptors([APIInterceptor, youtubeInterceptor]),
     ),
+    provideStore(),
   ],
 };
