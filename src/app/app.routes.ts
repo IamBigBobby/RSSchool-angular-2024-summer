@@ -28,6 +28,7 @@ export const routes: Routes = [
     path: 'admin',
     loadComponent: () =>
       import('./admin/admin.component').then((m) => m.AdminComponent),
+    canActivate: [authGuard],
   },
   {
     path: 'favorite-page',
@@ -35,6 +36,7 @@ export const routes: Routes = [
       import('./favorite-page/favorite-page.component').then(
         (m) => m.FavoritePageComponent,
       ),
+    canActivate: [authGuard],
   },
   { path: '**', component: PageNotFoundComponent },
 ];
