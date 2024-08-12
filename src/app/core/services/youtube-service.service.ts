@@ -8,7 +8,9 @@ import {
   switchMap,
 } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Store } from '@ngrx/store';
 import { VideoItem, YouTubeInterface } from './you-tube-interface';
+import { updateVideos } from '../../redux/actions/edit-video.actions';
 // import { mockData } from '../../../../mock-data';
 
 // const MOCK_RESPONSE = mockData;
@@ -25,6 +27,8 @@ export class YoutubeService {
   private sortCallback$ = new BehaviorSubject((data: VideoItem[]) => data);
 
   private http = inject(HttpClient);
+
+  private store = inject(Store);
 
   public keyword$ = new BehaviorSubject('');
 
@@ -64,6 +68,8 @@ export class YoutubeService {
     this.loadVideos().subscribe({
       next: (data) => {
         this.youtubeResponse$.next(data);
+        this.store.dispatch(updateVideos({ videos: data.items }));
+        console.log('state into service', this.store);
       },
       error: (err) => console.error('Error fetching data:', err),
     });
@@ -75,7 +81,6 @@ export class YoutubeService {
   // }
 
   searchVideos(query: string = 'js'): Observable<string[]> {
-    // const url = `https://www.googleapis.com/youtube/v3/search?key=${this.API_KEY}&type=video&part=snippet&maxResults=${maxResults}&q=${query}`;
     return this.http
       .get<YouTubeInterface>('search', {
         params: {
@@ -98,7 +103,6 @@ export class YoutubeService {
 
   getVideoStatistics(videoIds: string[]): Observable<YouTubeInterface> {
     const ids = videoIds.join(',');
-    // const url = `https://www.googleapis.com/youtube/v3/videos?key=${this.API_KEY}&id=${ids}&part=snippet,statistics`;
     return this.http.get<YouTubeInterface>('videos', {
       params: {
         part: 'snippet,statistics',

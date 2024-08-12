@@ -11,6 +11,7 @@ import { provideStore } from '@ngrx/store';
 import { routes } from './app.routes';
 import { youtubeInterceptor } from './shared/interceptors/youtube-interseptor';
 import { APIInterceptor } from './shared/interceptors/api-interseptor';
+import { loadVideos } from './redux/reducers/edit-video.reducers';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,6 +22,6 @@ export const appConfig: ApplicationConfig = {
       withFetch(),
       withInterceptors([APIInterceptor, youtubeInterceptor]),
     ),
-    provideStore(),
+    provideStore({ videos: loadVideos }),
   ],
 };
