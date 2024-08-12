@@ -29,5 +29,12 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./admin/admin.component').then((m) => m.AdminComponent),
   },
+  {
+    path: 'favorite-page',
+    loadComponent: () =>
+      import('./favorite-page/favorite-page.component').then(
+        (m) => m.FavoritePageComponent,
+      ),
+  },
   { path: '**', component: PageNotFoundComponent },
 ];
