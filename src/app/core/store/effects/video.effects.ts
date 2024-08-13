@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, switchMap } from 'rxjs';
+import { debounceTime, map, switchMap } from 'rxjs';
 import { YoutubeService } from '../../services/youtube-service.service';
 import { VideoActions } from '../actions/edit-video.actions';
 
@@ -13,8 +13,8 @@ export class VideoEffects {
   loadVideos$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(VideoActions.loadVideos),
+      debounceTime(500),
       switchMap(() => {
-        console.log('Effect triggered: Load Videos');
         return this.youtubeService.loadVideos().pipe(
           map((data) => {
             console.log('Data fetched:', data);
