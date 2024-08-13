@@ -8,10 +8,12 @@ import {
   withInterceptors,
 } from '@angular/common/http';
 import { provideStore } from '@ngrx/store';
+import { provideEffects } from '@ngrx/effects';
 import { routes } from './app.routes';
 import { youtubeInterceptor } from './shared/interceptors/youtube-interseptor';
 import { APIInterceptor } from './shared/interceptors/api-interseptor';
-import { loadVideos } from './redux/reducers/edit-video.reducers';
+import { VideoEffects } from './core/store/effects/video.effects';
+import { appReducer } from './core/store/reducers/app.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -22,6 +24,7 @@ export const appConfig: ApplicationConfig = {
       withFetch(),
       withInterceptors([APIInterceptor, youtubeInterceptor]),
     ),
-    provideStore({ videos: loadVideos }),
+    provideStore(appReducer),
+    provideEffects([VideoEffects]),
   ],
 };

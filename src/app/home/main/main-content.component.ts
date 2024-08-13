@@ -1,10 +1,12 @@
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { ButtonComponent } from '../../shared/components/button/button.component';
 import { ColorBorderCardDirective } from '../../shared/directives/color-border-card.directive';
 import { FilteringKeyWordPipe } from '../../shared/pipes/filtering-key-word.pipe';
 import { YoutubeService } from '../../core/services/youtube-service.service';
 import { VideoCardComponent } from '../../shared/components/video-card/video-card.component';
+import { VideoActions } from '../../core/store/actions/edit-video.actions';
 
 @Component({
   selector: 'app-main-content',
@@ -35,7 +37,13 @@ import { VideoCardComponent } from '../../shared/components/video-card/video-car
 export class MainContentComponent {
   private youtubeService = inject(YoutubeService);
 
+  private store = inject(Store);
+
   videos$ = this.youtubeService.videos$;
 
   keyword$ = this.youtubeService.keyword$;
+
+  constructor() {
+    this.store.dispatch(VideoActions.loadVideos());
+  }
 }
