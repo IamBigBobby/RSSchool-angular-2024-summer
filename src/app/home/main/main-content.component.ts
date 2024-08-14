@@ -6,7 +6,6 @@ import { ColorBorderCardDirective } from '../../shared/directives/color-border-c
 import { FilteringKeyWordPipe } from '../../shared/pipes/filtering-key-word.pipe';
 import { YoutubeService } from '../../core/services/youtube-service.service';
 import { VideoCardComponent } from '../../shared/components/video-card/video-card.component';
-import { VideoActions } from '../../core/store/actions/edit-video.actions';
 
 @Component({
   selector: 'app-main-content',
@@ -44,6 +43,6 @@ export class MainContentComponent {
   keyword$ = this.youtubeService.keyword$;
 
   constructor() {
-    this.store.dispatch(VideoActions.loadVideos());
+    this.youtubeService.loadVideos();
   }
 }

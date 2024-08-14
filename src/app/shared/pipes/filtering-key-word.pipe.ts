@@ -10,7 +10,7 @@ export class FilteringKeyWordPipe implements PipeTransform {
   // eslint-disable-next-line class-methods-use-this
   transform(videos: VideoItem[], keyword: string): VideoItem[] {
     return videos.filter((video) =>
-      video.snippet.title.toLowerCase().includes(keyword.toLowerCase()),
+      video.snippet?.title.toLowerCase().includes(keyword.toLowerCase()),
     );
   }
 }

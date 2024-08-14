@@ -11,7 +11,7 @@ import {
   standalone: true,
 })
 export class ColorBorderCardDirective implements OnChanges {
-  @Input() date: string = new Date().toISOString();
+  @Input() date: string | null = new Date().toISOString();
 
   constructor(private element: ElementRef) {}
 

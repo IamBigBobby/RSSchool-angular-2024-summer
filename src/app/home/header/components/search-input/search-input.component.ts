@@ -29,7 +29,7 @@ export class SearchInputComponent {
     const value = input.value.trim();
 
     if (value.length >= 3) {
-      this.youtubeService.searchword$.next(value);
+      this.youtubeService.searchVideos(value);
     }
   }
 }
