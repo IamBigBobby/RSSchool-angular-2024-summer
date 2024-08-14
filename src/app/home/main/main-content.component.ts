@@ -38,4 +38,8 @@ export class MainContentComponent {
   videos$ = this.youtubeService.videos$;
 
   keyword$ = this.youtubeService.keyword$;
+
+  constructor() {
+    this.youtubeService.loadVideos();
+  }
 }

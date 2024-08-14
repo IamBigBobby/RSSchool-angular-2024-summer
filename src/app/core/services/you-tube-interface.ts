@@ -1,19 +1,19 @@
-export interface VideoItem {
-  kind: string;
-  etag: string;
-  id: IdField | string;
-  snippet: Snippet;
-  statistics: Statistics;
-}
-
-export interface YouTubeInterface {
+export interface YouTubeResponse {
   kind: string;
   etag: string;
   pageInfo: PageInfo;
   items: VideoItem[];
 }
 
-interface IdField {
+export interface VideoItem {
+  kind: string;
+  etag: string;
+  id: VideoItemId | string;
+  snippet?: Snippet;
+  statistics?: Statistics;
+}
+
+export interface VideoItemId {
   kind: string;
   videoId: string;
 }

@@ -94,10 +94,7 @@ export class DetailedPageComponent {
 
   private route: ActivatedRoute = inject(ActivatedRoute);
 
-  detailedInfo$ = this.youtubeService.detailedVideo$;
+  private videoId: string = this.route.snapshot.params['id'];
 
-  constructor() {
-    const videoId = this.route.snapshot.params['id'];
-    this.youtubeService.getPageId(videoId);
-  }
+  detailedInfo$ = this.youtubeService.getDetailedVideo(this.videoId);
 }

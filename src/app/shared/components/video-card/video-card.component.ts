@@ -22,36 +22,38 @@ import { ColorBorderCardDirective } from '../../directives/color-border-card.dir
   template: `
     <div
       appColorBorderCard
-      [date]="videoItem.snippet.publishedAt"
+      [date]="videoItem.snippet?.publishedAt ?? null"
       class="video-card"
     >
       <img
         class="video-card__title"
-        [ngSrc]="videoItem.snippet.thumbnails.medium.url"
+        [ngSrc]="
+          videoItem.snippet?.thumbnails?.medium?.url ?? 'https://i.ytimg.com'
+        "
         width="320"
         height="180"
         priority
         alt="title"
       />
       <div class="video-card__title">
-        {{ videoItem.snippet.title }}
+        {{ videoItem.snippet?.title }}
       </div>
       <div class="video-card__statistic">
         <div class="video-card__views">
-          {{ videoItem.statistics.viewCount }}
+          {{ videoItem.statistics?.viewCount }}
         </div>
         <div class="video-card__likes">
-          {{ videoItem.statistics.likeCount }}
+          {{ videoItem.statistics?.likeCount }}
         </div>
         <div class="video-card__dislikes">
-          {{ videoItem.statistics.dislikeCount }}
+          {{ videoItem.statistics?.dislikeCount }}
         </div>
         <div class="video-card__comments">
-          {{ videoItem.statistics.commentCount }}
+          {{ videoItem.statistics?.commentCount }}
         </div>
       </div>
       <div class="video-card__date">
-        {{ videoItem.snippet.publishedAt | date }}
+        {{ videoItem.snippet?.publishedAt | date }}
       </div>
       <a
         routerLinkActive="active"
