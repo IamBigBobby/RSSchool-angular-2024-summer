@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { VideoItemId, VideoItem, YouTubeResponse } from './you-tube-interface';
 
@@ -11,16 +11,10 @@ export class YoutubeService {
 
   private VIDEOS_MAX_RESULTS = 15;
 
-  public keyword$ = new BehaviorSubject('');
-
   public getDetailedVideo(id: string): Observable<VideoItem | null> {
     return this.getVideosWithStatistics([id]).pipe(
       map((response) => response.items[0]),
     );
-  }
-
-  public sortByKeyWord(keyword: string) {
-    this.keyword$.next(keyword);
   }
 
   public getSearchedVideos(query: string): Observable<YouTubeResponse> {
