@@ -1,14 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import {
-  BehaviorSubject,
-  combineLatest,
-  debounceTime,
-  distinctUntilChanged,
-  map,
-  Observable,
-  Subject,
-  switchMap,
-} from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { VideoItemId, VideoItem, YouTubeResponse } from './you-tube-interface';
 
@@ -20,38 +11,9 @@ export class YoutubeService {
 
   private VIDEOS_MAX_RESULTS = 15;
 
-  private VIDEOS_SEARCH_DEBOUNCE_TIME = 500;
-
-  private videosQuery$ = new Subject<string>();
-
-  private videosRequest$ = this.videosQuery$.pipe(
-    debounceTime(this.VIDEOS_SEARCH_DEBOUNCE_TIME),
-    distinctUntilChanged(),
-    switchMap((query) => this.getSearchedVideos(query)),
-    map((response) => this.getVideoIds(response)),
-    switchMap((videoIds) => this.getVideosWithStatistics(videoIds)),
-  );
-
   private sortCallback$ = new BehaviorSubject((data: VideoItem[]) => data);
 
   public keyword$ = new BehaviorSubject('');
-
-  public videos$: Observable<VideoItem[]> = combineLatest({
-    youtubeResponse: this.videosRequest$,
-    sortCallback: this.sortCallback$,
-  }).pipe(
-    map(({ youtubeResponse, sortCallback }) =>
-      sortCallback(youtubeResponse?.items ?? []),
-    ),
-  );
-
-  public loadVideos(): void {
-    this.videosQuery$.next('');
-  }
-
-  public searchVideos(query: string): void {
-    this.videosQuery$.next(query);
-  }
 
   public getDetailedVideo(id: string): Observable<VideoItem | null> {
     return this.getVideosWithStatistics([id]).pipe(
@@ -104,7 +66,6 @@ export class YoutubeService {
   }
 
   public getSearchedVideos(query: string): Observable<YouTubeResponse> {
-    // const url = `https://www.googleapis.com/youtube/v3/search?key=${this.API_KEY}&type=video&part=snippet&maxResults=${maxResults}&q=${query}`;
     return this.http.get<YouTubeResponse>('search', {
       params: {
         q: query,
@@ -126,7 +87,6 @@ export class YoutubeService {
     videoIds: string[],
   ): Observable<YouTubeResponse> {
     const ids = videoIds.join(',');
-    // const url = `https://www.googleapis.com/youtube/v3/videos?key=${this.API_KEY}&id=${ids}&part=snippet,statistics`;
     return this.http.get<YouTubeResponse>('videos', {
       params: {
         part: 'snippet,statistics',
