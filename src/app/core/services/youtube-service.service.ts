@@ -11,53 +11,11 @@ export class YoutubeService {
 
   private VIDEOS_MAX_RESULTS = 15;
 
-  private sortCallback$ = new BehaviorSubject((data: VideoItem[]) => data);
-
   public keyword$ = new BehaviorSubject('');
 
   public getDetailedVideo(id: string): Observable<VideoItem | null> {
     return this.getVideosWithStatistics([id]).pipe(
       map((response) => response.items[0]),
-    );
-  }
-
-  public sortByDateAsc() {
-    this.sortCallback$.next((videos) =>
-      videos.sort((a, b) => {
-        const dateA = new Date(a.snippet?.publishedAt ?? '');
-        const dateB = new Date(b.snippet?.publishedAt ?? '');
-        return dateB.getTime() - dateA.getTime();
-      }),
-    );
-  }
-
-  public sortByDateDesc() {
-    this.sortCallback$.next((videos) =>
-      videos.sort((a, b) => {
-        const dateA = new Date(a.snippet?.publishedAt ?? '');
-        const dateB = new Date(b.snippet?.publishedAt ?? '');
-        return dateA.getTime() - dateB.getTime();
-      }),
-    );
-  }
-
-  public sortByViewsAsc() {
-    this.sortCallback$.next((videos) =>
-      videos.sort((a, b) => {
-        const viewsA: number = Number(a.statistics?.viewCount ?? 0);
-        const viewsB: number = Number(b.statistics?.viewCount ?? 0);
-        return viewsB - viewsA;
-      }),
-    );
-  }
-
-  public sortByViewsDesc() {
-    this.sortCallback$.next((videos) =>
-      videos.sort((a, b) => {
-        const viewsA: number = Number(a.statistics?.viewCount ?? 0);
-        const viewsB: number = Number(b.statistics?.viewCount ?? 0);
-        return viewsA - viewsB;
-      }),
     );
   }
 

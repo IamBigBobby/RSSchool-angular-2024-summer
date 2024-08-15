@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { YoutubeService } from '../../../../core/services/youtube-service.service';
+import { Component, inject, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { setSortType } from '../../../../core/store/actions/sort-type.actions';
 
 @Component({
   selector: 'app-filters-input',
@@ -29,11 +30,7 @@ import { YoutubeService } from '../../../../core/services/youtube-service.servic
           <div class="sort-field__input">
             <p>by word of sentance</p>
             <form>
-              <input
-                type="text"
-                placeholder=""
-                (input)="onFilterWordChange($event)"
-              />
+              <input type="text" placeholder="" />
             </form>
           </div>
         </div>
@@ -45,19 +42,19 @@ import { YoutubeService } from '../../../../core/services/youtube-service.servic
 export class FiltersInputComponent {
   @Input() isSortFieldVisibleToggle!: boolean;
 
+  private store = inject(Store);
+
   isSortDateUp: boolean = false;
 
   isSortViewsUp: boolean = false;
-
-  constructor(private youtubeServiceData: YoutubeService) {}
 
   onSortByDateClick() {
     this.isSortDateUp = !this.isSortDateUp;
 
     if (this.isSortDateUp) {
-      this.youtubeServiceData.sortByDateDesc();
+      this.store.dispatch(setSortType({ sortType: 'dateAsc' }));
     } else {
-      this.youtubeServiceData.sortByDateAsc();
+      this.store.dispatch(setSortType({ sortType: 'dateDesc' }));
     }
   }
 
@@ -65,15 +62,9 @@ export class FiltersInputComponent {
     this.isSortViewsUp = !this.isSortViewsUp;
 
     if (this.isSortViewsUp) {
-      this.youtubeServiceData.sortByViewsDesc();
+      this.store.dispatch(setSortType({ sortType: 'viewsAsc' }));
     } else {
-      this.youtubeServiceData.sortByViewsAsc();
+      this.store.dispatch(setSortType({ sortType: 'viewsDesc' }));
     }
-  }
-
-  onFilterWordChange(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    const keyword = inputElement.value;
-    this.youtubeServiceData.sortByKeyWord(keyword);
   }
 }

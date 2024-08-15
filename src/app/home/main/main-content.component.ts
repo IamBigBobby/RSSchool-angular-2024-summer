@@ -6,7 +6,7 @@ import { ColorBorderCardDirective } from '../../shared/directives/color-border-c
 import { FilteringKeyWordPipe } from '../../shared/pipes/filtering-key-word.pipe';
 import { YoutubeService } from '../../core/services/youtube-service.service';
 import { VideoCardComponent } from '../../shared/components/video-card/video-card.component';
-import { selectVideoItems } from '../../core/store/selectors/video-selectors';
+import { selectSortedVideoItems } from '../../core/store/selectors/video-selectors';
 
 @Component({
   selector: 'app-main-content',
@@ -42,11 +42,7 @@ export class MainContentComponent {
 
   private store = inject(Store);
 
-  videos$ = this.store.select(selectVideoItems);
+  videos$ = this.store.select(selectSortedVideoItems);
 
   keyword$ = this.youtubeService.keyword$;
-
-  constructor() {
-    this.videos$.subscribe((videos) => console.log('Videos:', videos));
-  }
 }
