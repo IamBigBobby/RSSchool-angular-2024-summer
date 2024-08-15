@@ -1,6 +1,7 @@
 import { Component, inject, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { setSortType } from '../../../../core/store/actions/sort-type.actions';
+import { getSortKeyWord } from '../../../../core/store/actions/key-word.action';
 
 @Component({
   selector: 'app-filters-input',
@@ -30,7 +31,11 @@ import { setSortType } from '../../../../core/store/actions/sort-type.actions';
           <div class="sort-field__input">
             <p>by word of sentance</p>
             <form>
-              <input type="text" placeholder="" />
+              <input
+                type="text"
+                placeholder=""
+                (input)="onFilterWordChange($event)"
+              />
             </form>
           </div>
         </div>
@@ -66,5 +71,11 @@ export class FiltersInputComponent {
     } else {
       this.store.dispatch(setSortType({ sortType: 'viewsDesc' }));
     }
+  }
+
+  onFilterWordChange(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    const keyword = inputElement.value;
+    this.store.dispatch(getSortKeyWord({ key: keyword }));
   }
 }
