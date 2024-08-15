@@ -14,6 +14,7 @@ import { youtubeInterceptor } from './shared/interceptors/youtube-interseptor';
 import { APIInterceptor } from './shared/interceptors/api-interseptor';
 import { VideoEffects } from './core/store/effects/video.effects';
 import { appReducer } from './core/store/reducers/app.reducer';
+import { initialAppState } from './core/store/state/app-state';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -24,7 +25,7 @@ export const appConfig: ApplicationConfig = {
       withFetch(),
       withInterceptors([APIInterceptor, youtubeInterceptor]),
     ),
-    provideStore(appReducer),
+    provideStore(appReducer, { initialState: initialAppState }),
     provideEffects([VideoEffects]),
   ],
 };

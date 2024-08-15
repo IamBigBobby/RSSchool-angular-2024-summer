@@ -6,6 +6,7 @@ import { ColorBorderCardDirective } from '../../shared/directives/color-border-c
 import { FilteringKeyWordPipe } from '../../shared/pipes/filtering-key-word.pipe';
 import { YoutubeService } from '../../core/services/youtube-service.service';
 import { VideoCardComponent } from '../../shared/components/video-card/video-card.component';
+import { selectVideoItems } from '../../core/store/selectors/video-selectors';
 
 @Component({
   selector: 'app-main-content',
@@ -13,12 +14,15 @@ import { VideoCardComponent } from '../../shared/components/video-card/video-car
   template: `
     <main class="main">
       <div class="main-container">
-        @for (
-          youtubeElement of (videos$ | async) ?? []
-            | filteringKeyWord: (keyword$ | async) ?? '';
-          track youtubeElement.id
-        ) {
-          <app-video-card [videoItem]="youtubeElement"></app-video-card>
+        @let videos = videos$ | async;
+        @if (videos) {
+          @for (
+            youtubeElement of videos ?? []
+              | filteringKeyWord: (keyword$ | async) ?? '';
+            track youtubeElement.id
+          ) {
+            <app-video-card [videoItem]="youtubeElement"></app-video-card>
+          }
         }
       </div>
     </main>
@@ -38,11 +42,11 @@ export class MainContentComponent {
 
   private store = inject(Store);
 
-  videos$ = this.youtubeService.videos$;
+  videos$ = this.store.select(selectVideoItems);
 
   keyword$ = this.youtubeService.keyword$;
 
   constructor() {
-    this.youtubeService.loadVideos();
+    this.videos$.subscribe((videos) => console.log('Videos:', videos));
   }
 }

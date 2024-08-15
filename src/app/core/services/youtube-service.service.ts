@@ -18,8 +18,6 @@ import { VideoItemId, VideoItem, YouTubeResponse } from './you-tube-interface';
 export class YoutubeService {
   private http = inject(HttpClient);
 
-  private API_KEY = 'AIzaSyAsslk2ZsR14rpQXl-gaqRyDkrs4Syi9w0';
-
   private VIDEOS_MAX_RESULTS = 15;
 
   private VIDEOS_SEARCH_DEBOUNCE_TIME = 500;
@@ -105,7 +103,7 @@ export class YoutubeService {
     this.keyword$.next(keyword);
   }
 
-  private getSearchedVideos(query: string): Observable<YouTubeResponse> {
+  public getSearchedVideos(query: string): Observable<YouTubeResponse> {
     // const url = `https://www.googleapis.com/youtube/v3/search?key=${this.API_KEY}&type=video&part=snippet&maxResults=${maxResults}&q=${query}`;
     return this.http.get<YouTubeResponse>('search', {
       params: {
@@ -118,13 +116,13 @@ export class YoutubeService {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  private getVideoIds(response: YouTubeResponse): VideoItemId['videoId'][] {
+  public getVideoIds(response: YouTubeResponse): VideoItemId['videoId'][] {
     return response.items.map(({ id }) =>
       typeof id === 'string' ? id : id.videoId,
     );
   }
 
-  private getVideosWithStatistics(
+  public getVideosWithStatistics(
     videoIds: string[],
   ): Observable<YouTubeResponse> {
     const ids = videoIds.join(',');

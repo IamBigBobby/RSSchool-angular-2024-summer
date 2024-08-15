@@ -1,6 +1,8 @@
 import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { YoutubeService } from '../../../../core/services/youtube-service.service';
+import { getSearchWord } from '../../../../core/store/actions/search.action';
 
 @Component({
   selector: 'app-search-input',
@@ -22,6 +24,8 @@ import { YoutubeService } from '../../../../core/services/youtube-service.servic
 export class SearchInputComponent {
   private youtubeService = inject(YoutubeService);
 
+  private store = inject(Store);
+
   @ViewChild('filter', { static: true }) filter!: ElementRef<HTMLInputElement>;
 
   onFilterChange(event: Event) {
@@ -29,7 +33,7 @@ export class SearchInputComponent {
     const value = input.value.trim();
 
     if (value.length >= 3) {
-      this.youtubeService.searchVideos(value);
+      this.store.dispatch(getSearchWord({ word: value }));
     }
   }
 }

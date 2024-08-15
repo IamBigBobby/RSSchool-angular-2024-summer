@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { YouTubeInterface } from '../../services/you-tube-interface';
+import { YouTubeResponse } from '../../services/you-tube-interface';
 
 export enum EVideoActions {
   LoadVideos = '[Videos] Load Videos',
@@ -12,7 +12,7 @@ export const VideoActions = {
   loadVideos: createAction(EVideoActions.LoadVideos),
   loadVideosSuccess: createAction(
     EVideoActions.LoadVideosSuccess,
-    props<{ data: YouTubeInterface }>(),
+    props<{ data: YouTubeResponse }>(),
   ),
   addVideo: createAction(EVideoActions.AddVideo),
   removeVideo: createAction(EVideoActions.RemoveVideo),

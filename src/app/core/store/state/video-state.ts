@@ -1,7 +1,7 @@
-import { YouTubeInterface } from '../../services/you-tube-interface';
+import { YouTubeResponse } from '../../services/you-tube-interface';
 
 export interface VideosState {
-  videosObj: YouTubeInterface;
+  videosObj: YouTubeResponse;
 }
 
 export const initionalVideoState: VideosState = {
