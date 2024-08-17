@@ -3,6 +3,8 @@ export interface YouTubeResponse {
   etag: string;
   pageInfo: PageInfo;
   items: VideoItem[];
+  nextPageToken?: string;
+  prevPageToken?: string;
 }
 
 export interface VideoItem {

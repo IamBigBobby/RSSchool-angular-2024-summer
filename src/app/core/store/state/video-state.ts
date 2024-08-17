@@ -2,6 +2,8 @@ import { YouTubeResponse } from '../../services/you-tube-interface';
 
 export interface VideosState {
   videosObj: YouTubeResponse;
+  nextPageToken: string | undefined;
+  prevPageToken: string | undefined;
 }
 
 export const initionalVideoState: VideosState = {
@@ -14,4 +16,6 @@ export const initionalVideoState: VideosState = {
     },
     items: [],
   },
+  nextPageToken: undefined,
+  prevPageToken: undefined,
 };

@@ -14,6 +14,16 @@ export const selectVideoItems = createSelector(
   (videosState: VideosState) => videosState.videosObj.items,
 );
 
+export const selectNextPageToken = createSelector(
+  selectVideosState,
+  (videosState: VideosState) => videosState.nextPageToken,
+);
+
+export const selectPrevPageToken = createSelector(
+  selectVideosState,
+  (videosState: VideosState) => videosState.prevPageToken,
+);
+
 export const selectSortType = createSelector(
   selectVideosSortType,
   (videoSortType: SortVideosState) => videoSortType.sortType,

@@ -17,13 +17,17 @@ export class YoutubeService {
     );
   }
 
-  public getSearchedVideos(query: string): Observable<YouTubeResponse> {
+  public getSearchedVideos(
+    query: string,
+    pageToken?: string,
+  ): Observable<YouTubeResponse> {
     return this.http.get<YouTubeResponse>('search', {
       params: {
         q: query,
         part: 'snippet',
         type: 'video',
         maxResults: this.VIDEOS_MAX_RESULTS,
+        pageToken: pageToken || '',
       },
     });
   }

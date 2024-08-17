@@ -9,7 +9,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
       class="custom-button"
       [type]="type"
       [disabled]="disabled"
-      [class.disabled]="disabled"
       (click)="onButtonClick()"
     >
       <ng-content></ng-content>
@@ -20,7 +19,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class ButtonComponent {
   @Input() type: 'button' | 'submit' = 'button';
 
-  @Input() disabled: false | true = false;
+  @Input() disabled = false;
 
   @Output() clicked = new EventEmitter<void>();
 

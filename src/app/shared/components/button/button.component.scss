@@ -1,17 +1,17 @@
 @import "variables";
 
 .custom-button {
-    height: 33px;
-    width: 100px;
-    text-align: center;
-    margin-left: -5px;
-    background-color: $primary-color;
-    color: white;
-    outline: none;
-    cursor: pointer;
+  height: 33px;
+  width: 100px;
+  text-align: center;
+  margin-left: -5px;
+  background-color: $primary-color;
+  color: white;
+  outline: none;
+  cursor: pointer;
 
-    &.disabled {
-        opacity: 0.5;
-        pointer-events: none;
-      }
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }

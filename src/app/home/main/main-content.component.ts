@@ -6,6 +6,7 @@ import { ColorBorderCardDirective } from '../../shared/directives/color-border-c
 import { FilteringKeyWordPipe } from '../../shared/pipes/filtering-key-word.pipe';
 import { VideoCardComponent } from '../../shared/components/video-card/video-card.component';
 import { selectSortedVideoItems } from '../../core/store/selectors/video-selectors';
+import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
 
 @Component({
   selector: 'app-main-content',
@@ -20,6 +21,7 @@ import { selectSortedVideoItems } from '../../core/store/selectors/video-selecto
           }
         }
       </div>
+      <app-pagination></app-pagination>
     </main>
   `,
   styleUrls: ['./main-content.component.scss'],
@@ -30,6 +32,7 @@ import { selectSortedVideoItems } from '../../core/store/selectors/video-selecto
     ButtonComponent,
     NgOptimizedImage,
     VideoCardComponent,
+    PaginationComponent,
   ],
 })
 export class MainContentComponent {
