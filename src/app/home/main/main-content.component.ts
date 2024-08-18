@@ -12,21 +12,23 @@ import {
   selectSortedVideoItems,
 } from '../../core/store/selectors/video-selectors';
 import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
+import { CustomVideo } from '../../custom-video/custom-video-interface';
+import { VideoItem } from '../../core/services/you-tube-interface';
 
 @Component({
   selector: 'app-main-content',
   standalone: true,
   template: `
     <main class="main">
-      <!-- @let mixedVideos = mixedVideos$ | async | json;
-      @if (mixedVideos) {
-        {{ mixedVideos }}
-      } -->
       <div class="main-container">
-        @let videos = videos$ | async;
+        @let videos = currentMixedVideos$ | async;
         @if (videos) {
-          @for (youtubeElement of videos ?? []; track youtubeElement.id) {
-            <app-video-card [videoItem]="youtubeElement"></app-video-card>
+          @for (youtubeElement of videos ?? []; track youtubeElement) {
+            @if (isCustomVideo(youtubeElement)) {
+              {{ youtubeElement | json }}
+            } @else if (isVideoItem(youtubeElement)) {
+              <app-video-card [videoItem]="youtubeElement"></app-video-card>
+            }
           }
         }
       </div>
@@ -56,11 +58,18 @@ export class MainContentComponent {
   currentMixedVideos$ = this.store.select(selectCurrentMixedVideos);
 
   constructor() {
-    this.mixedVideos$.subscribe((videos) => {
-      console.log('mixed videos in main', videos.flat(2));
-    });
     this.currentMixedVideos$.subscribe((videos) => {
       console.log('mixed videos with pagiantion', videos);
     });
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  isCustomVideo(video: CustomVideo | VideoItem): video is CustomVideo {
+    return (video as CustomVideo).title !== undefined;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  isVideoItem(video: CustomVideo | VideoItem): video is VideoItem {
+    return (video as VideoItem).kind !== undefined;
   }
 }
