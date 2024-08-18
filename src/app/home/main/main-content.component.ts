@@ -6,6 +6,7 @@ import { ColorBorderCardDirective } from '../../shared/directives/color-border-c
 import { FilteringKeyWordPipe } from '../../shared/pipes/filtering-key-word.pipe';
 import { VideoCardComponent } from '../../shared/components/video-card/video-card.component';
 import {
+  selectCurrentMixedVideos,
   selectCustomVideos,
   selectMixedVideos,
   selectSortedVideoItems,
@@ -52,9 +53,14 @@ export class MainContentComponent {
 
   mixedVideos$ = this.store.select(selectMixedVideos);
 
+  currentMixedVideos$ = this.store.select(selectCurrentMixedVideos);
+
   constructor() {
     this.mixedVideos$.subscribe((videos) => {
       console.log('mixed videos in main', videos.flat(2));
+    });
+    this.currentMixedVideos$.subscribe((videos) => {
+      console.log('mixed videos with pagiantion', videos);
     });
   }
 }

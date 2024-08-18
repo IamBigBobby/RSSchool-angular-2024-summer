@@ -9,7 +9,7 @@ import { VideoItemId, VideoItem, YouTubeResponse } from './you-tube-interface';
 export class YoutubeService {
   private http = inject(HttpClient);
 
-  private VIDEOS_MAX_RESULTS = 15;
+  private VIDEOS_MAX_RESULTS = 20;
 
   public getDetailedVideo(id: string): Observable<VideoItem | null> {
     return this.getVideosWithStatistics([id]).pipe(

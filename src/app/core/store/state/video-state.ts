@@ -8,6 +8,7 @@ export interface VideosState {
   addedVideos: CustomVideo[];
   mixedVideos: (CustomVideo | VideoItem[])[];
   pageNumber: number;
+  itemsPerPage: number;
 }
 
 export const initionalVideoState: VideosState = {
@@ -25,4 +26,5 @@ export const initionalVideoState: VideosState = {
   addedVideos: [],
   mixedVideos: [],
   pageNumber: 1,
+  itemsPerPage: 20,
 };

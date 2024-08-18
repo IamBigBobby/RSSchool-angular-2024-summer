@@ -4,6 +4,7 @@ import { VideosState } from '../state/video-state';
 import { SortVideosState } from '../state/sort-type-state';
 import { VideoItem } from '../../services/you-tube-interface';
 import { KeyWordState } from '../state/sort-key-word-state';
+import { CustomVideo } from '../../../custom-video/custom-video-interface';
 
 const selectVideosState = (state: AppState) => state.videos;
 const selectVideosSortType = (state: AppState) => state.sortType;
@@ -47,6 +48,11 @@ export const selectMixedVideos = createSelector(
 export const selectPageNumber = createSelector(
   selectVideosState,
   (videosState: VideosState) => videosState.pageNumber,
+);
+
+export const selectItemsPerPage = createSelector(
+  selectVideosState,
+  (videosState: VideosState) => videosState.itemsPerPage,
 );
 
 export const selectSortedVideoItems = createSelector(
@@ -96,5 +102,17 @@ export const selectSortedVideoItems = createSelector(
     }
 
     return sortedItems;
+  },
+);
+
+export const selectCurrentMixedVideos = createSelector(
+  selectMixedVideos,
+  selectPageNumber,
+  selectItemsPerPage,
+  (mixedVideos: (CustomVideo | VideoItem)[], pageNumber, itemsPerPage) => {
+    const startIndex = (pageNumber - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+
+    return mixedVideos.slice(startIndex, endIndex);
   },
 );
