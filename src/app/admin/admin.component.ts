@@ -6,8 +6,11 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { ButtonComponent } from '../shared/components/button/button.component';
 import { noFutureDate } from '../shared/validators/custom-validators';
+import { CustomVideo } from '../custom-video/custom-video-interface';
+import { VideoActions } from '../core/store/actions/edit-video.actions';
 
 @Component({
   selector: 'app-admin',
@@ -143,6 +146,8 @@ import { noFutureDate } from '../shared/validators/custom-validators';
 export class AdminComponent {
   private formBuilder = inject(FormBuilder);
 
+  private store = inject(Store);
+
   public adminForm: FormGroup;
 
   public maxTags = 5;
@@ -171,10 +176,6 @@ export class AdminComponent {
     return this.adminForm.get('tags') as FormArray;
   }
 
-  public createCard() {
-    console.log(this.adminForm.value);
-  }
-
   public addTag() {
     if (this.tags.length < this.maxTags) {
       this.tags.push(this.formBuilder.control('', Validators.required));
@@ -194,5 +195,18 @@ export class AdminComponent {
       date: '',
       tags: [''],
     });
+  }
+
+  public createCard() {
+    const newVideo: CustomVideo = {
+      title: this.adminForm.get('title')?.value,
+      description: this.adminForm.get('description')?.value,
+      img: this.adminForm.get('img')?.value,
+      video: this.adminForm.get('video')?.value,
+      date: this.adminForm.get('date')?.value,
+    };
+
+    console.log('Dispatching addVideo action with:', newVideo);
+    this.store.dispatch(VideoActions.addVideo({ video: newVideo }));
   }
 }

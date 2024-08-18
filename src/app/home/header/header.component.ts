@@ -22,6 +22,15 @@ import { LoginService } from '../../login/services/login.service';
   ],
   template: `
     <header class="header">
+      <section class="header__admin-page">
+        <a
+          routerLink="/admin"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+        >
+          <p>Admin page</p>
+        </a>
+      </section>
       <section class="header__search-field">
         <img
           class="header__logo"
