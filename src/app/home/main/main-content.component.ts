@@ -17,10 +17,10 @@ import { PaginationComponent } from '../../shared/components/pagination/paginati
   standalone: true,
   template: `
     <main class="main">
-      @let customVideos = customVideos$ | async | json;
-      @if (customVideos) {
-        {{ customVideos }}
-      }
+      <!-- @let mixedVideos = mixedVideos$ | async | json;
+      @if (mixedVideos) {
+        {{ mixedVideos }}
+      } -->
       <div class="main-container">
         @let videos = videos$ | async;
         @if (videos) {

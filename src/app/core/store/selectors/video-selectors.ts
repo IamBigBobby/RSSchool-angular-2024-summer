@@ -41,7 +41,12 @@ export const selectCustomVideos = createSelector(
 
 export const selectMixedVideos = createSelector(
   selectVideosState,
-  (videosstate: VideosState) => videosstate.mixedVideos,
+  (videosstate: VideosState) => videosstate.mixedVideos.flat(2),
+);
+
+export const selectPageNumber = createSelector(
+  selectVideosState,
+  (videosState: VideosState) => videosState.pageNumber,
 );
 
 export const selectSortedVideoItems = createSelector(

@@ -25,4 +25,16 @@ export const videosReducer = createReducer(
       mixedVideos: [video, ...state.mixedVideos],
     };
   }),
+  on(VideoActions.loadNextPage, (state): VideosState => {
+    return {
+      ...state,
+      pageNumber: state.pageNumber + 1,
+    };
+  }),
+  on(VideoActions.loadPrevPage, (state): VideosState => {
+    return {
+      ...state,
+      pageNumber: state.pageNumber - 1,
+    };
+  }),
 );
