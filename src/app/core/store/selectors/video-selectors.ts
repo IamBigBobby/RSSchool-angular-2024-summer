@@ -34,6 +34,16 @@ export const selectKeyType = createSelector(
   (videoKeyType: KeyWordState) => videoKeyType.sortKeyWord,
 );
 
+export const selectCustomVideos = createSelector(
+  selectVideosState,
+  (videosState: VideosState) => videosState.addedVideos,
+);
+
+export const selectMixedVideos = createSelector(
+  selectVideosState,
+  (videosstate: VideosState) => videosstate.mixedVideos,
+);
+
 export const selectSortedVideoItems = createSelector(
   selectVideoItems,
   selectSortType,

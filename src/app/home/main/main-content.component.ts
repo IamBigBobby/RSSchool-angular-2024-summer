@@ -5,7 +5,11 @@ import { ButtonComponent } from '../../shared/components/button/button.component
 import { ColorBorderCardDirective } from '../../shared/directives/color-border-card.directive';
 import { FilteringKeyWordPipe } from '../../shared/pipes/filtering-key-word.pipe';
 import { VideoCardComponent } from '../../shared/components/video-card/video-card.component';
-import { selectSortedVideoItems } from '../../core/store/selectors/video-selectors';
+import {
+  selectCustomVideos,
+  selectMixedVideos,
+  selectSortedVideoItems,
+} from '../../core/store/selectors/video-selectors';
 import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
 
 @Component({
@@ -13,6 +17,10 @@ import { PaginationComponent } from '../../shared/components/pagination/paginati
   standalone: true,
   template: `
     <main class="main">
+      @let customVideos = customVideos$ | async | json;
+      @if (customVideos) {
+        {{ customVideos }}
+      }
       <div class="main-container">
         @let videos = videos$ | async;
         @if (videos) {
@@ -39,4 +47,14 @@ export class MainContentComponent {
   private store = inject(Store);
 
   videos$ = this.store.select(selectSortedVideoItems);
+
+  customVideos$ = this.store.select(selectCustomVideos);
+
+  mixedVideos$ = this.store.select(selectMixedVideos);
+
+  constructor() {
+    this.mixedVideos$.subscribe((videos) => {
+      console.log('mixed videos in main', videos.flat(2));
+    });
+  }
 }
