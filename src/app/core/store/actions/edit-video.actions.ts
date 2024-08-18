@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { YouTubeResponse } from '../../services/you-tube-interface';
+import { CustomVideo } from '../../../custom-video/custom-video-interface';
 
 export enum EVideoActions {
   LoadVideos = '[Videos] Load Videos',
@@ -22,6 +23,9 @@ export const VideoActions = {
   ),
   loadNextPage: createAction(EVideoActions.LoadNextPage),
   loadPrevPage: createAction(EVideoActions.LoadPrevPage),
-  addVideo: createAction(EVideoActions.AddVideo),
+  addVideo: createAction(
+    EVideoActions.AddVideo,
+    props<{ video: CustomVideo }>(),
+  ),
   removeVideo: createAction(EVideoActions.RemoveVideo),
 };

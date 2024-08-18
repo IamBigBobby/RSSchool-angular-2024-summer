@@ -51,34 +51,31 @@ export class VideoEffects {
       ofType(VideoActions.loadNextPage, VideoActions.loadPrevPage),
       concatLatestFrom(() => this.store.select(appSelector)),
       switchMap(([action, state]) => {
-        const pageToken = action.type === VideoActions.loadNextPage.type
-          ? state.videos.nextPageToken
-          : state.videos.prevPageToken;
+        const pageToken =
+          action.type === VideoActions.loadNextPage.type
+            ? state.videos.nextPageToken
+            : state.videos.prevPageToken;
 
         const query = state.searchWord.searchWord;
 
-        return this.youtubeService$
-          .getSearchedVideos(query, pageToken)
-          .pipe(
-            switchMap((response) => {
-              const videoIds = this.youtubeService$.getVideoIds(response);
-              return this.youtubeService$
-                .getVideosWithStatistics(videoIds)
-                .pipe(
-                  map((videosWithStatistics) => {
-                    return VideoActions.loadVideosSuccess({
-                      data: videosWithStatistics,
-                      nextPageToken: response.nextPageToken,
-                      prevPageToken: response.prevPageToken,
-                    });
-                  }),
-                  catchError((error) => {
-                    console.error('Error loading videos:', error);
-                    return EMPTY;
-                  }),
-                );
-            }),
-          );
+        return this.youtubeService$.getSearchedVideos(query, pageToken).pipe(
+          switchMap((response) => {
+            const videoIds = this.youtubeService$.getVideoIds(response);
+            return this.youtubeService$.getVideosWithStatistics(videoIds).pipe(
+              map((videosWithStatistics) => {
+                return VideoActions.loadVideosSuccess({
+                  data: videosWithStatistics,
+                  nextPageToken: response.nextPageToken,
+                  prevPageToken: response.prevPageToken,
+                });
+              }),
+              catchError((error) => {
+                console.error('Error loading videos:', error);
+                return EMPTY;
+              }),
+            );
+          }),
+        );
       }),
     );
   });

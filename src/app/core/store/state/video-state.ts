@@ -1,9 +1,11 @@
+import { CustomVideo } from '../../../custom-video/custom-video-interface';
 import { YouTubeResponse } from '../../services/you-tube-interface';
 
 export interface VideosState {
   videosObj: YouTubeResponse;
   nextPageToken: string | undefined;
   prevPageToken: string | undefined;
+  addedVideos: CustomVideo[];
 }
 
 export const initionalVideoState: VideosState = {
@@ -18,4 +20,5 @@ export const initionalVideoState: VideosState = {
   },
   nextPageToken: undefined,
   prevPageToken: undefined,
+  addedVideos: [],
 };
