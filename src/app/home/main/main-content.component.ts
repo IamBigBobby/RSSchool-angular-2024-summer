@@ -57,12 +57,6 @@ export class MainContentComponent {
 
   currentMixedVideos$ = this.store.select(selectCurrentMixedVideos);
 
-  constructor() {
-    this.currentMixedVideos$.subscribe((videos) => {
-      console.log('mixed videos with pagiantion', videos);
-    });
-  }
-
   // eslint-disable-next-line class-methods-use-this
   isCustomVideo(video: CustomVideo | VideoItem): video is CustomVideo {
     return (video as CustomVideo).title !== undefined;
