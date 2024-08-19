@@ -13,8 +13,8 @@ import { selectFavoriteVideos } from '../core/store/selectors/video-selectors';
   selector: 'app-main-content',
   standalone: true,
   template: `
-    <main class="main">
-      <div class="main-container">
+    <div class="favorite">
+      <div class="favorite-container">
         @let videos = sortedVideoItems$ | async;
         @if (videos) {
           @for (youtubeElement of videos ?? []; track youtubeElement) {
@@ -22,7 +22,7 @@ import { selectFavoriteVideos } from '../core/store/selectors/video-selectors';
           }
         }
       </div>
-    </main>
+    </div>
   `,
   styleUrls: ['./favorite-page.component.scss'],
   imports: [
