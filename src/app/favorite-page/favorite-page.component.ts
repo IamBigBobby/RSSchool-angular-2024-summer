@@ -18,11 +18,10 @@ import { selectFavoriteVideos } from '../core/store/selectors/video-selectors';
         @let videos = sortedVideoItems$ | async;
         @if (videos) {
           @for (youtubeElement of videos ?? []; track youtubeElement) {
-            <p>{{ youtubeElement }}</p>
+            <app-video-card [videoItem]="youtubeElement"></app-video-card>
           }
         }
       </div>
-      <app-pagination></app-pagination>
     </main>
   `,
   styleUrls: ['./favorite-page.component.scss'],
@@ -41,14 +40,4 @@ export class FavoritePageComponent {
   private store = inject(Store);
 
   sortedVideoItems$ = this.store.select(selectFavoriteVideos);
-
-  // // eslint-disable-next-line class-methods-use-this
-  // isCustomVideo(video: CustomVideo | VideoItem): video is CustomVideo {
-  //   return (video as CustomVideo).title !== undefined;
-  // }
-
-  // // eslint-disable-next-line class-methods-use-this
-  // isVideoItem(video: CustomVideo | VideoItem): video is VideoItem {
-  //   return (video as VideoItem).kind !== undefined;
-  // }
 }
