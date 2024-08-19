@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -7,6 +7,7 @@ import { ButtonComponent } from '../button/button.component';
 import { FilteringKeyWordPipe } from '../../pipes/filtering-key-word.pipe';
 import { ColorBorderCardDirective } from '../../directives/color-border-card.directive';
 import { VideoActions } from '../../../core/store/actions/edit-video.actions';
+import { selectFavoriteVideos } from '../../../core/store/selectors/video-selectors';
 
 @Component({
   selector: 'app-video-card',
@@ -64,20 +65,38 @@ import { VideoActions } from '../../../core/store/actions/edit-video.actions';
       >
         <app-button>Detaled page</app-button>
       </a>
-      <app-button (click)="addToFavorite(videoItem)"
-        >Add to favorite</app-button
-      >
+      @if (isFavorite) {
+        <app-button (click)="addToFavorite(videoItem)"
+          >Remove from favorite</app-button
+        >
+      } @else {
+        <app-button (click)="addToFavorite(videoItem)"
+          >Add to favorite</app-button
+        >
+      }
     </div>
   `,
   styleUrl: './video-card.component.scss',
 })
-export class VideoCardComponent {
+export class VideoCardComponent implements OnInit {
   private store = inject(Store);
 
   @Input({
     required: true,
   })
   videoItem!: VideoItem;
+
+  isFavorite: boolean = false;
+
+  favoriteVideos$ = this.store.select(selectFavoriteVideos);
+
+  ngOnInit() {
+    this.favoriteVideos$.subscribe((favoriteVideos) => {
+      this.isFavorite = favoriteVideos.some(
+        (favVideo) => favVideo.id === this.videoItem.id,
+      );
+    });
+  }
 
   addToFavorite(video: VideoItem) {
     this.store.dispatch(VideoActions.addToFavorite({ video }));
