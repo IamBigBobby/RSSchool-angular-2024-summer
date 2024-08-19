@@ -1,4 +1,4 @@
-import { CustomVideo } from '../../../custom-video/custom-video-interface';
+import { CustomVideo } from '../../../shared/components/custom-video-card/custom-video-interface';
 import { VideoItem, YouTubeResponse } from '../../services/you-tube-interface';
 
 export interface VideosState {

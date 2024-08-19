@@ -7,7 +7,7 @@ import { FilteringKeyWordPipe } from '../../shared/pipes/filtering-key-word.pipe
 import { VideoCardComponent } from '../../shared/components/video-card/video-card.component';
 import { selectSortedVideoItems } from '../../core/store/selectors/video-selectors';
 import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
-import { CustomVideo } from '../../custom-video/custom-video-interface';
+import { CustomVideo } from '../../shared/components/custom-video-card/custom-video-interface';
 import { VideoItem } from '../../core/services/you-tube-interface';
 import { CustomVideoCardComponent } from '../../shared/components/custom-video-card/custom-video-card.component';
 

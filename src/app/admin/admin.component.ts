@@ -9,7 +9,7 @@ import {
 import { Store } from '@ngrx/store';
 import { ButtonComponent } from '../shared/components/button/button.component';
 import { noFutureDate } from '../shared/validators/custom-validators';
-import { CustomVideo } from '../custom-video/custom-video-interface';
+import { CustomVideo } from '../shared/components/custom-video-card/custom-video-interface';
 import { VideoActions } from '../core/store/actions/edit-video.actions';
 
 @Component({

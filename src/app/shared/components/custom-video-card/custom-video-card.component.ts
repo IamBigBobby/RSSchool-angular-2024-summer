@@ -2,7 +2,7 @@ import { Component, inject, Input } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Store } from '@ngrx/store';
-import { CustomVideo } from '../../../custom-video/custom-video-interface';
+import { CustomVideo } from './custom-video-interface';
 import { ColorBorderCardDirective } from '../../directives/color-border-card.directive';
 import { FilteringKeyWordPipe } from '../../pipes/filtering-key-word.pipe';
 import { ButtonComponent } from '../button/button.component';

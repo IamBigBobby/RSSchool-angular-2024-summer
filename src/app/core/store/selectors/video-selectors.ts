@@ -4,7 +4,7 @@ import { VideosState } from '../state/video-state';
 import { SortVideosState } from '../state/sort-type-state';
 import { VideoItem } from '../../services/you-tube-interface';
 import { KeyWordState } from '../state/sort-key-word-state';
-import { CustomVideo } from '../../../custom-video/custom-video-interface';
+import { CustomVideo } from '../../../shared/components/custom-video-card/custom-video-interface';
 
 const selectVideosState = (state: AppState) => state.videos;
 const selectVideosSortType = (state: AppState) => state.sortType;

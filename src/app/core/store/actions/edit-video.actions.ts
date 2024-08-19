@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { VideoItem, YouTubeResponse } from '../../services/you-tube-interface';
-import { CustomVideo } from '../../../custom-video/custom-video-interface';
+import { CustomVideo } from '../../../shared/components/custom-video-card/custom-video-interface';
 
 export enum EVideoActions {
   LoadVideos = '[Videos] Load Videos',
