@@ -66,12 +66,12 @@ import { selectFavoriteVideos } from '../../../core/store/selectors/video-select
         <app-button>Detaled page</app-button>
       </a>
       @if (isFavorite) {
-        <app-button (click)="addToFavorite(videoItem)"
-          >Remove from favorite</app-button
+        <app-button (click)="removeFromFavorite(videoItem)"
+          >Remove to favorite</app-button
         >
       } @else {
         <app-button (click)="addToFavorite(videoItem)"
-          >Add to favorite</app-button
+          >Add from favorite</app-button
         >
       }
     </div>
@@ -100,5 +100,9 @@ export class VideoCardComponent implements OnInit {
 
   addToFavorite(video: VideoItem) {
     this.store.dispatch(VideoActions.addToFavorite({ video }));
+  }
+
+  removeFromFavorite(video: VideoItem) {
+    this.store.dispatch(VideoActions.removeFromFavorite({ video }));
   }
 }

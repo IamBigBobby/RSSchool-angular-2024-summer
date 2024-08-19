@@ -50,4 +50,10 @@ export const videosReducer = createReducer(
       favoriteVideos: [video, ...state.favoriteVideos],
     };
   }),
+  on(VideoActions.removeFromFavorite, (state, { video }): VideosState => {
+    return {
+      ...state,
+      favoriteVideos: state.favoriteVideos.filter((item) => item !== video),
+    };
+  }),
 );
