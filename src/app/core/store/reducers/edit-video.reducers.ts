@@ -23,6 +23,15 @@ export const videosReducer = createReducer(
       mixedVideos: [video, ...state.mixedVideos],
     };
   }),
+  on(VideoActions.removeVideo, (state, { video }): VideosState => {
+    return {
+      ...state,
+      addedVideos: state.addedVideos.filter((item) => item !== video),
+      mixedVideos: state.mixedVideos.filter(
+        (videoItem) => Array.isArray(videoItem) || videoItem !== video,
+      ),
+    };
+  }),
   on(VideoActions.loadNextPage, (state): VideosState => {
     return {
       ...state,

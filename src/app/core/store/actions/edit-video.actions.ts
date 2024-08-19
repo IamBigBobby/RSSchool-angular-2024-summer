@@ -27,5 +27,8 @@ export const VideoActions = {
     EVideoActions.AddVideo,
     props<{ video: CustomVideo }>(),
   ),
-  removeVideo: createAction(EVideoActions.RemoveVideo),
+  removeVideo: createAction(
+    EVideoActions.RemoveVideo,
+    props<{ video: CustomVideo }>(),
+  ),
 };
