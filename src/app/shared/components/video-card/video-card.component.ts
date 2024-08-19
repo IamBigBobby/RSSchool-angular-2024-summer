@@ -61,7 +61,7 @@ import { selectFavoriteVideos } from '../../../core/store/selectors/video-select
       <a
         routerLinkActive="active"
         ariaCurrentWhenActive="page"
-        [routerLink]="['detailed-page', videoItem.id]"
+        [routerLink]="['/detailed-page', videoItem.id]"
       >
         <app-button>Detaled page</app-button>
       </a>
