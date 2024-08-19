@@ -22,6 +22,15 @@ import { LoginService } from '../../login/services/login.service';
   ],
   template: `
     <header class="header">
+      <section class="header__favorite-page">
+        <a
+          routerLink="/favorite-page"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+        >
+          <p>Favorite page</p>
+        </a>
+      </section>
       <section class="header__admin-page">
         <a
           routerLink="/admin"
@@ -53,31 +62,31 @@ import { LoginService } from '../../login/services/login.service';
           role="button"
         />
       </section>
-      @let loginStatus = loginStatus$ | async;
-      @if (loginStatus) {
-        <a
-          routerLink="/login-page"
-          routerLinkActive="active"
-          ariaCurrentWhenActive="page"
-          (click)="logOut()"
-        >
-          <section class="header__profile-section">
+      <section class="header__profile-section">
+        @let loginStatus = loginStatus$ | async;
+        @if (loginStatus) {
+          <a
+            routerLink="/login-page"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+            (click)="logOut()"
+            class="header__profile-section-login-link"
+          >
             <p>Log out</p>
             <img src="assets/login.svg" alt="login" />
-          </section>
-        </a>
-      } @else {
-        <a
-          routerLink="/login-page"
-          routerLinkActive="active"
-          ariaCurrentWhenActive="page"
-        >
-          <section class="header__profile-section">
+          </a>
+        } @else {
+          <a
+            routerLink="/login-page"
+            routerLinkActive="active"
+            ariaCurrentWhenActive="page"
+            class="header__profile-section-login-link"
+          >
             <p>Log in</p>
             <img src="assets/login.svg" alt="login" />
-          </section>
-        </a>
-      }
+          </a>
+        }
+      </section>
       <app-filters-input
         class="header__sort-field"
         [isSortFieldVisibleToggle]="isSortFieldVisible"

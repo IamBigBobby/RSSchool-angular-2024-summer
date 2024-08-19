@@ -7,7 +7,7 @@
     align-items: center;
     background-color: $background-color;
 
-    &__sort-settings, &__sort-input, &__search-field, &__profile-section, &__admin-page {
+    &__sort-settings, &__sort-input, &__search-field, &__profile-section, &__profile-section-login-link, &__admin-page, &__favorite-page {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -19,16 +19,24 @@
     }
 
     &__profile-section {
-        grid-column: 3;
-        justify-self: end;
+        grid-row: 1;
     }
 
     &__sort-field {
         grid-column: 1 / 4;
-        grid-row: 2;
+        grid-row: 3;
+    }
+
+    &__favorite-page {
+        grid-row: 1;
+    }
+
+    &__admin-page {
+        grid-row: 1;
     }
 
     &__show-sort-field {
         cursor: pointer;
     }
+
 }
