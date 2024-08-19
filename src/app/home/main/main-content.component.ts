@@ -9,6 +9,7 @@ import { selectSortedVideoItems } from '../../core/store/selectors/video-selecto
 import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
 import { CustomVideo } from '../../custom-video/custom-video-interface';
 import { VideoItem } from '../../core/services/you-tube-interface';
+import { CustomVideoCardComponent } from '../../shared/components/custom-video-card/custom-video-card.component';
 
 @Component({
   selector: 'app-main-content',
@@ -20,7 +21,9 @@ import { VideoItem } from '../../core/services/you-tube-interface';
         @if (videos) {
           @for (youtubeElement of videos ?? []; track youtubeElement) {
             @if (isCustomVideo(youtubeElement)) {
-              {{ youtubeElement | json }}
+              <app-custom-video-card
+                [customItem]="youtubeElement"
+              ></app-custom-video-card>
             } @else if (isVideoItem(youtubeElement)) {
               <app-video-card [videoItem]="youtubeElement"></app-video-card>
             }
@@ -39,6 +42,7 @@ import { VideoItem } from '../../core/services/you-tube-interface';
     NgOptimizedImage,
     VideoCardComponent,
     PaginationComponent,
+    CustomVideoCardComponent,
   ],
 })
 export class MainContentComponent {
