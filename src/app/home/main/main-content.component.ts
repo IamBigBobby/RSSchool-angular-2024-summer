@@ -5,12 +5,7 @@ import { ButtonComponent } from '../../shared/components/button/button.component
 import { ColorBorderCardDirective } from '../../shared/directives/color-border-card.directive';
 import { FilteringKeyWordPipe } from '../../shared/pipes/filtering-key-word.pipe';
 import { VideoCardComponent } from '../../shared/components/video-card/video-card.component';
-import {
-  selectCurrentMixedVideos,
-  selectCustomVideos,
-  selectMixedVideos,
-  selectSortedVideoItems,
-} from '../../core/store/selectors/video-selectors';
+import { selectSortedVideoItems } from '../../core/store/selectors/video-selectors';
 import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
 import { CustomVideo } from '../../custom-video/custom-video-interface';
 import { VideoItem } from '../../core/services/you-tube-interface';
@@ -21,7 +16,7 @@ import { VideoItem } from '../../core/services/you-tube-interface';
   template: `
     <main class="main">
       <div class="main-container">
-        @let videos = currentMixedVideos$ | async;
+        @let videos = sortedVideoItems$ | async;
         @if (videos) {
           @for (youtubeElement of videos ?? []; track youtubeElement) {
             @if (isCustomVideo(youtubeElement)) {
@@ -49,13 +44,7 @@ import { VideoItem } from '../../core/services/you-tube-interface';
 export class MainContentComponent {
   private store = inject(Store);
 
-  videos$ = this.store.select(selectSortedVideoItems);
-
-  customVideos$ = this.store.select(selectCustomVideos);
-
-  mixedVideos$ = this.store.select(selectMixedVideos);
-
-  currentMixedVideos$ = this.store.select(selectCurrentMixedVideos);
+  sortedVideoItems$ = this.store.select(selectSortedVideoItems);
 
   // eslint-disable-next-line class-methods-use-this
   isCustomVideo(video: CustomVideo | VideoItem): video is CustomVideo {

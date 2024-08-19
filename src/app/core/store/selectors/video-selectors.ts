@@ -55,37 +55,67 @@ export const selectItemsPerPage = createSelector(
   (videosState: VideosState) => videosState.itemsPerPage,
 );
 
+export const selectCurrentMixedVideos = createSelector(
+  selectMixedVideos,
+  selectPageNumber,
+  selectItemsPerPage,
+  (mixedVideos: (CustomVideo | VideoItem)[], pageNumber, itemsPerPage) => {
+    const startIndex = (pageNumber - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+
+    return mixedVideos.slice(startIndex, endIndex);
+  },
+);
+
+export const selectCurrentMixedVideosVideoItem = createSelector(
+  selectCurrentMixedVideos,
+  (mixedVideos: (CustomVideo | VideoItem)[]) => {
+    return mixedVideos.filter(
+      (video): video is VideoItem => 'snippet' in video,
+    );
+  },
+);
+
 export const selectSortedVideoItems = createSelector(
-  selectVideoItems,
+  selectCurrentMixedVideos,
   selectSortType,
   selectKeyType,
-  (videoItems: VideoItem[], sortType: string, keyword: string) => {
-    let sortedItems = [...videoItems];
+  (
+    videoItems: (VideoItem | CustomVideo)[],
+    sortType: string,
+    keyword: string,
+  ) => {
+    let sortedItemsVideoItem = videoItems.filter(
+      (video): video is VideoItem => 'snippet' in video,
+    );
+    const sortedItemsCustomItem = videoItems.filter(
+      (video): video is CustomVideo => 'title' in video,
+    );
 
     switch (sortType) {
       case 'dateAsc':
-        sortedItems = sortedItems.sort(
+        sortedItemsVideoItem = sortedItemsVideoItem.sort(
           (a, b) =>
             new Date(a.snippet?.publishedAt ?? '').getTime() -
             new Date(b.snippet?.publishedAt ?? '').getTime(),
         );
         break;
       case 'dateDesc':
-        sortedItems = sortedItems.sort(
+        sortedItemsVideoItem = sortedItemsVideoItem.sort(
           (a, b) =>
             new Date(b.snippet?.publishedAt ?? '').getTime() -
             new Date(a.snippet?.publishedAt ?? '').getTime(),
         );
         break;
       case 'viewsAsc':
-        sortedItems = sortedItems.sort(
+        sortedItemsVideoItem = sortedItemsVideoItem.sort(
           (a, b) =>
             Number(a.statistics?.viewCount ?? 0) -
             Number(b.statistics?.viewCount ?? 0),
         );
         break;
       case 'viewsDesc':
-        sortedItems = sortedItems.sort(
+        sortedItemsVideoItem = sortedItemsVideoItem.sort(
           (a, b) =>
             Number(b.statistics?.viewCount ?? 0) -
             Number(a.statistics?.viewCount ?? 0),
@@ -96,23 +126,11 @@ export const selectSortedVideoItems = createSelector(
     }
 
     if (keyword) {
-      sortedItems = sortedItems.filter((video) =>
+      sortedItemsVideoItem = sortedItemsVideoItem.filter((video) =>
         video.snippet?.title.toLowerCase().includes(keyword.toLowerCase()),
       );
     }
 
-    return sortedItems;
-  },
-);
-
-export const selectCurrentMixedVideos = createSelector(
-  selectMixedVideos,
-  selectPageNumber,
-  selectItemsPerPage,
-  (mixedVideos: (CustomVideo | VideoItem)[], pageNumber, itemsPerPage) => {
-    const startIndex = (pageNumber - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-
-    return mixedVideos.slice(startIndex, endIndex);
+    return [...sortedItemsCustomItem, ...sortedItemsVideoItem];
   },
 );
