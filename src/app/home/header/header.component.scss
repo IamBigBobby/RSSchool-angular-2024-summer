@@ -2,12 +2,12 @@
 
 .header {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: auto auto; 
     align-items: center;
     background-color: $background-color;
 
-    &__sort-settings, &__sort-input, &__search-field, &__profile-section, &__profile-section-login-link, &__admin-page, &__favorite-page {
+    &__sort-settings, &__sort-input, &__search-field, &__profile-section, &__profile-section-login-link, &__admin-page, &__favorite-page, &__main-page {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -15,11 +15,12 @@
     }
 
     &__search-field {
-        grid-column: 2;
+        grid-column: 2 / 4  ;
     }
 
     &__profile-section {
         grid-row: 1;
+        grid-column: 4;
     }
 
     &__sort-field {

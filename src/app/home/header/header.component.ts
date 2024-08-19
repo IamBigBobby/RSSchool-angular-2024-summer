@@ -40,6 +40,15 @@ import { LoginService } from '../../login/services/login.service';
           <p>Admin page</p>
         </a>
       </section>
+      <section class="header__main-page">
+        <a
+          routerLink="/"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+        >
+          <p>Main page</p>
+        </a>
+      </section>
       <section class="header__search-field">
         <img
           class="header__logo"
