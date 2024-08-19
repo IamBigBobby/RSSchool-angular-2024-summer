@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { YouTubeResponse } from '../../services/you-tube-interface';
+import { VideoItem, YouTubeResponse } from '../../services/you-tube-interface';
 import { CustomVideo } from '../../../custom-video/custom-video-interface';
 
 export enum EVideoActions {
@@ -9,6 +9,8 @@ export enum EVideoActions {
   LoadPrevPage = '[Videos] Load Prev Page',
   AddVideo = '[Videos] Add Video',
   RemoveVideo = '[Videos] Remove Video',
+  AddToFavorite = '[Videos] Add To Favorite',
+  RemoveFromFavorite = '[Videos] Remove From Favorite',
 }
 
 export const VideoActions = {
@@ -30,5 +32,13 @@ export const VideoActions = {
   removeVideo: createAction(
     EVideoActions.RemoveVideo,
     props<{ video: CustomVideo }>(),
+  ),
+  addToFavorite: createAction(
+    EVideoActions.AddToFavorite,
+    props<{ video: VideoItem }>(),
+  ),
+  removeFromFavorite: createAction(
+    EVideoActions.RemoveFromFavorite,
+    props<{ video: VideoItem }>(),
   ),
 };

@@ -44,4 +44,10 @@ export const videosReducer = createReducer(
       pageNumber: state.pageNumber - 1,
     };
   }),
+  on(VideoActions.addToFavorite, (state, { video }): VideosState => {
+    return {
+      ...state,
+      favoriteVideos: [video, ...state.favoriteVideos],
+    };
+  }),
 );

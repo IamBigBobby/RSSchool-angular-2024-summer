@@ -7,6 +7,7 @@ export interface VideosState {
   prevPageToken: string | undefined;
   addedVideos: CustomVideo[];
   mixedVideos: (CustomVideo | VideoItem[])[];
+  favoriteVideos: VideoItem[];
   pageNumber: number;
   itemsPerPage: number;
 }
@@ -25,6 +26,7 @@ export const initionalVideoState: VideosState = {
   prevPageToken: undefined,
   addedVideos: [],
   mixedVideos: [],
+  favoriteVideos: [],
   pageNumber: 1,
   itemsPerPage: 20,
 };

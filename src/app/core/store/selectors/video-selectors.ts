@@ -76,6 +76,11 @@ export const selectCurrentMixedVideosVideoItem = createSelector(
   },
 );
 
+export const selectFavoriteVideos = createSelector(
+  selectVideosState,
+  (favoriteVideos: VideosState) => favoriteVideos.favoriteVideos,
+);
+
 export const selectSortedVideoItems = createSelector(
   selectCurrentMixedVideos,
   selectSortType,
