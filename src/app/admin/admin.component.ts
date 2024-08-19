@@ -83,7 +83,7 @@ import { VideoActions } from '../core/store/actions/edit-video.actions';
           >
         }
       }
-      <label for="date-input" class="admin__label-date">Link video</label>
+      <label for="date-input" class="admin__label-date">Date</label>
       <input
         id="date-input"
         class="admin__input-date"
