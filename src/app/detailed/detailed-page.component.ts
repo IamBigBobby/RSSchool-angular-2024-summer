@@ -8,12 +8,13 @@ import {
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { YoutubeService } from '../core/services/youtube-service.service';
 import { ColorBorderCardDirective } from '../shared/directives/color-border-card.directive';
+import { YoutubeFacadeService } from '../core/services/youtube-facade';
 
 @Component({
   selector: 'app-detailed-page',
   standalone: true,
   template: `
-    @let details = detailedInfo$ | async;
+    @let details = detailedVideosSignal();
     @if (details) {
       <div class="detailed-page__wrapper">
         <a
@@ -94,7 +95,13 @@ export class DetailedPageComponent {
 
   private route: ActivatedRoute = inject(ActivatedRoute);
 
+  private youtubeFacadeService = inject(YoutubeFacadeService);
+
   private videoId: string = this.route.snapshot.params['id'];
 
-  detailedInfo$ = this.youtubeService.getDetailedVideo(this.videoId);
+  public detailedVideosSignal = this.youtubeFacadeService.detailedVideoSignal;
+
+  constructor() {
+    this.youtubeFacadeService.fetchGetDetaledVideo(this.videoId);
+  }
 }

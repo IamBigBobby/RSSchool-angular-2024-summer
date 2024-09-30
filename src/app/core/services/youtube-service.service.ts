@@ -1,5 +1,5 @@
-import { inject, Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { inject, Injectable, signal } from '@angular/core';
+import { firstValueFrom, map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { VideoItemId, VideoItem, YouTubeResponse } from './you-tube-interface';
 
@@ -11,10 +11,12 @@ export class YoutubeService {
 
   private VIDEOS_MAX_RESULTS = 20;
 
-  public getDetailedVideo(id: string): Observable<VideoItem | null> {
-    return this.getVideosWithStatistics([id]).pipe(
-      map((response) => response.items[0]),
-    );
+  // private searchedVideosSignal = signal<YouTubeResponse | null>(null);
+
+  public async getDetailedVideo(id: string): Promise<VideoItem | null> {
+    const response = await firstValueFrom(this.getVideosWithStatistics([id]));
+    const detailedVideo = response.items[0] || null;
+    return detailedVideo;
   }
 
   public getSearchedVideos(
