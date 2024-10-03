@@ -1,14 +1,14 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { map, Observable } from 'rxjs';
 import { VideoItem } from '../../../core/services/you-tube-interface';
 import { ButtonComponent } from '../button/button.component';
 import { FilteringKeyWordPipe } from '../../pipes/filtering-key-word.pipe';
 import { ColorBorderCardDirective } from '../../directives/color-border-card.directive';
 import { VideoActions } from '../../../core/store/actions/edit-video.actions';
 import { selectFavoriteVideos } from '../../../core/store/selectors/video-selectors';
-import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-video-card',
