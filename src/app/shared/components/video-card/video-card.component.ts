@@ -8,6 +8,7 @@ import { FilteringKeyWordPipe } from '../../pipes/filtering-key-word.pipe';
 import { ColorBorderCardDirective } from '../../directives/color-border-card.directive';
 import { VideoActions } from '../../../core/store/actions/edit-video.actions';
 import { selectFavoriteVideos } from '../../../core/store/selectors/video-selectors';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-video-card',
@@ -65,7 +66,7 @@ import { selectFavoriteVideos } from '../../../core/store/selectors/video-select
       >
         <app-button>Detaled page</app-button>
       </a>
-      @if (isFavorite) {
+      @if (isFavorite$ | async) {
         <app-button (click)="removeFromFavorite(videoItem)"
           >Remove to favorite</app-button
         >
@@ -78,7 +79,7 @@ import { selectFavoriteVideos } from '../../../core/store/selectors/video-select
   `,
   styleUrl: './video-card.component.scss',
 })
-export class VideoCardComponent implements OnInit {
+export class VideoCardComponent {
   private store = inject(Store);
 
   @Input({
@@ -86,17 +87,11 @@ export class VideoCardComponent implements OnInit {
   })
   videoItem!: VideoItem;
 
-  isFavorite: boolean = false;
-
-  favoriteVideos$ = this.store.select(selectFavoriteVideos);
-
-  ngOnInit() {
-    this.favoriteVideos$.subscribe((favoriteVideos) => {
-      this.isFavorite = favoriteVideos.some(
-        (favVideo) => favVideo.id === this.videoItem.id,
-      );
-    });
-  }
+  isFavorite$: Observable<boolean> = this.store.select(selectFavoriteVideos).pipe(
+    map((favoriteVideos) =>
+      favoriteVideos.some((favVideo) => favVideo.id === this.videoItem.id)
+    )
+  );
 
   addToFavorite(video: VideoItem) {
     this.store.dispatch(VideoActions.addToFavorite({ video }));
