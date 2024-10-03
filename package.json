@@ -6,11 +6,13 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "jest",
     "serve:ssr:youtube-client-app": "node dist/youtube-client-app/server/server.mjs",
     "lint": "ng lint --fix",
     "prettier:fix": "prettier --write '**/*.js' '**/*.ts' '**/*.json'",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test": "jest --verbose",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch"
   },
   "private": true,
   "dependencies": {
