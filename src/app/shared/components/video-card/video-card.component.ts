@@ -87,11 +87,13 @@ export class VideoCardComponent {
   })
   videoItem!: VideoItem;
 
-  isFavorite$: Observable<boolean> = this.store.select(selectFavoriteVideos).pipe(
-    map((favoriteVideos) =>
-      favoriteVideos.some((favVideo) => favVideo.id === this.videoItem.id)
-    )
-  );
+  isFavorite$: Observable<boolean> = this.store
+    .select(selectFavoriteVideos)
+    .pipe(
+      map((favoriteVideos) =>
+        favoriteVideos.some((favVideo) => favVideo.id === this.videoItem.id),
+      ),
+    );
 
   addToFavorite(video: VideoItem) {
     this.store.dispatch(VideoActions.addToFavorite({ video }));
