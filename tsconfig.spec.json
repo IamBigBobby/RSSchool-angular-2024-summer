@@ -10,8 +10,5 @@
     "esModuleInterop": true, // 2
     "emitDecoratorMetadata": true // 3
   },
-  "include": [
-    "src/**/*.spec.ts",
-    "src/**/*.d.ts"
-  ]
+  "include": ["src/**/*.spec.ts", "src/**/*.d.ts"]
 }
