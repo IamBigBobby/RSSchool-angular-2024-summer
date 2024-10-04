@@ -121,7 +121,7 @@ export class LoginComponent {
     });
   }
 
-  protected submitUser() {
+  public submitUser() {
     console.log(this.loginForm.value);
     this.loginService.login();
     this.router.navigate(['']);
